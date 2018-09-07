@@ -39,7 +39,7 @@ public class Person5 {
 		arr[arr.length - 2] = first;
 		arr[arr.length - 1] = second;
 		String updatedString = new String(arr);
-		return null;
+		return updatedString;
 	}
 
 	/**
