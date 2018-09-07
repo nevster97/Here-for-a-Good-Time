@@ -31,8 +31,8 @@ public class Person1 {
 	 */
 	private String calc(String input) {
 	  //Person 1 put your implementation here
-      char a = String.charAt(0);
-      char b = String.charAt(1);
+      char a = input.charAt(0);
+      char b = input.charAt(1);
       String returnable = input.substring(2);
       return returnable + a + b;
 	}
