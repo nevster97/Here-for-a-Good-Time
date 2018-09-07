@@ -54,9 +54,9 @@ public class Person5 {
 		return name + calc(input);
 	}
 
-	public static void main(String[] args) {
-		Person5 yasmin = new Person5("yasmin");
-		yasmin.toString();
-	}
+	// public static void main(String[] args) {
+	//	Person5 yasmin = new Person5("yasmin");
+	//	yasmin.toString();
+	// }
 
 }
