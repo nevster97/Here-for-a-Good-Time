@@ -49,10 +49,10 @@ public class Person4 {
       return name + calc(input);
     }
 
-    public void main(String[] args) {
-        System.out.println(calc("abc123"));
-        System.out.println(calc("def456"));
-    }
+    // public void main(String[] args) {
+    //    System.out.println(calc("abc123"));
+    //    System.out.println(calc("def456"));
+    // }
 
 }
 
