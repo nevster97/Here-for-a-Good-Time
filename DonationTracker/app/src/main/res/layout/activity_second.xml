@@ -30,11 +30,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginRight="28dp"
-        android:layout_marginTop="184dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="92dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <EditText
@@ -56,13 +59,14 @@
         android:layout_marginLeft="74dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="74dp"
-        android:layout_marginTop="192dp"
+        android:layout_marginTop="104dp"
         android:text="Email:"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:fontFamily="serif"
         app:layout_constraintEnd_toStartOf="@+id/editText"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -93,7 +97,7 @@
         android:layout_marginLeft="148dp"
         android:layout_marginRight="148dp"
         android:layout_marginStart="148dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:onClick="onButtonPress3"
         android:text="Login"
         android:textAllCaps="false"
@@ -104,6 +108,22 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText2" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="148dp"
+        android:layout_marginLeft="148dp"
+        android:layout_marginRight="148dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="140dp"
+        android:onClick="onButtonPress4"
+        android:text="Cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -32,7 +32,7 @@ public class SecondActivity extends AppCompatActivity {
         String emailString = (String) edit.getText().toString();
         String emailString1 = (String) edit1.getText().toString();
 
-        if (emailString.equals("HFAGT") && emailString1.equals("1234")) {
+        if (emailString.equals("user") && emailString1.equals("pass")) {
             Intent randomIntent = new Intent(this, ThirdActivity.class);
             startActivity(randomIntent);
         } else {
@@ -42,6 +42,12 @@ public class SecondActivity extends AppCompatActivity {
 
         }
     }
+
+    public void onButtonPress4(View view) {
+        Intent randomIntent = new Intent(this, MainActivity.class);
+        startActivity(randomIntent);
+    }
+
 
 
 }
