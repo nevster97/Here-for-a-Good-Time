@@ -9,13 +9,12 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="280dp"
-        android:layout_height="187dp"
-        android:layout_marginEnd="52dp"
-        android:layout_marginLeft="52dp"
-        android:layout_marginRight="52dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="50dp"
+        android:layout_width="250dp"
+        android:layout_height="150dp"
+        android:layout_marginEnd="67dp"
+        android:layout_marginLeft="67dp"
+        android:layout_marginRight="67dp"
+        android:layout_marginStart="67dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -23,70 +22,48 @@
 
     <EditText
         android:id="@+id/editText4"
-        android:layout_width="134dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="88dp"
-        android:layout_marginRight="88dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="34dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="19dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginLeft="76dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="42dp"
-        android:text="First Name:"
-        app:layout_constraintEnd_toStartOf="@+id/editText4"
+        android:text="First"
+        app:layout_constraintEnd_toStartOf="@+id/editText7"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <EditText
         android:id="@+id/editText6"
-        android:layout_width="191dp"
+        android:layout_width="181dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="31dp"
-        android:layout_marginRight="31dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginRight="52dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText7" />
+        app:layout_constraintTop_toBottomOf="@+id/editText5" />
 
     <EditText
         android:id="@+id/editText7"
-        android:layout_width="134dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="88dp"
-        android:layout_marginRight="88dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginRight="52dp"
+        android:layout_marginTop="34dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:selectAllOnFocus="true"
+        android:text="Last"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
-        android:layout_marginLeft="76dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="36dp"
-        android:text="Last Name:"
-        app:layout_constraintEnd_toStartOf="@+id/editText7"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <Spinner
         android:id="@+id/spinner"
@@ -96,7 +73,7 @@
         android:layout_marginLeft="117dp"
         android:layout_marginRight="117dp"
         android:layout_marginStart="117dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText6" />
@@ -109,10 +86,11 @@
         android:layout_marginLeft="148dp"
         android:layout_marginRight="148dp"
         android:layout_marginStart="148dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:onClick="toStartUp"
         android:text="Back to Home"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
@@ -124,11 +102,12 @@
         android:layout_marginLeft="118dp"
         android:layout_marginRight="117dp"
         android:layout_marginStart="118dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:onClick="onRegisterClick"
         app:cardCornerRadius="25dp"
         app:cardElevation="19dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner">
 
@@ -152,14 +131,85 @@
         android:id="@+id/imageView5"
         android:layout_width="25dp"
         android:layout_height="26dp"
-        android:layout_marginBottom="156dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginLeft="93dp"
-        android:layout_marginRight="44dp"
-        android:layout_marginStart="93dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="17dp"
+        android:layout_marginLeft="109dp"
+        android:layout_marginRight="17dp"
+        android:layout_marginStart="109dp"
+        android:layout_marginTop="27dp"
         app:layout_constraintEnd_toStartOf="@+id/editText6"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView7"
         app:srcCompat="@drawable/email" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="134dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginTop="14dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:selectAllOnFocus="true"
+        android:text="password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+
+    <EditText
+        android:id="@+id/editText5"
+        android:layout_width="134dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:selectAllOnFocus="true"
+        android:text="password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="66dp"
+        android:layout_marginLeft="66dp"
+        android:layout_marginRight="66dp"
+        android:layout_marginStart="66dp"
+        android:text="CS+Social Good"
+        android:textSize="30sp"
+        app:fontFamily="monospace"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="25dp"
+        android:layout_height="26dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginLeft="109dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginStart="109dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toStartOf="@+id/editText2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText4"
+        app:srcCompat="@drawable/passwordicon" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="25dp"
+        android:layout_height="26dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="109dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="109dp"
+        android:layout_marginTop="27dp"
+        app:layout_constraintEnd_toStartOf="@+id/editText5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+        app:srcCompat="@drawable/passwordcheck" />
 
 </android.support.constraint.ConstraintLayout>
