@@ -4,63 +4,112 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@color/colorLogo"
+    tools:context=".Controller.StartUp"><![CDATA[
 
-    <Button
-        android:id="@+id/button"
-        style="@android:style/Widget.Button"
-        android:layout_width="99dp"
-        android:layout_height="51dp"
-        android:layout_marginLeft="70dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="72dp"
-        android:onClick="onButtonPress1"
-        android:text="Login"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />;
+    ;
     android:textStyle="bold"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 
-    <Button
-        android:id="@+id/button4"
-        style="@android:style/Widget.Button"
-        android:layout_width="102dp"
-        android:layout_height="51dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginLeft="48dp"
-        android:layout_marginRight="80dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="72dp"
-        android:text="Register"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+    ]]>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="280dp"
+        android:layout_height="187dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginRight="52dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="72dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="149dp"
+        android:layout_height="41dp"
         android:layout_marginEnd="117dp"
         android:layout_marginLeft="118dp"
         android:layout_marginRight="117dp"
         android:layout_marginStart="118dp"
-        android:layout_marginTop="124dp"
-        android:text="Welcome!"
-        android:textColor="@android:color/black"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:fontFamily="serif"
+        android:layout_marginTop="96dp"
+        app:cardBackgroundColor="@android:color/background_light"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="19dp"
+        android:onClick="toLogin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Login"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="149dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="117dp"
+        android:layout_marginLeft="118dp"
+        android:layout_marginRight="117dp"
+        android:layout_marginStart="118dp"
+        android:layout_marginTop="20dp"
+        android:onClick="toRegistration"
+        app:cardBackgroundColor="@android:color/background_light"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="19dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Register"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginEnd="66dp"
+        android:layout_marginLeft="66dp"
+        android:layout_marginRight="66dp"
+        android:layout_marginStart="66dp"
+        android:text="CS+Social Good"
+        android:textSize="30sp"
+        app:fontFamily="monospace"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
 </android.support.constraint.ConstraintLayout>

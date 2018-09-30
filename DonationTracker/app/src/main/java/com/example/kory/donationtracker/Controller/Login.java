@@ -1,4 +1,4 @@
-package com.example.kory.donationtracker;
+package com.example.kory.donationtracker.Controller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class SecondActivity extends AppCompatActivity {
+import com.example.kory.donationtracker.R;
+
+public class Login extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,24 +18,24 @@ public class SecondActivity extends AppCompatActivity {
 
     }
 
-    public void onButtonPress2(View view) {
+    public void toStartUp(View view) {
         // Create an Intent to start the second activity
-        Intent randomIntent = new Intent(this, MainActivity.class);
+        Intent randomIntent = new Intent(this, StartUp.class);
 
         // Start the new activity.
         startActivity(randomIntent);
 
     }
 
-    public void onButtonPress3(View view) {
+    public void onLoginClick(View view) {
 
         final EditText edit =  (EditText) findViewById(R.id.editText);
-        final EditText edit1 =  (EditText) findViewById(R.id.editText2);
+        final EditText edit1 =  (EditText) findViewById(R.id.editText3);
         String emailString = (String) edit.getText().toString();
         String emailString1 = (String) edit1.getText().toString();
 
         if (emailString.equals("user") && emailString1.equals("pass")) {
-            Intent randomIntent = new Intent(this, ThirdActivity.class);
+            Intent randomIntent = new Intent(this, Home.class);
             startActivity(randomIntent);
         } else {
             Toast myToast = Toast.makeText(this, "Incorrect Username/Password!",
@@ -44,7 +46,7 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     public void onButtonPress4(View view) {
-        Intent randomIntent = new Intent(this, MainActivity.class);
+        Intent randomIntent = new Intent(this, StartUp.class);
         startActivity(randomIntent);
     }
 
