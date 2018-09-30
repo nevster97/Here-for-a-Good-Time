@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.example.kory.donationtracker.Models.UserFacade;
 
 import com.example.kory.donationtracker.R;
 
@@ -26,46 +27,36 @@ public class Registration extends AppCompatActivity {
 
         final EditText firstName =  (EditText) findViewById(R.id.editText4);
         final EditText lastName =  (EditText) findViewById(R.id.editText7);
-        final EditText password =  (EditText) findViewById(R.id.editText2);
-        final EditText passwordCheck =  (EditText) findViewById(R.id.editText5);
         final EditText email =  (EditText) findViewById(R.id.editText6);
 
-        String firstString = (String) firstName.getText().toString();
-        String lastString = (String) lastName.getText().toString();
-        String passwordString = (String) password.getText().toString();
-        String passwordCheckString = (String) passwordCheck.getText().toString();
+        String firstString = (String) firstName.getText().toString().trim();
+        String lastString = (String) lastName.getText().toString().trim();
+
+        String nameString = firstString + " " + lastString;
         String emailString = (String) email.getText().toString();
 
-        if (firstString.equals("")) {
-            CharSequence text = ("First is null");
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(this, text, duration);
-            toast.show();
-        } else if (lastString.equals("")) {
-            CharSequence text = ("Last is null");
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(this, text, duration);
-            toast.show();
-        } else if (passwordString.equals("")) {
-            CharSequence text = ("Password is null");
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(this, text, duration);
-            toast.show();
-        } else if (passwordCheckString.equals("")) {
-            CharSequence text = ("PasswordCheck is null");
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(this, text, duration);
-            toast.show();
-        } else if (emailString.equals("")) {
-            CharSequence text = ("Email is null");
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(this, text, duration);
-            toast.show();
-        } else {
-            Intent randomIntent = new Intent(this, StartUp.class);
-            startActivity(randomIntent);
-        }
+//        if (firstString.equals("")) {
+//            CharSequence text = ("First is null");
+//            int duration = Toast.LENGTH_SHORT;
+//            Toast toast = Toast.makeText(this, text, duration);
+//            toast.show();
+//        } else if (lastString.equals("")) {
+//            CharSequence text = ("Last is null");
+//            int duration = Toast.LENGTH_SHORT;
+//            Toast toast = Toast.makeText(this, text, duration);
+//            toast.show();
+//        } else if (emailString.equals("")) {
+//            CharSequence text = ("Email is null");
+//            int duration = Toast.LENGTH_SHORT;
+//            Toast toast = Toast.makeText(this, text, duration);
+//            toast.show();
+//        } else {
+//            Intent randomIntent = new Intent(this, StartUp.class);
+//            startActivity(randomIntent);
+//        }
 
+
+        UserFacade facade = UserFacade.getInstance();
 
 
     }
