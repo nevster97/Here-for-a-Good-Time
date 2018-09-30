@@ -1,11 +1,13 @@
-package com.example.kory.donationtracker;
+package com.example.kory.donationtracker.Controller;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-public class ThirdActivity extends AppCompatActivity {
+import com.example.kory.donationtracker.R;
+
+public class Home extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,14 +16,14 @@ public class ThirdActivity extends AppCompatActivity {
     }
 
     public void backToHome(View view) {
-        Intent randomIntent = new Intent(this, MainActivity.class);
+        Intent randomIntent = new Intent(this, StartUp.class);
         startActivity(randomIntent);
     }
 
     @Override
     public void onBackPressed() {
         // Do Here what ever you want do on back press;
-        Intent randomIntent = new Intent(this, MainActivity.class);
+        Intent randomIntent = new Intent(this, StartUp.class);
         startActivity(randomIntent);
     }
 }

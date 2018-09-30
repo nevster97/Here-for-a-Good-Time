@@ -1,11 +1,13 @@
-package com.example.kory.donationtracker;
+package com.example.kory.donationtracker.Controller;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.kory.donationtracker.R;
+
+public class StartUp extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,18 +17,23 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onButtonPress1(View view) {
+    public void toLogin(View view) {
         // Create an Intent to start the second activity
-        Intent randomIntent = new Intent(this, SecondActivity.class);
+        Intent randomIntent = new Intent(this, Login.class);
 
         // Start the new activity.
+        startActivity(randomIntent);
+    }
+
+    public void toRegistration(View view) {
+        Intent randomIntent = new Intent(this, Registration.class);
         startActivity(randomIntent);
     }
 
     @Override
     public void onBackPressed() {
         // Do Here what ever you want do on back press;
-        Intent randomIntent = new Intent(this, MainActivity.class);
+        Intent randomIntent = new Intent(this, StartUp.class);
         startActivity(randomIntent);
     }
 
