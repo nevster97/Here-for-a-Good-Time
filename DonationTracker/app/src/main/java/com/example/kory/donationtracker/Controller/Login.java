@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.example.kory.donationtracker.Models.UserFacade;
 
 import com.example.kory.donationtracker.R;
 
@@ -29,20 +30,30 @@ public class Login extends AppCompatActivity {
 
     public void onLoginClick(View view) {
 
-        final EditText edit =  (EditText) findViewById(R.id.editText);
-        final EditText edit1 =  (EditText) findViewById(R.id.editText3);
-        String emailString = (String) edit.getText().toString();
-        String emailString1 = (String) edit1.getText().toString();
+        final EditText ET_username =  (EditText) findViewById(R.id.editText);
+        final EditText ET_password =  (EditText) findViewById(R.id.editText3);
+        String username = (String) ET_username.getText().toString();
+        String password = (String) ET_password.getText().toString();
 
-        if (emailString.equals("user") && emailString1.equals("pass")) {
+        UserFacade facade = UserFacade.getInstance();
+        if (facade.login(username, password)) {
             Intent randomIntent = new Intent(this, Home.class);
             startActivity(randomIntent);
         } else {
             Toast myToast = Toast.makeText(this, "Incorrect Username/Password!",
                     Toast.LENGTH_SHORT);
             myToast.show();
-
         }
+
+//        if (username.equals("user") && password.equals("pass")) {
+//            Intent randomIntent = new Intent(this, Home.class);
+//            startActivity(randomIntent);
+//        } else {
+//            Toast myToast = Toast.makeText(this, "Incorrect Username/Password!",
+//                    Toast.LENGTH_SHORT);
+//            myToast.show();
+//
+//        }
     }
 
     public void onButtonPress4(View view) {
