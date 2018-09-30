@@ -26,10 +26,14 @@ public class Registration extends AppCompatActivity {
 
         final EditText firstName =  (EditText) findViewById(R.id.editText4);
         final EditText lastName =  (EditText) findViewById(R.id.editText7);
+        final EditText password =  (EditText) findViewById(R.id.editText2);
+        final EditText passwordCheck =  (EditText) findViewById(R.id.editText5);
         final EditText email =  (EditText) findViewById(R.id.editText6);
 
         String firstString = (String) firstName.getText().toString();
         String lastString = (String) lastName.getText().toString();
+        String passwordString = (String) password.getText().toString();
+        String passwordCheckString = (String) passwordCheck.getText().toString();
         String emailString = (String) email.getText().toString();
 
         if (firstString.equals("")) {
@@ -39,6 +43,16 @@ public class Registration extends AppCompatActivity {
             toast.show();
         } else if (lastString.equals("")) {
             CharSequence text = ("Last is null");
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(this, text, duration);
+            toast.show();
+        } else if (passwordString.equals("")) {
+            CharSequence text = ("Password is null");
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(this, text, duration);
+            toast.show();
+        } else if (passwordCheckString.equals("")) {
+            CharSequence text = ("PasswordCheck is null");
             int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(this, text, duration);
             toast.show();

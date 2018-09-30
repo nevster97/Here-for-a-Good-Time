@@ -7,19 +7,34 @@
     android:background="@color/colorLogo"
     tools:context=".Controller.Login">
 
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginEnd="66dp"
+        android:layout_marginLeft="66dp"
+        android:layout_marginRight="66dp"
+        android:layout_marginStart="66dp"
+        android:text="CS+Social Good"
+        android:textSize="30sp"
+        app:fontFamily="monospace"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
     <EditText
         android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="60dp"
         android:layout_marginRight="60dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="43dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:selectAllOnFocus="true"
         android:text="Username"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -29,10 +44,10 @@
         android:layout_marginLeft="67dp"
         android:layout_marginRight="10dp"
         android:layout_marginStart="67dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="51dp"
         app:layout_constraintEnd_toStartOf="@+id/editText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
         app:srcCompat="@drawable/user" />
 
     <ImageView
@@ -119,7 +134,7 @@
         android:layout_marginLeft="52dp"
         android:layout_marginRight="52dp"
         android:layout_marginStart="52dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="41dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
