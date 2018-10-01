@@ -1,1 +1,0 @@
-This file exists to resolve the disappearing layout directory
