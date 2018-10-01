@@ -29,12 +29,17 @@ public class UserFacade {
         return currentUser != null;
     }
 
-    public boolean register(String user, String pass, String name, String contact, UserType type) {
+    public boolean register(String username, String pass, String name, String contact, UserType type) {
         if (hasLoggedInUser()) {
             return false;
         }
-
-        return manager.addUser(user, pass, name, contact, type);
+        User user = null;
+        if (manager.addUser(username, pass, name, contact, type)) {
+            return true;
+        } else {
+            return false;
+        }
+        // return manager.addUser(username, pass, name, contact, type);
     }
 
     public boolean login(String username, String password) {
