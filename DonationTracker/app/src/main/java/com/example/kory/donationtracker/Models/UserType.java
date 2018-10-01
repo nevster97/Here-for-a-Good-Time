@@ -1,5 +1,8 @@
 package com.example.kory.donationtracker.Models;
 
+import java.util.Arrays;
+import java.util.List;
+
 public enum UserType {
 
     USER("User", false, false, false, false),
@@ -12,6 +15,8 @@ public enum UserType {
     private boolean _canLockUser;
     private boolean _canUpdateLoc;
     private boolean _canManageLoc;
+
+    private static List<UserType> list = Arrays.asList(USER, EMPLOYEE, MANAGER, ADMIN);
 
     UserType(String type, boolean add, boolean lock, boolean update, boolean manage) {
         _type = type;
@@ -27,4 +32,6 @@ public enum UserType {
     public boolean canLockUser() { return _canLockUser; }
     public boolean canUpdateLocation() { return _canUpdateLoc; }
     public boolean canManageLocations() { return _canManageLoc; }
+
+    public static List<UserType> getList() { return list; }
 }
