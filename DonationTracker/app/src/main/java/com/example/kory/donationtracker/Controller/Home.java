@@ -17,6 +17,10 @@ public class Home extends AppCompatActivity {
     }
 
     public void backToHome(View view) {
+        // logs the current user out of the system
+        UserFacade facade = UserFacade.getInstance();
+        facade.logout();
+
         Intent randomIntent = new Intent(this, StartUp.class);
         startActivity(randomIntent);
     }
