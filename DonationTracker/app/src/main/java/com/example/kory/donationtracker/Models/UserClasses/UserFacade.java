@@ -1,6 +1,4 @@
-package com.example.kory.donationtracker.Models;
-
-import android.util.Log;
+package com.example.kory.donationtracker.Models.UserClasses;
 
 // << interface >>
 public class UserFacade {

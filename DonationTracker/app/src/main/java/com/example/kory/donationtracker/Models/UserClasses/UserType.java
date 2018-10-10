@@ -1,4 +1,4 @@
-package com.example.kory.donationtracker.Models;
+package com.example.kory.donationtracker.Models.UserClasses;
 
 import java.util.Arrays;
 import java.util.List;
