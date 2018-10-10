@@ -8,8 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-import com.example.kory.donationtracker.Models.UserFacade;
-import com.example.kory.donationtracker.Models.UserType;
+import com.example.kory.donationtracker.Models.UserClasses.UserFacade;
+import com.example.kory.donationtracker.Models.UserClasses.UserType;
 import com.example.kory.donationtracker.R;
 
 public class Registration extends AppCompatActivity {
