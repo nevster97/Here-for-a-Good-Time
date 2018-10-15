@@ -224,6 +224,15 @@ public class Home extends AppCompatActivity implements OnItemSelectedListener {
             }
             TextView tv = findViewById(R.id.textView3);
             tv.setText(tokens[4]);
+            TextView tv1 = findViewById(R.id.phoneNumber);
+            tv1.setText(tokens[9]);
+            TextView tv2 = findViewById(R.id.longtitude);
+            tv2.setText(tokens[3]);
+            TextView tv3 = findViewById(R.id.latitude);
+            tv3.setText(tokens[2]);
+            TextView tv4 = findViewById(R.id.type);
+            tv4.setText(tokens[8]);
+
             br.close();
 
 
