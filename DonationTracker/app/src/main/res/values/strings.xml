@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">DonationTracker</string>
     <string name="location">Location</string>
+    <string name="lockuser">Lock User</string>
+    <string name="adduser">Add User</string>
+    <string name="updatelocation">Update Location</string>
+    <string name="managelocation">Manage Location</string>
 </resources>
