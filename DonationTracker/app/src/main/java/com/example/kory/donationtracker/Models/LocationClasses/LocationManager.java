@@ -24,15 +24,6 @@ public class LocationManager {
         return _locations.remove(location);
     }
 
-    public boolean readData() {
-        try {
-
-        } catch (Exception e) {
-
-        }
-        return true;
-    }
-
 
 
 }
