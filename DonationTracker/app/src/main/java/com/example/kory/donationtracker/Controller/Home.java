@@ -13,9 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.kory.donationtracker.Models.UserClasses.User;
@@ -33,6 +33,8 @@ import java.util.ArrayList;
 public class Home extends AppCompatActivity implements OnItemSelectedListener {
 
     private ArrayList<String> dummy;
+    private ArrayList<String> address = new ArrayList<>();
+    private ArrayList<String> type = new ArrayList<>();
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -46,21 +48,31 @@ public class Home extends AppCompatActivity implements OnItemSelectedListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
-        dummy = populateSpinner();
-        Spinner majorSpinner = (Spinner) findViewById(R.id.spinner2);
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, dummy);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        majorSpinner.setAdapter(adapter);
-        majorSpinner.setOnItemSelectedListener(this);
-
         UserFacade facade = UserFacade.getInstance();
         User user = facade.getCurrentUser();
         String name = user.get_name();
         // TextView nameView = (TextView)findViewById(R.id.textView6);
         // nameView.setText(name);
         ut = user.get_type();
+        loadMenus();
 
+        ListView simpleList = (ListView) findViewById(R.id.listView);
+        dummy = populateSpinner();
+        CustomAdapter customAdapter = new CustomAdapter(getApplicationContext(), dummy, address, type);
+        simpleList.setAdapter(customAdapter);
+        simpleList.setOnItemClickListener(new OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?>adapter,View v, int position, long id){
+                // Intent intent;
+                doingStuff(v, position);
+            }
+
+        });
+
+
+    }
+
+    public void loadMenus(){
         if (ut.equals(UserType.EMPLOYEE)) {
             mDrawerLayout = findViewById(R.id.drawer_layout);
 
@@ -70,7 +82,7 @@ public class Home extends AppCompatActivity implements OnItemSelectedListener {
             actionbar.setDisplayHomeAsUpEnabled(true);
             actionbar.setHomeAsUpIndicator(R.drawable.menuhome);
 
-            NavigationView navigationView = findViewById(R.id.nav_view);
+            final NavigationView navigationView = findViewById(R.id.nav_view);
             navigationView.inflateMenu(R.menu.employee_view);
             navigationView.setNavigationItemSelectedListener(
                     new NavigationView.OnNavigationItemSelectedListener() {
@@ -80,6 +92,13 @@ public class Home extends AppCompatActivity implements OnItemSelectedListener {
                             menuItem.setChecked(true);
                             // close drawer when item is tapped
                             mDrawerLayout.closeDrawers();
+
+                            int id = menuItem.getItemId();
+                            if (id == R.id.nav_camera4) {
+                                backToHome(navigationView);
+                            } else if (id == R.id.nav_camera) {
+                                reloadHome(navigationView);
+                            }
 
                             // Add code here to update the UI based on the item selected
                             // For example, swap UI fragments here
@@ -96,7 +115,7 @@ public class Home extends AppCompatActivity implements OnItemSelectedListener {
             actionbar.setDisplayHomeAsUpEnabled(true);
             actionbar.setHomeAsUpIndicator(R.drawable.menuhome);
 
-            NavigationView navigationView = findViewById(R.id.nav_view);
+            final NavigationView navigationView = findViewById(R.id.nav_view);
             navigationView.inflateMenu(R.menu.manager_view);
             navigationView.setNavigationItemSelectedListener(
                     new NavigationView.OnNavigationItemSelectedListener() {
@@ -106,6 +125,13 @@ public class Home extends AppCompatActivity implements OnItemSelectedListener {
                             menuItem.setChecked(true);
                             // close drawer when item is tapped
                             mDrawerLayout.closeDrawers();
+
+                            int id = menuItem.getItemId();
+                            if (id == R.id.nav_camera4) {
+                                backToHome(navigationView);
+                            } else if (id == R.id.nav_camera) {
+                                reloadHome(navigationView);
+                            }
 
                             // Add code here to update the UI based on the item selected
                             // For example, swap UI fragments here
@@ -122,7 +148,7 @@ public class Home extends AppCompatActivity implements OnItemSelectedListener {
             actionbar.setDisplayHomeAsUpEnabled(true);
             actionbar.setHomeAsUpIndicator(R.drawable.menuhome);
 
-            NavigationView navigationView = findViewById(R.id.nav_view);
+            final NavigationView navigationView = findViewById(R.id.nav_view);
             navigationView.inflateMenu(R.menu.admin_view);
             navigationView.setNavigationItemSelectedListener(
                     new NavigationView.OnNavigationItemSelectedListener() {
@@ -133,21 +159,112 @@ public class Home extends AppCompatActivity implements OnItemSelectedListener {
                             // close drawer when item is tapped
                             mDrawerLayout.closeDrawers();
 
+                            int id = menuItem.getItemId();
+                            if (id == R.id.nav_camera4) {
+                                backToHome(navigationView);
+                            } else if (id == R.id.nav_camer) {
+                                reloadHome(navigationView);
+                            }
+
                             // Add code here to update the UI based on the item selected
                             // For example, swap UI fragments here
 
                             return true;
                         }
                     });
+        } else {
+            mDrawerLayout = findViewById(R.id.drawer_layout);
+
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            ActionBar actionbar = getSupportActionBar();
+            actionbar.setDisplayHomeAsUpEnabled(true);
+            actionbar.setHomeAsUpIndicator(R.drawable.menuhome);
+
+            final NavigationView navigationView = findViewById(R.id.nav_view);
+            navigationView.inflateMenu(R.menu.user_view);
+            navigationView.setNavigationItemSelectedListener(
+                    new NavigationView.OnNavigationItemSelectedListener() {
+                        @Override
+                        public boolean onNavigationItemSelected(MenuItem menuItem) {
+                            // set item as selected to persist highlight
+                            menuItem.setChecked(true);
+                            // close drawer when item is tapped
+                            mDrawerLayout.closeDrawers();
+
+                            int id = menuItem.getItemId();
+                            if (id == R.id.nav_camera1) {
+                                backToHome(navigationView);
+                            } else if (id == R.id.nav_camera) {
+                                reloadHome(navigationView);
+                            }
+
+                            // Add code here to update the UI based on the item selected
+                            // For example, swap UI fragments here
+
+                            return true;
+                        }
+                    });
+
         }
     }
 
+
+
+
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    public void doingStuff(View view, int pos) {
+        ArrayList<String> temp = new ArrayList<>();
+        try {
+            //Open a stream on the raw file
+            InputStream is = getResources().openRawResource(R.raw.locationdata);
+            //From here we probably should call a model method and pass the InputStream
+            //Wrap it in a BufferedReader so that we get the readLine() method
+            BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+
+            String line;
+            String[] tokens = new String[10];
+            br.readLine(); //get rid of header line
+            for (int i = 0; i < pos + 1; i++) {
+                line = br.readLine();
+                tokens = line.split(",");
+            }
+            setContentView(R.layout.activity_select_location);
+            loadMenus();
+            TextView tv = findViewById(R.id.name);
+            tv.setText(tokens[1]);
+            TextView tv1 = findViewById(R.id.latitude);
+            tv1.setText(tokens[2]);
+            TextView tv2 = findViewById(R.id.longitude);
+            tv2.setText(tokens[3]);
+            TextView tv3 = findViewById(R.id.address);
+            String t = tokens[4] + ", " + tokens[5] + ", " + tokens[6];
+            tv3.setText(t);
+            TextView tv4 = findViewById(R.id.type);
+            tv4.setText(tokens[8]);
+
+            br.close();
+
+
+
+        } catch (IOException e) {
+            System.out.println("Error");
+        }
+    }
     public void backToHome(View view) {
         // logs the current user out of the system
         UserFacade facade = UserFacade.getInstance();
         facade.logout();
 
         Intent randomIntent = new Intent(this, StartUp.class);
+        startActivity(randomIntent);
+    }
+
+    public void reloadHome(View view) {
+        // logs the current user out of the system
+
+        Intent randomIntent = new Intent(this, Home.class);
         startActivity(randomIntent);
     }
 
@@ -175,15 +292,6 @@ public class Home extends AppCompatActivity implements OnItemSelectedListener {
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public ArrayList<String> populateSpinner() {
-
-
-//        String dir = getApplicationInfo().dataDir;
-//        System.out.println("DIR: " + dir);
-//
-//        URL url = getClass().getResource("/Users/kory/Desktop/Here-for-a-Good-Time/DonationTracker/app/src/main/java/com/example/kory/donationtracker/Controller");
-//        File file = new File(url.getPath());
-//
-//        Scanner scan = new Scanner("Apple");
         ArrayList<String> temp = new ArrayList<>();
         try {
             //Open a stream on the raw file
@@ -197,6 +305,9 @@ public class Home extends AppCompatActivity implements OnItemSelectedListener {
             while ((line = br.readLine()) != null) {
                 String[] tokens = line.split(",");
                 temp.add(tokens[1]);
+                String a = tokens[4] + ", " + tokens[5] + ", " + tokens[6];
+                address.add(a);
+                type.add(tokens[8]);
             }
             br.close();
         } catch (IOException e) {
@@ -224,14 +335,6 @@ public class Home extends AppCompatActivity implements OnItemSelectedListener {
             }
             TextView tv = findViewById(R.id.textView3);
             tv.setText(tokens[4]);
-            TextView tv1 = findViewById(R.id.phoneNumber);
-            tv1.setText(tokens[9]);
-            TextView tv2 = findViewById(R.id.longtitude);
-            tv2.setText(tokens[3]);
-            TextView tv3 = findViewById(R.id.latitude);
-            tv3.setText(tokens[2]);
-            TextView tv4 = findViewById(R.id.type);
-            tv4.setText(tokens[8]);
 
             br.close();
 
@@ -241,6 +344,8 @@ public class Home extends AppCompatActivity implements OnItemSelectedListener {
             System.out.println("Error");
         }
     }
+
+
 }
 
 

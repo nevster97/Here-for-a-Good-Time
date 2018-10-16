@@ -19,4 +19,9 @@
         android:id="@+id/nav_camera3"
         android:icon="@drawable/managelocation"
         android:title="@string/managelocation" />
+
+    <item
+        android:id="@+id/nav_camera4"
+        android:icon="@drawable/logout_icon"
+        android:title="@string/logout" />
 </menu>
