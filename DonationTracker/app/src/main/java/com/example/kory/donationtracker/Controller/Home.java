@@ -261,12 +261,17 @@ public class Home extends AppCompatActivity implements OnItemSelectedListener {
         startActivity(randomIntent);
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void reloadHome(View view) {
         // logs the current user out of the system
-
         Intent randomIntent = new Intent(this, Home.class);
         startActivity(randomIntent);
     }
+
+//    @Override
+//    public boolean equals(Object o) {
+//
+//    }
 
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
