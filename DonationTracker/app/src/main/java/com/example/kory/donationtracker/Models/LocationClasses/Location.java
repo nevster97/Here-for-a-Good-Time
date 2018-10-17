@@ -19,4 +19,17 @@ public class Location {
         _phone = phone;
         _website = website;
     }
+
+    public String getName() { return _name; }
+    public double getLat() { return _latitude; }
+    public double getLon() { return _longitude; }
+    public Address getAddress() { return _address; }
+    public LocationType getType() { return _type; }
+    public String getPhone() { return _phone; }
+    public String getWebsite() { return _website; }
+
+    @Override
+    public String toString() {
+        return _name + "\n" + _address + "\n" + _phone + "\n" + _website;
+    }
 }
