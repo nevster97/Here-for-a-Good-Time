@@ -10,12 +10,12 @@ public class Location {
     private String _website;
 
     public Location(String name, double latitude, double longitude, Address address,
-                    LocationType type, String phone, String website) {
+                    String type, String phone, String website) {
         _name = name;
         _latitude = latitude;
         _longitude = longitude;
         _address = address;
-        _type = type;
+        _type = LocationType.valueOf(type);
         _phone = phone;
         _website = website;
     }

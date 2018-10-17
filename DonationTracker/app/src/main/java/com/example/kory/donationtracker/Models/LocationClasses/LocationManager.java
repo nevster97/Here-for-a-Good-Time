@@ -23,7 +23,6 @@ public class LocationManager {
     public boolean removeLocation(Location location) {
         return _locations.remove(location);
     }
-
-
+    
 
 }
