@@ -235,20 +235,50 @@ public class Home extends AppCompatActivity implements OnItemSelectedListener {
                 tokens = line.split(",");
             }
 
+            String name = tokens[1];
+            String lat = tokens[2];
+            String lon = tokens[3];
+            // address
+            String street = tokens[4];
+            String city = tokens[5];
+            String state = tokens[6];
+            String zip = tokens[7];
+            Address address = new Address(street, city, state, zip);
+            String type = tokens[8];
+            String phone = tokens[9];
+            String website = tokens[10];
+
+            LocationFacade locFacade = LocationFacade.getInstance();
+            Location location = new Location (name, lat, lon, address, type, phone, website);
+            locFacade.addLocation(location);
+
+
             setContentView(R.layout.activity_select_location);
             loadMenus();
 
-            TextView tv = findViewById(R.id.name);
-            tv.setText(tokens[1]);
+            TextView tv0 = findViewById(R.id.name);
             TextView tv1 = findViewById(R.id.latitude);
-            tv1.setText(tokens[2]);
             TextView tv2 = findViewById(R.id.longitude);
-            tv2.setText(tokens[3]);
             TextView tv3 = findViewById(R.id.address);
-            String t = tokens[4] + ", " + tokens[5] + ", " + tokens[6];
-            tv3.setText(t);
             TextView tv4 = findViewById(R.id.type);
-            tv4.setText(tokens[8]);
+
+            tv0.setText(location.getName());
+            tv1.setText(location.getLat());
+            tv2.setText(location.getLon());
+            tv3.setText(location.getAddress().toString());
+            tv4.setText(location.getType().getStringType());
+
+//            TextView tv = findViewById(R.id.name);
+//            tv.setText(tokens[1]);
+//            TextView tv1 = findViewById(R.id.latitude);
+//            tv1.setText(tokens[2]);
+//            TextView tv2 = findViewById(R.id.longitude);
+//            tv2.setText(tokens[3]);
+//            TextView tv3 = findViewById(R.id.address);
+//            String t = tokens[4] + ", " + tokens[5] + ", " + tokens[6];
+//            tv3.setText(t);
+//            TextView tv4 = findViewById(R.id.type);
+//            tv4.setText(tokens[8]);
 
             br.close();
 
@@ -304,25 +334,30 @@ public class Home extends AppCompatActivity implements OnItemSelectedListener {
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public ArrayList<String> populateSpinner() {
         ArrayList<String> temp = new ArrayList<>();
-        try {
-            //Open a stream on the raw file
-            InputStream is = getResources().openRawResource(R.raw.locationdata);
-            //From here we probably should call a model method and pass the InputStream
-            //Wrap it in a BufferedReader so that we get the readLine() method
-            BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+        LocationFacade locFacade = LocationFacade.getInstance();
+        if (locFacade.checkIfEmpty()) {
+            try {
+                //Open a stream on the raw file
+                InputStream is = getResources().openRawResource(R.raw.locationdata);
+                //From here we probably should call a model method and pass the InputStream
+                //Wrap it in a BufferedReader so that we get the readLine() method
+                BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
 
-            String line;
-            br.readLine(); //get rid of header line
-            while ((line = br.readLine()) != null) {
-                String[] tokens = line.split(",");
-                temp.add(tokens[1]);
-                String a = tokens[4] + ", " + tokens[5] + ", " + tokens[6];
-                address.add(a);
-                type.add(tokens[8]);
+                String line;
+                br.readLine(); //get rid of header line
+                while ((line = br.readLine()) != null) {
+                    String[] tokens = line.split(",");
+                    temp.add(tokens[1]);
+                    String a = tokens[4] + ", " + tokens[5] + ", " + tokens[6];
+                    address.add(a);
+                    type.add(tokens[8]);
+                }
+                br.close();
+            } catch (IOException e) {
+                System.out.println("Error");
             }
-            br.close();
-        } catch (IOException e) {
-            System.out.println("Error");
+        } else {
+
         }
         return temp;
     }

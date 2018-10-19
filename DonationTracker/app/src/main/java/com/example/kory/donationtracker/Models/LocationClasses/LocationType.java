@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum LocationType {
-    DROPOFF("Drop-Off", true, false, true),
+    DROPOFF("Drop Off", true, false, true),
     STORE("Store", true, true, true),
     WAREHOUSE("Warehouse", false, false, true);
 
