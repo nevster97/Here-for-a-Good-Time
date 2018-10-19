@@ -8,6 +8,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.kory.donationtracker.Models.LocationClasses.Address;
+import com.example.kory.donationtracker.Models.LocationClasses.Location;
+import com.example.kory.donationtracker.Models.LocationClasses.LocationFacade;
+import com.example.kory.donationtracker.Models.LocationClasses.LocationType;
 import com.example.kory.donationtracker.R;
 
 import java.util.ArrayList;
@@ -19,17 +23,16 @@ public class CustomAdapter extends BaseAdapter {
     ArrayList<String> type;
     LayoutInflater inflter;
 
-    public CustomAdapter(Context applicationContext, ArrayList<String> s, ArrayList<String> a, ArrayList<String> t) {
+    public CustomAdapter(Context applicationContext) {
         this.context = context;
-        this.data = s;
-        this.address = a;
-        this.type = t;
         inflter = (LayoutInflater.from(applicationContext));
     }
 
     @Override
     public int getCount() {
-        return data.size();
+        LocationFacade locFacade = LocationFacade.getInstance();
+        ArrayList<Location> locList = (ArrayList) locFacade.getList();
+        return locList.size();
     }
 
     @Override
@@ -45,13 +48,18 @@ public class CustomAdapter extends BaseAdapter {
     @SuppressLint("ViewHolder")
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+        LocationFacade locFacade = LocationFacade.getInstance();
+        ArrayList<Location> locList = (ArrayList) locFacade.getList();
+        Location l = locList.get(i);
         view = inflter.inflate(R.layout.item, null);
-        TextView country = (TextView) view.findViewById(R.id.textView10);
-        country.setText(data.get(i));
-        TextView country1 = (TextView) view.findViewById(R.id.textView11);
-        country1.setText(address.get(i));
-        TextView country2 = (TextView) view.findViewById(R.id.textView12);
-        country2.setText(type.get(i));
+        TextView name = (TextView) view.findViewById(R.id.textView10);
+        name.setText(l.getName());
+        TextView address = (TextView) view.findViewById(R.id.textView11);
+        Address a = l.getAddress();
+        address.setText(a.toString());
+        TextView type = (TextView) view.findViewById(R.id.textView12);
+        LocationType t = l.getType();
+        type.setText(t.getStringType());
         return view;
     }
 

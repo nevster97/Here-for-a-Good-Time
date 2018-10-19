@@ -15,7 +15,7 @@ public class Address {
 
     @Override
     public String toString() {
-        String str = _street + ", " +  _city + ", " + _state + ", " + _zip;
+        String str = _street + ", " +  _city + ", " + _state + " " + _zip;
         return str;
     }
 
