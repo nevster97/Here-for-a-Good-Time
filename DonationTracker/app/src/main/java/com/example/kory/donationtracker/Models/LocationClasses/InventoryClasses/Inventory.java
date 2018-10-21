@@ -25,15 +25,22 @@ public class Inventory {
 
     public void addItem(Item item) {
         _inventory.add(item);
+        _totalValue += item.getValue();
+        _totalItems++;
     }
 
     public void removeItem(Item item) {
         _inventory.remove(item);
+        _totalValue -= item.getValue();
+        _totalItems--;
     }
 
     public List<Item> getInventory() {
         return _inventory;
     }
+
+    public int getTotalItems() { return _totalItems; }
+    public double getTotalValue() { return _totalValue; }
 
 //    public void sortByName() {
 //        _inventory = _inventory.sort(ItemComparator)

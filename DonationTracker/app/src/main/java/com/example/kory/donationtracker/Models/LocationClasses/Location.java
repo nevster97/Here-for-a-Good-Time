@@ -1,5 +1,8 @@
 package com.example.kory.donationtracker.Models.LocationClasses;
 
+import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Inventory;
+import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Item;
+
 public class Location {
     private String _name;
     private String _latitude;
@@ -8,6 +11,7 @@ public class Location {
     private LocationType _type;
     private String _phone;
     private String _website;
+    private Inventory _inventory;
 
 
     public Location(String name, String latitude, String longitude, Address address,
@@ -28,6 +32,22 @@ public class Location {
         }
         _phone = phone;
         _website = website;
+        _inventory = new Inventory(this);
+    }
+
+    // use this constructor when taking in an inventory object
+    public Location(String name, String latitude, String longitude, Address address,
+                    String type, String phone, String website, Inventory inventory) {
+        _name = name;
+        _latitude = latitude;
+        _longitude = longitude;
+        _address = address;
+        if (type.equals("Drop Off")) { _type = LocationType.DROPOFF; }
+        else if (type.equals("Store")) { _type = LocationType.STORE; }
+        else { _type = LocationType.WAREHOUSE; }
+        _phone = phone;
+        _website = website;
+        _inventory = inventory;
     }
 
     public String getName() { return _name; }
@@ -37,6 +57,7 @@ public class Location {
     public LocationType getType() { return _type; }
     public String getPhone() { return _phone; }
     public String getWebsite() { return _website; }
+    public Inventory getInventory() { return _inventory; }
 
     @Override
     public String toString() {
