@@ -24,32 +24,50 @@
             app:title="@string/companyname"
             android:layout_alignParentLeft="true" />
 
-        <ListView
-            android:id="@+id/listView"
+        <TextView
+            android:id="@+id/short1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_below="@+id/toolbar"
-            android:layout_marginTop="56dp"
-            android:divider="#f00"
-            android:dividerHeight="1dp" >
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="140dp"
+            android:text="Short"
+            android:textAlignment="center"
+            android:textSize="36sp" />;
+        android:textSize="30sp" />
 
-        </ListView>
+        <TextView
+            android:id="@+id/long1"
+            android:layout_width="337dp"
+            android:layout_height="104dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="221dp"
+            android:text="Long"
+            android:textAlignment="center"
+            android:textSize="18sp" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="74dp"
+            android:text="Type"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="end|bottom"
-            android:layout_marginBottom="33dp"
-            android:layout_marginEnd="24dp"
-            android:src="@drawable/fab"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="24dp" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="127dp"
+            android:text="Value"
+            android:textAlignment="center"
+            android:textSize="18sp" />
 
 
     </RelativeLayout>

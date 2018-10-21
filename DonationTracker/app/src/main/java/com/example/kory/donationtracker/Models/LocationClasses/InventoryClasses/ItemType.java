@@ -10,7 +10,7 @@ public enum ItemType {
 
     private String _type;
 
-    ItemType(String type) {
+    private ItemType(String type) {
         _type = type;
     }
 

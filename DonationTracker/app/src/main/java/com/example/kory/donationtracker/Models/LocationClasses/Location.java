@@ -1,7 +1,10 @@
 package com.example.kory.donationtracker.Models.LocationClasses;
 
 import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Inventory;
-import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Item;
+import com.example.kory.donationtracker.Models.UserClasses.User;
+import com.example.kory.donationtracker.Models.UserClasses.UserType;
+
+import java.util.ArrayList;
 
 public class Location {
     private String _name;
@@ -12,6 +15,7 @@ public class Location {
     private String _phone;
     private String _website;
     private Inventory _inventory;
+    private ArrayList<User> _locationEmployees;
 
 
     public Location(String name, String latitude, String longitude, Address address,
@@ -58,6 +62,23 @@ public class Location {
     public String getPhone() { return _phone; }
     public String getWebsite() { return _website; }
     public Inventory getInventory() { return _inventory; }
+    public ArrayList<User> getLocationEmployees() {return _locationEmployees; }
+
+    public boolean addLocationEmployee(User u) {
+        UserType ut = u.get_type();
+        if (ut.equals(UserType.EMPLOYEE)) {
+//            String username = u.get_name();
+//            String password = u.get_password();
+//            String name = u.get_name();
+//            String contact = u.get_contact();
+//            UserType type = u.get_type();
+//            User us = new User(username, password, name, contact, type, this);
+            _locationEmployees.add(u);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     @Override
     public String toString() {

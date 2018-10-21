@@ -37,6 +37,14 @@ public class User {
     public String get_name() { return _name; }
     public String get_contact() { return _contact; }
     public UserType get_type() { return _type; }
+    public String get_password() {return _password; }
+    public Location get_employeeLocation() {return _employeeLocation; }
+    public void set_employeeLocation(Location l) {
+        _employeeLocation = l;
+//        if (l.addLocationEmployee(this)) {
+//            System.out.println("ItS ADDING THE FUCKING BABY TO THIS GOD DAMN THING THAT OWNT WORK");
+//        }
+    }
 
     public boolean checkPassword(String password) {
         return _password.equals(password);

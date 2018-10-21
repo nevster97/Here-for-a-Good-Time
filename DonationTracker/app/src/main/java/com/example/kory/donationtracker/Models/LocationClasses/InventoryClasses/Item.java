@@ -1,8 +1,8 @@
 package com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses;
 
-import java.util.Comparator;
-import java.util.Date;
 import com.example.kory.donationtracker.Models.LocationClasses.Location;
+
+import java.util.Date;
 
 public class Item {
 
@@ -22,7 +22,7 @@ public class Item {
         _location = location;
         _shortDesc = shortDesc;
         _fullDesc = fullDesc;
-        _value = Double.parseDouble(String.format("%.2f", value));
+        _value = Double.parseDouble(value);
         _category = category;
     }
 
@@ -31,7 +31,7 @@ public class Item {
         _location = location;
         _shortDesc = shortDesc;
         _fullDesc = fullDesc;
-        _value = Double.parseDouble(String.format("%.2f", value));
+        _value = Double.parseDouble(value);
         _category = category;
     }
 
