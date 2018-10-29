@@ -11,6 +11,7 @@
     <RelativeLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
+        android:background="@color/colorLogo"
         android:layout_height="match_parent">
 
         <android.support.v7.widget.Toolbar
@@ -19,7 +20,7 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:background="@color/colorLogo"
+            android:background="@color/backgroundColor1"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:title="@string/companyname"
             android:layout_alignParentLeft="true" />
@@ -28,19 +29,20 @@
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="63dp"
             android:text="Name"
             android:textAlignment="center"
-            android:textSize="36sp" />;
+            android:textSize="36sp"
+            android:layout_alignParentLeft="true" />;
             android:textSize="30sp" />
 
         <TextView
             android:id="@+id/latitude"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/longitude"
+            android:layout_below="@+id/type"
             android:layout_centerHorizontal="true"
             android:text="Latitude"
             android:textAlignment="center"
@@ -50,9 +52,8 @@
             android:id="@+id/address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/longitude"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="92dp"
             android:text="Address"
             android:textAlignment="center"
             android:textSize="18sp" />
@@ -71,12 +72,20 @@
             android:id="@+id/longitude"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/latitude"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="216dp"
             android:text="Longitude"
             android:textAlignment="center"
             android:textSize="18sp" />
+
+        <ListView
+            android:id="@+id/listView1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/address"
+            android:divider="#f00" />
 
 
     </RelativeLayout>
@@ -89,5 +98,6 @@
         android:fitsSystemWindows="true"
         app:itemBackground="@android:color/white"
         app:headerLayout="@layout/nav_header" />
+
 
 </android.support.v4.widget.DrawerLayout>
