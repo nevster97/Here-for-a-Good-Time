@@ -18,7 +18,11 @@
         </activity>
         <activity android:name=".Controller.Login" />
         <activity android:name=".Controller.Home" />
-        <activity android:name=".Controller.Registration"></activity>
+        <activity android:name=".Controller.Registration" />
+        <activity
+            android:name=".Controller.LocEmpRegister"
+            android:label="@string/title_activity_loc_emp_register"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
