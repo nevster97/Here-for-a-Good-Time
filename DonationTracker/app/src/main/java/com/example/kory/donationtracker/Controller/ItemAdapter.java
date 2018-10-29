@@ -8,22 +8,26 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.kory.donationtracker.Models.LocationClasses.Address;
+import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Inventory;
+import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Item;
+import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.ItemType;
 import com.example.kory.donationtracker.Models.LocationClasses.Location;
 import com.example.kory.donationtracker.Models.LocationClasses.LocationFacade;
-import com.example.kory.donationtracker.Models.LocationClasses.LocationType;
+import com.example.kory.donationtracker.Models.UserClasses.User;
+import com.example.kory.donationtracker.Models.UserClasses.UserFacade;
 import com.example.kory.donationtracker.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class CustomAdapter extends BaseAdapter {
+public class ItemAdapter extends BaseAdapter {
     Context context;
     ArrayList<String> data;
     ArrayList<String> address;
     ArrayList<String> type;
     LayoutInflater inflter;
 
-    public CustomAdapter(Context applicationContext) {
+    public ItemAdapter(Context applicationContext) {
         this.context = context;
         inflter = (LayoutInflater.from(applicationContext));
     }
@@ -31,8 +35,10 @@ public class CustomAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         LocationFacade locFacade = LocationFacade.getInstance();
-        ArrayList<Location> locList = (ArrayList) locFacade.getList();
-        return locList.size();
+        Location loc = locFacade.getCurrentLocation();
+        Inventory arr = loc.getInventory();
+        ArrayList<Item> arr1 = (ArrayList) arr.getInventory();
+        return arr1.size();
     }
 
     @Override
@@ -48,18 +54,23 @@ public class CustomAdapter extends BaseAdapter {
     @SuppressLint("ViewHolder")
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        LocationFacade locFacade = LocationFacade.getInstance();
-        ArrayList<Location> locList = (ArrayList) locFacade.getList();
-        Location l = locList.get(i);
+        UserFacade userFacade = UserFacade.getInstance();
+        User user = userFacade.getCurrentUser();
+        Location loc = user.get_employeeLocation();
+        Inventory inv = loc.getInventory();
+        List<Item> list = inv.getInventory();
+        Item p = list.get(i);
         view = inflter.inflate(R.layout.item, null);
         TextView name = (TextView) view.findViewById(R.id.textView10);
-        name.setText(l.getName());
+        name.setText(p.getShort());
         TextView address = (TextView) view.findViewById(R.id.textView11);
-        Address a = l.getAddress();
-        address.setText(a.toString());
+        double temp = p.getValue();
+        String temp1 = Double.toString(temp);
+        address.setText(temp1);
         TextView type = (TextView) view.findViewById(R.id.textView12);
-        LocationType t = l.getType();
-        type.setText(t.getStringType());
+        ItemType type1 = p.getItemType();
+        String type2 = type1.getStringType();
+        type.setText(type2);
         return view;
     }
 
