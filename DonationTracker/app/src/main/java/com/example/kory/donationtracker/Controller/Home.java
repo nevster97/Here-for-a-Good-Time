@@ -101,6 +101,11 @@ public class Home extends AppCompatActivity {
             ActionBar actionbar = getSupportActionBar();
             actionbar.setDisplayHomeAsUpEnabled(true);
             actionbar.setHomeAsUpIndicator(R.drawable.menuhome);
+            UserFacade userF = UserFacade.getInstance();
+            User user = userF.getCurrentUser();
+            Location loc = user.get_employeeLocation();
+            LocationFacade locF = LocationFacade.getInstance();
+            locF.setCurrentLocation(loc);
 
             final NavigationView navigationView = findViewById(R.id.nav_view);
             navigationView.inflateMenu(R.menu.employee_view);
@@ -423,42 +428,43 @@ public class Home extends AppCompatActivity {
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public void populateLocations() {
-        try {
-            //Open a stream on the raw file
-            InputStream is = getResources().openRawResource(R.raw.locationdata);
-            //From here we probably should call a model method and pass the InputStream
-            //Wrap it in a BufferedReader so that we get the readLine() method
-            BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
-            LocationFacade locFacade = LocationFacade.getInstance();
-            String line;
-            String[] tokens = new String[10];
-            br.readLine(); //get rid of header line
+        LocationFacade locFacade = LocationFacade.getInstance();
+        if (locFacade.checkIfEmpty()) {
+            try {
+                //Open a stream on the raw file
+                InputStream is = getResources().openRawResource(R.raw.locationdata);
+                //From here we probably should call a model method and pass the InputStream
+                //Wrap it in a BufferedReader so that we get the readLine() method
+                BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+                String line;
+                String[] tokens = new String[10];
+                br.readLine(); //get rid of header line
 
-            while ((line = br.readLine()) != null) {
-                //line = br.readLine();
-                tokens = line.split(",");
-                String name = tokens[1];
-                String lat = tokens[2];
-                String lon = tokens[3];
-                // address
-                String street = tokens[4];
-                String city = tokens[5];
-                String state = tokens[6];
-                String zip = tokens[7];
-                Address address = new Address(street, city, state, zip);
-                String type = tokens[8];
-                String phone = tokens[9];
-                String website = tokens[10];
+                while ((line = br.readLine()) != null) {
+                    //line = br.readLine();
+                    tokens = line.split(",");
+                    String name = tokens[1];
+                    String lat = tokens[2];
+                    String lon = tokens[3];
+                    // address
+                    String street = tokens[4];
+                    String city = tokens[5];
+                    String state = tokens[6];
+                    String zip = tokens[7];
+                    Address address = new Address(street, city, state, zip);
+                    String type = tokens[8];
+                    String phone = tokens[9];
+                    String website = tokens[10];
 
-                Location location = new Location(name, lat, lon, address, type, phone, website);
-                locFacade.addLocation(location);
+                    Location location = new Location(name, lat, lon, address, type, phone, website);
+                    locFacade.addLocation(location);
+                }
+                br.close();
+
+
+            } catch (IOException e) {
+                System.out.println("Error");
             }
-            br.close();
-
-
-
-        } catch (IOException e) {
-            System.out.println("Error");
         }
     }
 

@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundColor1"
+    android:background="@color/colorLogo"
     android:fitsSystemWindows="true">
 
     <!-- Layout to contain contents of main body of screen (drawer will slide over this) -->
@@ -20,7 +20,7 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:background="@color/colorLogo"
+            android:background="@color/backgroundColor1"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:title="@string/companyname"
             android:layout_alignParentLeft="true" />
@@ -100,6 +100,25 @@
                     android:textSize="18sp" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="33dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="91dp"
+            android:layout_toStartOf="@+id/valuetext"
+            app:srcCompat="@drawable/moneysign"
+            android:layout_toLeftOf="@+id/valuetext" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/typespinner"
+            android:layout_toStartOf="@+id/typespinner"
+            android:text="Type:"
+            android:layout_toLeftOf="@+id/typespinner" />
 
 
     </RelativeLayout>

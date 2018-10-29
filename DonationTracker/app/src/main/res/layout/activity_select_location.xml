@@ -11,6 +11,7 @@
     <RelativeLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
+        android:background="@color/colorLogo"
         android:layout_height="match_parent">
 
         <android.support.v7.widget.Toolbar
@@ -19,7 +20,7 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:background="@color/colorLogo"
+            android:background="@color/backgroundColor1"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:title="@string/companyname"
             android:layout_alignParentLeft="true" />
@@ -33,7 +34,8 @@
             android:layout_marginTop="63dp"
             android:text="Name"
             android:textAlignment="center"
-            android:textSize="36sp" />;
+            android:textSize="36sp"
+            android:layout_alignParentLeft="true" />;
             android:textSize="30sp" />
 
         <TextView
@@ -80,6 +82,7 @@
             android:id="@+id/listView1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/address"
             android:divider="#f00" />

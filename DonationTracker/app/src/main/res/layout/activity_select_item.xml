@@ -19,7 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:background="@color/colorLogo"
+            android:background="@color/backgroundColor1"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:title="@string/companyname"
             android:layout_alignParentLeft="true" />
