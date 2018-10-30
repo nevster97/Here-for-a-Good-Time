@@ -31,4 +31,6 @@ public class LocationFacade {
     public List<Location> getList() {
         return manager.getList();
     }
+
+    public void logout() { }
 }

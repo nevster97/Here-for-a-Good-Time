@@ -83,34 +83,34 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="148dp"
         android:layout_marginLeft="148dp"
         android:layout_marginRight="148dp"
         android:layout_marginStart="148dp"
-        android:layout_marginTop="12dp"
         android:onClick="toStartUp"
         android:text="Back to Home"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="149dp"
         android:layout_height="41dp"
+        android:layout_marginBottom="14dp"
         android:layout_marginEnd="117dp"
         android:layout_marginLeft="118dp"
         android:layout_marginRight="117dp"
         android:layout_marginStart="118dp"
-        android:layout_marginTop="20dp"
         android:onClick="onRegisterClick"
         app:cardCornerRadius="25dp"
         app:cardElevation="19dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner">
+        app:layout_constraintStart_toStartOf="parent">
 
         <RelativeLayout
             android:layout_width="match_parent"

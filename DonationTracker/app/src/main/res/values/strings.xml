@@ -7,4 +7,5 @@
     <string name="updatelocation">Update Location</string>
     <string name="managelocation">Manage Location</string>
     <string name="logout">Logout</string>
+    <string name="title_activity_loc_emp_register">LocEmpRegister</string>
 </resources>
