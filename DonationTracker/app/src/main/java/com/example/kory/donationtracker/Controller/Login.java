@@ -45,15 +45,6 @@ public class Login extends AppCompatActivity {
             myToast.show();
         }
 
-//        if (username.equals("user") && password.equals("pass")) {
-//            Intent randomIntent = new Intent(this, Home.class);
-//            startActivity(randomIntent);
-//        } else {
-//            Toast myToast = Toast.makeText(this, "Incorrect Username/Password!",
-//                    Toast.LENGTH_SHORT);
-//            myToast.show();
-//
-//        }
     }
 
     public void onButtonPress4(View view) {

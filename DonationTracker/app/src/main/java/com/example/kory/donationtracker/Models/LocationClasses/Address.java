@@ -19,6 +19,23 @@ public class Address {
         return str;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Address) {
+            Address a = (Address) o;
+            String str1 = this._street + this._city + this._state + this._zip;
+            String str2 = a.getStreet() + a.getCity() + a.getState() + a.getZip();
+            return str1.equals(str2);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        String str1 = this._street + this._city + this._state + this._zip;
+        return str1.hashCode();
+    }
+
     public String getStreet() { return _street; }
     public String getCity() { return _city; }
     public String getState() { return _state; }

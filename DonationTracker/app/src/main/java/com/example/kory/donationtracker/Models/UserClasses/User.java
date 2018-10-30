@@ -1,6 +1,7 @@
 package com.example.kory.donationtracker.Models.UserClasses;
 
 import com.example.kory.donationtracker.Models.LocationClasses.Location;
+import com.example.kory.donationtracker.Models.LocationClasses.LocationFacade;
 
 public class User {
 
@@ -10,20 +11,15 @@ public class User {
     private String _contact;
     private UserType _type;
     private boolean _isDisabled;
-    private Location _employeeLocation;
+    // private Location _employeeLocation;
+    private String _employeeLocation;
 
     public User(String username, String password, String name, String contact, UserType type) {
-        _username = username;
-        _password = password;
-        _name = name;
-        _contact = contact;
-        _type = type;
-        _isDisabled = false;
-        _employeeLocation = null;
+        this(username, password, name, contact, type, null);
     }
 
     // use this constructor when instantiating a location employee
-    public User(String username, String password, String name, String contact, UserType type, Location employeeLocation) {
+    public User(String username, String password, String name, String contact, UserType type, String employeeLocation) {
         _username = username;
         _password = password;
         _name = name;
@@ -38,13 +34,10 @@ public class User {
     public String get_contact() { return _contact; }
     public UserType get_type() { return _type; }
     public String get_password() {return _password; }
-    public Location get_employeeLocation() {return _employeeLocation; }
-    public void set_employeeLocation(Location l) {
-        _employeeLocation = l;
-//        if (l.addLocationEmployee(this)) {
-//            System.out.println("ItS ADDING THE FUCKING BABY TO THIS GOD DAMN THING THAT OWNT WORK");
-//        }
-    }
+    // public Location get_employeeLocation() {return LocationFacade.getInstance().getLocation(_employeeLocation); }
+    public String get_employeeLocation() { return _employeeLocation; }
+    // public void set_employeeLocation(Location l) { _employeeLocation = l.getAddress(); }
+    public void set_employeeLocation(String s) { _employeeLocation = s; }
 
     public boolean checkPassword(String password) {
         return _password.equals(password);

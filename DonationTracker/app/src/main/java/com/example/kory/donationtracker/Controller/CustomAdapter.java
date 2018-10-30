@@ -48,6 +48,7 @@ public class CustomAdapter extends BaseAdapter {
     @SuppressLint("ViewHolder")
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+
         LocationFacade locFacade = LocationFacade.getInstance();
         ArrayList<Location> locList = (ArrayList) locFacade.getList();
         Location l = locList.get(i);
@@ -55,8 +56,9 @@ public class CustomAdapter extends BaseAdapter {
         TextView name = (TextView) view.findViewById(R.id.textView10);
         name.setText(l.getName());
         TextView address = (TextView) view.findViewById(R.id.textView11);
-        Address a = l.getAddress();
-        address.setText(a.toString());
+        // Address a = l.getAddress();
+        // address.setText(a.toString());
+        address.setText(l.getAddress());
         TextView type = (TextView) view.findViewById(R.id.textView12);
         LocationType t = l.getType();
         type.setText(t.getStringType());

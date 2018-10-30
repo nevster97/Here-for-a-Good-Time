@@ -20,7 +20,7 @@ public class LocationFacade {
         return manager.addLocation(location);
     }
 
-    public Location getLocation(Address address) {
+    public Location getLocation(String address) {
         return manager.getLocation(address);
     }
 
@@ -33,4 +33,10 @@ public class LocationFacade {
     }
 
     public void logout() { }
+
+    public void refresh() {
+        manager.downloadFromDB();
+    }
+
+    public void send() { manager.uploadToDB(); }
 }

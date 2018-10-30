@@ -50,10 +50,11 @@ public class LocEmpRegister extends AppCompatActivity implements OnItemSelectedL
             String a = l.getAddress().toString();
             if (a.equals(p)) {
                 System.out.println("SLKDJFLKSDJFLKSDJFLSDKFLSF");
-                user.set_employeeLocation(l);
+                user.set_employeeLocation(a);
+//                u.uploadToDB();
             }
         }
-
+        u.uploadToDB();
     }
 
     @Override

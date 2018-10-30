@@ -73,9 +73,9 @@ public class Home extends AppCompatActivity {
         loadMenus();
 
         LocationFacade locFacade = LocationFacade.getInstance();
-        if (locFacade.checkIfEmpty()) {
-            populateLocations();
-        }
+//        if (locFacade.checkIfEmpty()) {
+//            populateLocations();
+//        }
 
         ListView simpleList = (ListView) findViewById(R.id.listView);
         CustomAdapter customAdapter = new CustomAdapter(getApplicationContext());
@@ -103,7 +103,8 @@ public class Home extends AppCompatActivity {
             actionbar.setHomeAsUpIndicator(R.drawable.menuhome);
             UserFacade userF = UserFacade.getInstance();
             User user = userF.getCurrentUser();
-            Location loc = user.get_employeeLocation();
+            // Location loc = user.get_employeeLocation();
+            Location loc = LocationFacade.getInstance().getLocation(user.get_employeeLocation());
             LocationFacade locF = LocationFacade.getInstance();
             locF.setCurrentLocation(loc);
 
@@ -243,6 +244,7 @@ public class Home extends AppCompatActivity {
 //        Location loc = user.get_employeeLocation();
 //        Inventory inv = loc.getInventory();
 //        ArrayList<Item> items = (ArrayList) inv.getInventory();
+        // LocationFacade.getInstance().send();
         setContentView(R.layout.activity_home_employee);
         loadMenus();
         ListView simpleList = (ListView) findViewById(R.id.listView);
@@ -272,6 +274,8 @@ public class Home extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, ItemType.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeSpinner.setAdapter(adapter);
+        // LocationFacade.getInstance().send();
+        // UserFacade.getInstance().refresh();
     }
 
     public void addItemClickInside(View view) {
@@ -289,11 +293,15 @@ public class Home extends AppCompatActivity {
 
             UserFacade userFacade = UserFacade.getInstance();
             User user = userFacade.getCurrentUser();
-            Location l = user.get_employeeLocation();
+            // Location l = user.get_employeeLocation();
+            Location l = LocationFacade.getInstance().getLocation(user.get_employeeLocation());
             Inventory inv = l.getInventory();
-            Item i = new Item(l, shorttext, longtext, value, it);
+            Item i = new Item(l, shorttext, longtext, value, it.getStringType());
             inv.addItem(i);
+            LocationFacade.getInstance().send();
             loadInventory(view);
+            // LocationFacade.getInstance().send();
+            // UserFacade.getInstance().refresh();
         } catch (Exception e){
             Toast myToast = Toast.makeText(this, "Value must be a number!",
                     Toast.LENGTH_SHORT);
@@ -308,7 +316,8 @@ public class Home extends AppCompatActivity {
         loadMenus();
         UserFacade userFacade = UserFacade.getInstance();
         User user = userFacade.getCurrentUser();
-        Location loc = user.get_employeeLocation();
+        // Location loc = user.get_employeeLocation();
+        Location loc = LocationFacade.getInstance().getLocation(user.get_employeeLocation());
         LocationFacade locFacade = LocationFacade.getInstance();
         locFacade.setCurrentLocation(loc);
         Inventory inv = loc.getInventory();
@@ -321,7 +330,7 @@ public class Home extends AppCompatActivity {
 
         short1.setText(temp.getShort());
         long1.setText(temp.getFull());
-        ItemType it = temp.getItemType();
+        ItemType it = ItemType.valueOf(temp.getItemType());
         type.setText(it.getStringType());
         value.setText(Double.toString(temp.getValue()));
     }
@@ -365,7 +374,6 @@ public class Home extends AppCompatActivity {
         facade.logout();
 
         LocationFacade locFacade = LocationFacade.getInstance();
-        locFacade = new LocationFacade();
 
         Intent randomIntent = new Intent(this, StartUp.class);
         startActivity(randomIntent);
@@ -418,86 +426,21 @@ public class Home extends AppCompatActivity {
         for (int i = 0; i < locations.size(); i++) {
             Location l = locations.get(i);
             String name = l.getName();
-            Address address1 = l.getAddress();
-            String address = address1.toString();
+            // Address address1 = l.getAddress();
+            // String address = address1.toString();
+            String address = l.getAddress();
             LocationType type1 = l.getType();
             String type = type1.getStringType();
         }
 
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    public void populateLocations() {
-        LocationFacade locFacade = LocationFacade.getInstance();
-        if (locFacade.checkIfEmpty()) {
-            try {
-                //Open a stream on the raw file
-                InputStream is = getResources().openRawResource(R.raw.locationdata);
-                //From here we probably should call a model method and pass the InputStream
-                //Wrap it in a BufferedReader so that we get the readLine() method
-                BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
-                String line;
-                String[] tokens = new String[10];
-                br.readLine(); //get rid of header line
-
-                while ((line = br.readLine()) != null) {
-                    //line = br.readLine();
-                    tokens = line.split(",");
-                    String name = tokens[1];
-                    String lat = tokens[2];
-                    String lon = tokens[3];
-                    // address
-                    String street = tokens[4];
-                    String city = tokens[5];
-                    String state = tokens[6];
-                    String zip = tokens[7];
-                    Address address = new Address(street, city, state, zip);
-                    String type = tokens[8];
-                    String phone = tokens[9];
-                    String website = tokens[10];
-
-                    Location location = new Location(name, lat, lon, address, type, phone, website);
-                    locFacade.addLocation(location);
-                }
-                br.close();
-
-
-            } catch (IOException e) {
-                System.out.println("Error");
-            }
-        }
+    @Override
+    protected void onDestroy() {
+        LocationFacade.getInstance().send();
+        super.onDestroy();
     }
 
-//    @TargetApi(Build.VERSION_CODES.KITKAT)
-//    public void changeTheView(int pos) {
-//        ArrayList<String> temp = new ArrayList<>();
-//        try {
-//            //Open a stream on the raw file
-//            InputStream is = getResources().openRawResource(R.raw.locationdata);
-//            //From here we probably should call a model method and pass the InputStream
-//            //Wrap it in a BufferedReader so that we get the readLine() method
-//            BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
-//
-//            String line;
-//            String[] tokens = new String[10];
-//            br.readLine(); //get rid of header line
-//            for (int i = 0; i < pos + 1; i++) {
-//                line = br.readLine();
-//                tokens = line.split(",");
-//            }
-//            TextView tv = findViewById(R.id.textView3);
-//            tv.setText(tokens[4]);
-//
-//            br.close();
-//
-//
-//
-//        } catch (IOException e) {
-//            System.out.println("Error");
-//        }
-//    }
-//
-//
 }
 
 

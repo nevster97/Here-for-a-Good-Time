@@ -75,17 +75,6 @@ public class Registration extends AppCompatActivity {
 
         UserType type = (UserType) typeSpinner.getSelectedItem();
 
-
-//        } else if (emailString.equals("")) {
-//            CharSequence text = ("Email is null");
-//            int duration = Toast.LENGTH_SHORT;
-//            Toast toast = Toast.makeText(this, text, duration);
-//            toast.show();
-//        } else {
-//            Intent randomIntent = new Intent(this, StartUp.class);
-//            startActivity(randomIntent);
-//        }
-
         if (firstString.equals("") || lastString.equals("")
                 || emailString.equals("") || pass1.equals("") || pass2.equals("")) {
             // handle empty fields
@@ -103,7 +92,11 @@ public class Registration extends AppCompatActivity {
             UserFacade facade = UserFacade.getInstance();
             if (facade.register(emailString, pass1, nameString, emailString, type)) {
                 boolean b = facade.login(emailString, pass1);
-                populateLocations();
+                LocationFacade locFacade = LocationFacade.getInstance();
+//                if (locFacade.checkIfEmpty()) {
+//                    //populateLocations();
+//
+//                }
                 User u = facade.getCurrentUser();
                 UserType ut = u.get_type();
                 if (ut.equals(UserType.EMPLOYEE)) {
@@ -125,46 +118,47 @@ public class Registration extends AppCompatActivity {
 
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    public void populateLocations() {
-        try {
-            //Open a stream on the raw file
-            InputStream is = getResources().openRawResource(R.raw.locationdata);
-            //From here we probably should call a model method and pass the InputStream
-            //Wrap it in a BufferedReader so that we get the readLine() method
-            BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
-            LocationFacade locFacade = LocationFacade.getInstance();
-            String line;
-            String[] tokens = new String[10];
-            br.readLine(); //get rid of header line
-
-            while ((line = br.readLine()) != null) {
-                //line = br.readLine();
-                tokens = line.split(",");
-                String name = tokens[1];
-                String lat = tokens[2];
-                String lon = tokens[3];
-                // address
-                String street = tokens[4];
-                String city = tokens[5];
-                String state = tokens[6];
-                String zip = tokens[7];
-                Address address = new Address(street, city, state, zip);
-                String type = tokens[8];
-                String phone = tokens[9];
-                String website = tokens[10];
-
-                Location location = new Location(name, lat, lon, address, type, phone, website);
-                locFacade.addLocation(location);
-            }
-            br.close();
-
-
-
-        } catch (IOException e) {
-            System.out.println("Error");
-        }
-    }
+//    @TargetApi(Build.VERSION_CODES.KITKAT)
+//    public void populateLocations() {
+//        try {
+//            //Open a stream on the raw file
+//            InputStream is = getResources().openRawResource(R.raw.locationdata);
+//            //From here we probably should call a model method and pass the InputStream
+//            //Wrap it in a BufferedReader so that we get the readLine() method
+//            BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+//            LocationFacade locFacade = LocationFacade.getInstance();
+//            String line;
+//            String[] tokens = new String[10];
+//            br.readLine(); //get rid of header line
+//
+//            while ((line = br.readLine()) != null) {
+//                //line = br.readLine();
+//                tokens = line.split(",");
+//                String name = tokens[1];
+//                String lat = tokens[2];
+//                String lon = tokens[3];
+//                // address
+//                String street = tokens[4];
+//                String city = tokens[5];
+//                String state = tokens[6];
+//                String zip = tokens[7];
+//                // Address address = new Address(street, city, state, zip);
+//                String address = street + ", " + city + ", " + state + " " + zip;
+//                String type = tokens[8];
+//                String phone = tokens[9];
+//                String website = tokens[10];
+//
+//                Location location = new Location(name, lat, lon, address, type, phone, website);
+//                locFacade.addLocation(location);
+//            }
+//            br.close();
+//
+//
+//
+//        } catch (IOException e) {
+//            System.out.println("Error");
+//        }
+//    }
 
 
 

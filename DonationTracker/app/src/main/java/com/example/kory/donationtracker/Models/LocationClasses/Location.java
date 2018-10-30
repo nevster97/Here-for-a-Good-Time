@@ -10,7 +10,8 @@ public class Location {
     private String _name;
     private String _latitude;
     private String _longitude;
-    private Address _address;
+    // private Address _address;
+    private String _address;
     private LocationType _type;
     private String _phone;
     private String _website;
@@ -18,7 +19,7 @@ public class Location {
     private ArrayList<User> _locationEmployees;
 
 
-    public Location(String name, String latitude, String longitude, Address address,
+    public Location(String name, String latitude, String longitude, String address,
                     String type, String phone, String website) {
         _name = name;
         // _latitude = Double.parseDouble(latitude);
@@ -40,7 +41,7 @@ public class Location {
     }
 
     // use this constructor when taking in an inventory object
-    public Location(String name, String latitude, String longitude, Address address,
+    public Location(String name, String latitude, String longitude, String address,
                     String type, String phone, String website, Inventory inventory) {
         _name = name;
         _latitude = latitude;
@@ -57,7 +58,7 @@ public class Location {
     public String getName() { return _name; }
     public String getLat() { return _latitude; }
     public String getLon() { return _longitude; }
-    public Address getAddress() { return _address; }
+    public String getAddress() { return _address; }
     public LocationType getType() { return _type; }
     public String getPhone() { return _phone; }
     public String getWebsite() { return _website; }
@@ -78,6 +79,10 @@ public class Location {
         } else {
             return false;
         }
+    }
+
+    public void setInventory (Inventory inv) {
+        _inventory = inv;
     }
 
     @Override

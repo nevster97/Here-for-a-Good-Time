@@ -1,5 +1,8 @@
 package com.example.kory.donationtracker.Models.UserClasses;
 
+//import com.google.firebase.database.DatabaseReference;
+//import com.google.firebase.database.FirebaseDatabase;
+
 // << interface >>
 public class UserFacade {
 
@@ -9,6 +12,10 @@ public class UserFacade {
     private static UserFacade INSTANCE = new UserFacade();
     private UserManager manager;
     private User currentUser;
+
+//    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+//    private DatabaseReference ref = database.getReference();
+
 
     public static UserFacade getInstance() { return INSTANCE; }
 
@@ -28,6 +35,7 @@ public class UserFacade {
     }
 
     public boolean register(String username, String pass, String name, String contact, UserType type) {
+        manager.downloadFromDB();
         if (hasLoggedInUser()) {
             return false;
         }
@@ -41,6 +49,7 @@ public class UserFacade {
     }
 
     public boolean login(String username, String password) {
+        manager.downloadFromDB();
         if (hasLoggedInUser()) {
             return false;
         }
@@ -58,6 +67,8 @@ public class UserFacade {
         currentUser = null;
     }
 
+    public void uploadToDB() { manager.uploadToDB(); }
+    public void refresh() { manager.downloadFromDB(); }
 
 
 }

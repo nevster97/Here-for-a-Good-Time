@@ -3,6 +3,8 @@ package com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses
 import com.example.kory.donationtracker.Models.LocationClasses.Location;
 import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.ItemComparator;
 
+import com.example.kory.donationtracker.Models.LocationClasses.LocationFacade;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,17 +29,20 @@ public class Inventory {
         _inventory.add(item);
         _totalValue += item.getValue();
         _totalItems++;
+        LocationFacade.getInstance().refresh();
     }
 
     public void removeItem(Item item) {
         _inventory.remove(item);
         _totalValue -= item.getValue();
         _totalItems--;
+        LocationFacade.getInstance().refresh();
     }
 
     public List<Item> getInventory() {
         return _inventory;
     }
+    public void setInventory(List<Item> i) { _inventory = i; }
 
     public int getTotalItems() { return _totalItems; }
     public double getTotalValue() { return _totalValue; }
