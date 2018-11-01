@@ -274,8 +274,6 @@ public class Home extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, ItemType.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeSpinner.setAdapter(adapter);
-        // LocationFacade.getInstance().send();
-        // UserFacade.getInstance().refresh();
     }
 
     public void addItemClickInside(View view) {

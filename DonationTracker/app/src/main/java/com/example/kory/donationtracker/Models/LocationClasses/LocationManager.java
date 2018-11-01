@@ -67,7 +67,7 @@ public class LocationManager {
             public void onDataChange(DataSnapshot dataSnapshot) {
 //                System.out.println(dataSnapshot.toString());
 //                System.exit(0);
-                System.out.println(dataSnapshot.getChildren().toString());
+//                System.out.println(dataSnapshot.getChildren().toString());
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
                     //System.out.println(ds); //TODO RIGHT HERE
@@ -88,22 +88,12 @@ public class LocationManager {
                     loc.setInventory(new Inventory(loc, 0, 0, new ArrayList<Item>()));
 
                     if (map.get("inventory") != null) {
-                        // System.out.println(map.get("inventory").getClass());
                         Object obj = map.get("inventory");
-//                        System.out.println(obj.getClass());
-//                        System.out.println(((ArrayList<Object>) obj).get(0).getClass());
                         for (Map<String, Object> map2 : (ArrayList<HashMap>) obj) {
-                            // System.out.println(map2.get(""))
-//                            System.out.println(map2.get("short"));
-//                            System.out.println(map2.get("full"));
-//                            System.out.println(map2.get("itemType"));
-//                            System.out.println(map2.get("value"));
 
                             String s = (String) map2.get("short");
                             String f = (String) map2.get("full");
                             String t = (String) map2.get("itemType");
-                            // System.out.println(map2.get("value").getClass());
-                            // String v = Long.toString((Long) map2.get("value"));
                             String v;
 
                             if (map2.get("value") instanceof Long) {
@@ -116,15 +106,13 @@ public class LocationManager {
                                 v = "0";
                             }
 
-//                            System.out.println(map2.get("value"));
-//                            System.out.println(v);
-
-
                             Item item = new Item(null, s, f, v, t);
                             loc.getInventory().addItem(item);
+                            System.gc();
                         }
-
+                        obj = null;
                     }
+                    map = null;
                 }
             }
 

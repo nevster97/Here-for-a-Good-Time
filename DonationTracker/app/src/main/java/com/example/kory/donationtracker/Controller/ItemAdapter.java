@@ -56,40 +56,22 @@ public class ItemAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         UserFacade userFacade = UserFacade.getInstance();
         User user = userFacade.getCurrentUser();
-        Location loc = LocationFacade.getInstance().getLocation(user.get_employeeLocation());
+        // Location loc = LocationFacade.getInstance().getLocation(user.get_employeeLocation());
+        Location loc = LocationFacade.getInstance().getCurrentLocation();
         Inventory inv = loc.getInventory();
         List<Item> list = inv.getInventory();
-        try {
-            Item p = list.get(i);
-            view = inflter.inflate(R.layout.item, null);
-            TextView name = (TextView) view.findViewById(R.id.textView10);
-            name.setText(p.getShort());
-            TextView address = (TextView) view.findViewById(R.id.textView11);
-            double temp = p.getValue();
-            String temp1 = Double.toString(temp);
-            address.setText(temp1);
-            TextView type = (TextView) view.findViewById(R.id.textView12);
-//        ItemType type1 = p.getItemType();
-//        String type2 = type1.getStringType();
-            String type2 = p.getItemType();
-            type.setText(type2);
-            return view;
-        } catch (java.lang.IndexOutOfBoundsException e) {
-            return view;
-        }
-        //view = inflter.inflate(R.layout.item, null);
-//        TextView name = (TextView) view.findViewById(R.id.textView10);
-//        name.setText(p.getShort());
-//        TextView address = (TextView) view.findViewById(R.id.textView11);
-//        double temp = p.getValue();
-//        String temp1 = Double.toString(temp);
-//        address.setText(temp1);
-//        TextView type = (TextView) view.findViewById(R.id.textView12);
-////        ItemType type1 = p.getItemType();
-////        String type2 = type1.getStringType();
-//        String type2 = p.getItemType();
-//        type.setText(type2);
-//        return view;
+        Item p = list.get(i);
+        view = inflter.inflate(R.layout.item, null);
+        TextView name = (TextView) view.findViewById(R.id.textView10);
+        name.setText(p.getShort());
+        TextView address = (TextView) view.findViewById(R.id.textView11);
+        double temp = p.getValue();
+        String temp1 = Double.toString(temp);
+        address.setText(temp1);
+        TextView type = (TextView) view.findViewById(R.id.textView12);
+        String type2 = p.getItemType();
+        type.setText(type2);
+        return view;
     }
 
 }
