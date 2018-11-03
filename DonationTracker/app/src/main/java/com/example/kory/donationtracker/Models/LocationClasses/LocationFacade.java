@@ -34,9 +34,13 @@ public class LocationFacade {
 
     public void logout() { }
 
-    public void refresh() {
-        manager.downloadFromDB();
+    public void setup() {
+        manager.setup();
     }
 
-    public void send() { manager.uploadToDB(); }
+//    public void refresh() {
+//        manager.downloadFromDB();
+//    }
+//
+//    public void send() { manager.uploadToDB(); }
 }

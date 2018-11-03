@@ -73,7 +73,7 @@ public class Registration extends AppCompatActivity {
         String nameString = firstString + " " + lastString;
         String emailString = (String) email.getText().toString();
 
-        UserType type = (UserType) typeSpinner.getSelectedItem();
+        String type = ((UserType) typeSpinner.getSelectedItem()).getStringType();
 
         if (firstString.equals("") || lastString.equals("")
                 || emailString.equals("") || pass1.equals("") || pass2.equals("")) {
@@ -98,11 +98,21 @@ public class Registration extends AppCompatActivity {
 //
 //                }
                 User u = facade.getCurrentUser();
-                UserType ut = u.get_type();
+                UserType ut = u.getUserType();
                 if (ut.equals(UserType.EMPLOYEE)) {
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
                     Intent randomIntent = new Intent(this, LocEmpRegister.class);
                     startActivity(randomIntent);
                 } else {
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
                     Intent randomIntent = new Intent(this, Home.class);
                     startActivity(randomIntent);
                 }

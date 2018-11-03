@@ -66,10 +66,10 @@ public class Home extends AppCompatActivity {
 
         UserFacade facade = UserFacade.getInstance();
         User user = facade.getCurrentUser();
-        String name = user.get_name();
+        String name = user.getName();
         // TextView nameView = (TextView)findViewById(R.id.textView6);
         // nameView.setText(name);
-        ut = user.get_type();
+        ut = user.getUserType();
         loadMenus();
 
         LocationFacade locFacade = LocationFacade.getInstance();
@@ -104,7 +104,7 @@ public class Home extends AppCompatActivity {
             UserFacade userF = UserFacade.getInstance();
             User user = userF.getCurrentUser();
             // Location loc = user.get_employeeLocation();
-            Location loc = LocationFacade.getInstance().getLocation(user.get_employeeLocation());
+            Location loc = LocationFacade.getInstance().getLocation(user.getEmployeeLocation());
             LocationFacade locF = LocationFacade.getInstance();
             locF.setCurrentLocation(loc);
 
@@ -292,11 +292,12 @@ public class Home extends AppCompatActivity {
             UserFacade userFacade = UserFacade.getInstance();
             User user = userFacade.getCurrentUser();
             // Location l = user.get_employeeLocation();
-            Location l = LocationFacade.getInstance().getLocation(user.get_employeeLocation());
-            Inventory inv = l.getInventory();
-            Item i = new Item(l, shorttext, longtext, value, it.getStringType());
-            inv.addItem(i);
-            LocationFacade.getInstance().send();
+            // Location l = LocationFacade.getInstance().getLocation(user.getEmployeeLocation());
+            // Inventory inv = l.getInventory();
+            Item i = new Item(shorttext, longtext, value, it.getStringType());
+            LocationFacade.getInstance().getLocation(user.getEmployeeLocation()).addItem(i);
+            // inv.addItem(i);
+            // LocationFacade.getInstance().send();
             loadInventory(view);
             // LocationFacade.getInstance().send();
             // UserFacade.getInstance().refresh();
@@ -315,7 +316,7 @@ public class Home extends AppCompatActivity {
         UserFacade userFacade = UserFacade.getInstance();
         User user = userFacade.getCurrentUser();
         // Location loc = user.get_employeeLocation();
-        Location loc = LocationFacade.getInstance().getLocation(user.get_employeeLocation());
+        Location loc = LocationFacade.getInstance().getLocation(user.getEmployeeLocation());
         LocationFacade locFacade = LocationFacade.getInstance();
         locFacade.setCurrentLocation(loc);
         Inventory inv = loc.getInventory();
@@ -435,7 +436,7 @@ public class Home extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        LocationFacade.getInstance().send();
+        // LocationFacade.getInstance().send();
         super.onDestroy();
     }
 

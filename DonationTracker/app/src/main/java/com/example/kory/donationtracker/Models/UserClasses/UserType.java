@@ -28,6 +28,18 @@ public enum UserType {
 
     public String getStringType() { return _type; }
 
+    public static UserType typeFix(String s) {
+        if (s.equals("Employee")) {
+            return EMPLOYEE;
+        } else if (s.equals("Manager")) {
+            return MANAGER;
+        } else if (s.equals("Administrator")) {
+            return ADMIN;
+        } else {
+            return USER;
+        }
+    }
+
     public boolean canAddUser() { return _canAddUser; }
     public boolean canLockUser() { return _canLockUser; }
     public boolean canUpdateLocation() { return _canUpdateLoc; }

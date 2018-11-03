@@ -34,8 +34,8 @@ public class UserFacade {
         return currentUser != null;
     }
 
-    public boolean register(String username, String pass, String name, String contact, UserType type) {
-        manager.downloadFromDB();
+    public boolean register(String username, String pass, String name, String contact, String type) {
+        // manager.downloadFromDB();
         if (hasLoggedInUser()) {
             return false;
         }
@@ -45,11 +45,10 @@ public class UserFacade {
         } else {
             return false;
         }
-        // return manager.addUser(username, pass, name, contact, type);
     }
 
     public boolean login(String username, String password) {
-        manager.downloadFromDB();
+        // manager.downloadFromDB();
         if (hasLoggedInUser()) {
             return false;
         }
@@ -63,12 +62,13 @@ public class UserFacade {
         }
     }
 
+    public void setup() {
+        manager.setup();
+    }
+
     public void logout() {
         currentUser = null;
     }
-
-    public void uploadToDB() { manager.uploadToDB(); }
-    public void refresh() { manager.downloadFromDB(); }
 
 
 }
