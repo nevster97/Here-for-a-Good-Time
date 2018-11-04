@@ -30,6 +30,7 @@ public class Inventory {
         totalValue += item.getValue();
         totalItems++;
         // LocationFacade.getInstance().refresh();
+        LocationFacade.getInstance().update(location);
     }
 
     public void removeItem(Item item) {

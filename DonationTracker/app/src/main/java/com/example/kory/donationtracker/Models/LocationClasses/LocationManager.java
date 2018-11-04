@@ -111,6 +111,10 @@ public class LocationManager {
         return new ArrayList(locations.values());
     }
 
+    public void update(Location location) {
+        db.child(location.getAddress()).setValue(location);
+    }
+
     public void setup() {
         db.addValueEventListener(new ValueEventListener() {
             @Override

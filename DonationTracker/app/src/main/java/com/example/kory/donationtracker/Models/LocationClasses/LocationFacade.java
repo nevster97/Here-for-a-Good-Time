@@ -38,6 +38,10 @@ public class LocationFacade {
         manager.setup();
     }
 
+    public void update(Location location) {
+        manager.update(location);
+    }
+
 //    public void refresh() {
 //        manager.downloadFromDB();
 //    }
