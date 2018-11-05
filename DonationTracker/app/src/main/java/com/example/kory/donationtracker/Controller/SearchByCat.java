@@ -3,86 +3,52 @@ package com.example.kory.donationtracker.Controller;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
+import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Inventory;
+import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Item;
 import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.ItemType;
 import com.example.kory.donationtracker.Models.LocationClasses.Location;
 import com.example.kory.donationtracker.Models.LocationClasses.LocationFacade;
-import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Inventory;
-import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Item;
 import com.example.kory.donationtracker.Models.UserClasses.User;
 import com.example.kory.donationtracker.Models.UserClasses.UserFacade;
 import com.example.kory.donationtracker.Models.UserClasses.UserType;
 import com.example.kory.donationtracker.R;
 
+import java.util.ArrayList;
 
-public class Search extends AppCompatActivity implements OnItemSelectedListener {
+public class SearchByCat extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
     private UserType ut;
     public ArrayList<Inventory> masterInventory;
     public ArrayList<Item> view;
     public Location locationToBeSearched;
+    public ItemType itemToBeSearched;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_search);
-        loadMenus();
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_search_by_cat);
         view = new ArrayList<>();
         masterInventory = new ArrayList<>();
         populateGlobalInventoryList();
         populateSpinner();
-
-    }
-
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    public void loadLocation(View view, int pos) {
-        setContentView(R.layout.activity_select_location);
+        populateSpinner1();
         loadMenus();
-        LocationFacade locFacade = LocationFacade.getInstance();
-        ArrayList<Location> temp = (ArrayList) locFacade.getList();
-        Location location = temp.get(pos);
-        locFacade.setCurrentLocation(location);
-        TextView tv0 = findViewById(R.id.name);
-        TextView tv1 = findViewById(R.id.latitude);
-        TextView tv2 = findViewById(R.id.longitude);
-        TextView tv3 = findViewById(R.id.address);
-        TextView tv4 = findViewById(R.id.type);
-
-        tv0.setText(location.getName());
-        tv1.setText(location.getLat());
-        tv2.setText(location.getLon());
-        tv3.setText(location.getAddress().toString());
-        tv4.setText(location.getType().getStringType());
-
-        ListView simpleList = (ListView) findViewById(R.id.listView1);
-        ItemAdapter customAdapter = new ItemAdapter(getApplicationContext(), null);
-        simpleList.setAdapter(customAdapter);
-        simpleList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?>adapter,View v, int position, long id){
-                // Intent intent;
-                loadItem(v, position);
-            }
-
-        });
     }
 
     public void loadItem(View view, int pos) {
@@ -129,17 +95,34 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
         spinner.setOnItemSelectedListener(this);
     }
 
+    protected void populateSpinner1() {
+        ArrayList<Location> locs = (ArrayList<Location>) LocationFacade.getInstance().getList();
+        Spinner spinner = findViewById(R.id.spinner4);
+        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, ItemType.values());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
+    }
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String p = (String) parent.getItemAtPosition(position);
-        for (Location l : LocationFacade.getInstance().getList()) {
-            if (p.equals(l.getName())) {
-                System.out.println(l.getName());
-                System.out.println(p);
-                locationToBeSearched = l;
-                break;
-            } else {
-                locationToBeSearched = null;
+        Spinner spinner = (Spinner) parent;
+        if(spinner.getId() == R.id.spinner3) {
+            String p = (String) parent.getItemAtPosition(position);
+            for (Location l : LocationFacade.getInstance().getList()) {
+                if (p.equals(l.getName())) {
+                    locationToBeSearched = l;
+                    break;
+                } else {
+                    locationToBeSearched = null;
+                }
+            }
+        } else if (spinner.getId() == R.id.spinner4) {
+            ItemType p = (ItemType) parent.getItemAtPosition(position);
+            for (ItemType i : ItemType.values()) {
+                if (i.equals(p)) {
+                    itemToBeSearched = i;
+                }
             }
         }
     }
@@ -151,14 +134,12 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
 
     public void onSearchClicked(View viewOfTheScreen) {
         view.clear();
-        final EditText q = (EditText) findViewById(R.id.editText8);
-        String query = q. getText().toString();
         if (locationToBeSearched == null) {
             // do global search
             for (Location l : LocationFacade.getInstance().getList()) {
                 LocationFacade.getInstance().setCurrentLocation(l);
                 for (Item i : l.getInventory().getInventory()) {
-                    if (i.getShort().contains(query)) {
+                    if (i.getItemType().toUpperCase().equals(itemToBeSearched.toString())) {
                         view.add(i);
                     }
                 }
@@ -166,11 +147,12 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
         } else {
             // do local search
             for (Item i : locationToBeSearched.getInventory().getInventory()) {
-                if (i.getShort().contains(query)) {
+                if (i.getItemType().toUpperCase().equals(itemToBeSearched.toString())) {
                     view.add(i);
                 }
             }
         }
+        System.out.println(view);
         ListView simpleList = (ListView) findViewById(R.id.listView911);
         ItemAdapter customAdapter = new ItemAdapter(getApplicationContext(), view);
         simpleList.setAdapter(customAdapter);
@@ -202,7 +184,7 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
         actionbar.setHomeAsUpIndicator(R.drawable.menuhome);
 
         final NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.inflateMenu(R.menu.home_from_search);
+        navigationView.inflateMenu(R.menu.home_from_search1);
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -216,7 +198,7 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
                         if (id == R.id.nav_camera) {
                             reloadHome(navigationView);
                         } else if (id == R.id.nav_camera1) {
-                            goToSearchByCat(navigationView);
+                            goToSearch(navigationView);
                         }
 
                         // Add code here to update the UI based on the item selected
@@ -233,9 +215,8 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
         startActivity(randomIntent);
     }
 
-    public void goToSearchByCat(View view) {
-        Intent randomIntent = new Intent(this, SearchByCat.class);
+    public void goToSearch(View view) {
+        Intent randomIntent = new Intent(this, Search.class);
         startActivity(randomIntent);
     }
-
 }

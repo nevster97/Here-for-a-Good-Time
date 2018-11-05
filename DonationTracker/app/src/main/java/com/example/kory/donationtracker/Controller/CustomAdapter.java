@@ -9,11 +9,13 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.kory.donationtracker.Models.LocationClasses.Address;
+import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Item;
 import com.example.kory.donationtracker.Models.LocationClasses.Location;
 import com.example.kory.donationtracker.Models.LocationClasses.LocationFacade;
 import com.example.kory.donationtracker.Models.LocationClasses.LocationType;
 import com.example.kory.donationtracker.R;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class CustomAdapter extends BaseAdapter {
@@ -48,7 +50,6 @@ public class CustomAdapter extends BaseAdapter {
     @SuppressLint("ViewHolder")
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-
         LocationFacade locFacade = LocationFacade.getInstance();
         ArrayList<Location> locList = (ArrayList) locFacade.getList();
         Location l = locList.get(i);

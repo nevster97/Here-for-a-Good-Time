@@ -50,10 +50,7 @@ public class StartUp extends AppCompatActivity {
     }
 
     public void getContent() {
-        // UserFacade.getInstance().refresh();
-        // LocationFacade.getInstance().refresh(); or something
         // firstRead();
-        // LocationFacade.getInstance().refresh();
         UserFacade.getInstance().setup();
         LocationFacade.getInstance().setup();
         return;

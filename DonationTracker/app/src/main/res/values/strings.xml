@@ -8,4 +8,9 @@
     <string name="managelocation">Manage Location</string>
     <string name="logout">Logout</string>
     <string name="title_activity_loc_emp_register">LocEmpRegister</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="search_menu_thing">Search</string>
+    <string name="home_from_search">Home</string>
+    <string name="search_by_cat">Item Category Search</string>
+    <string name="search_reg">Item Search</string>
 </resources>

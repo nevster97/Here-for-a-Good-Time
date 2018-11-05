@@ -35,40 +35,32 @@
         <ListView
             android:id="@+id/listView911"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="439dp"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/editText8"
-            android:layout_marginTop="-430dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="128dp"
             android:background="@color/colorLogo"
             android:divider="#f00"
             android:dividerHeight="1dp" />
-
-        <EditText
-            android:id="@+id/editText8"
-            android:layout_width="339dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-
-            android:layout_below="@+id/spinner3"
-            android:layout_marginBottom="430dp"
-            android:background="@color/colorLogo"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:selectAllOnFocus="true"
-            android:text="Search"
-            android:textAlignment="center"
-            android:textColor="@android:color/black"
-            android:textSize="30sp" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="41dp"
             android:onClick="onSearchClicked"
             android:layout_height="36dp"
-            android:layout_toRightOf="@id/editText8"
+            android:layout_toRightOf="@id/spinner4"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/spinner3"
             android:layout_marginEnd="0dp" />
+
+        <Spinner
+            android:id="@+id/spinner4"
+            android:layout_width="341dp"
+            android:layout_height="36dp"
+            android:layout_alignBottom="@+id/spinner3"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/spinner3"
+            android:layout_marginBottom="-36dp" />
 
 
     </RelativeLayout>

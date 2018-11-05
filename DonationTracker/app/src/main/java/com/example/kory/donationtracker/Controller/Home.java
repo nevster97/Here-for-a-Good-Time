@@ -115,7 +115,7 @@ public class Home extends AppCompatActivity {
                         @Override
                         public boolean onNavigationItemSelected(MenuItem menuItem) {
                             // set item as selected to persist highlight
-                            menuItem.setChecked(true);
+                            // menuItem.setChecked(true);
                             // close drawer when item is tapped
                             mDrawerLayout.closeDrawers();
 
@@ -126,6 +126,10 @@ public class Home extends AppCompatActivity {
                                 reloadHome(navigationView);
                             } else if (id == R.id.nav_camera1) {
                                 loadInventory(navigationView);
+                            } else if (id == R.id.search_menu) {
+                                loadSearchPage(navigationView);
+                            } else if (id == R.id.map_menu) {
+                                loadMapPage(navigationView);
                             }
 
                             // Add code here to update the UI based on the item selected
@@ -150,7 +154,7 @@ public class Home extends AppCompatActivity {
                         @Override
                         public boolean onNavigationItemSelected(MenuItem menuItem) {
                             // set item as selected to persist highlight
-                            menuItem.setChecked(true);
+                            // menuItem.setChecked(true);
                             // close drawer when item is tapped
                             mDrawerLayout.closeDrawers();
 
@@ -159,6 +163,10 @@ public class Home extends AppCompatActivity {
                                 backToHome(navigationView);
                             } else if (id == R.id.nav_camera) {
                                 reloadHome(navigationView);
+                            } else if (id == R.id.search_menu) {
+                                loadSearchPage(navigationView);
+                            } else if (id == R.id.map_menu) {
+                                loadMapPage(navigationView);
                             }
 
                             // Add code here to update the UI based on the item selected
@@ -183,7 +191,7 @@ public class Home extends AppCompatActivity {
                         @Override
                         public boolean onNavigationItemSelected(MenuItem menuItem) {
                             // set item as selected to persist highlight
-                            menuItem.setChecked(true);
+                            // menuItem.setChecked(true);
                             // close drawer when item is tapped
                             mDrawerLayout.closeDrawers();
 
@@ -192,6 +200,10 @@ public class Home extends AppCompatActivity {
                                 backToHome(navigationView);
                             } else if (id == R.id.nav_camer) {
                                 reloadHome(navigationView);
+                            } else if (id == R.id.search_menu) {
+                                loadSearchPage(navigationView);
+                            } else if (id == R.id.map_menu) {
+                                loadMapPage(navigationView);
                             }
 
                             // Add code here to update the UI based on the item selected
@@ -216,7 +228,7 @@ public class Home extends AppCompatActivity {
                         @Override
                         public boolean onNavigationItemSelected(MenuItem menuItem) {
                             // set item as selected to persist highlight
-                            menuItem.setChecked(true);
+                            // menuItem.setChecked(true);
                             // close drawer when item is tapped
                             mDrawerLayout.closeDrawers();
 
@@ -225,6 +237,10 @@ public class Home extends AppCompatActivity {
                                 backToHome(navigationView);
                             } else if (id == R.id.nav_camera) {
                                 reloadHome(navigationView);
+                            } else if (id == R.id.search_menu) {
+                                loadSearchPage(navigationView);
+                            } else if (id == R.id.map_menu) {
+                                loadMapPage(navigationView);
                             }
 
                             // Add code here to update the UI based on the item selected
@@ -235,6 +251,16 @@ public class Home extends AppCompatActivity {
                     });
 
         }
+    }
+
+    public void loadMapPage(View view) {
+        Intent randomIntent = new Intent(this, MapsActivity.class);
+        startActivity(randomIntent);
+    }
+
+    public void loadSearchPage(View view) {
+        Intent randomIntent = new Intent(this, Search.class);
+        startActivity(randomIntent);
     }
 
     public void loadInventory(View view) {
@@ -248,7 +274,7 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home_employee);
         loadMenus();
         ListView simpleList = (ListView) findViewById(R.id.listView);
-        ItemAdapter customAdapter = new ItemAdapter(getApplicationContext());
+        ItemAdapter customAdapter = new ItemAdapter(getApplicationContext(), null);
         simpleList.setAdapter(customAdapter);
         simpleList.setOnItemClickListener(new OnItemClickListener(){
             @Override
@@ -316,9 +342,9 @@ public class Home extends AppCompatActivity {
         UserFacade userFacade = UserFacade.getInstance();
         User user = userFacade.getCurrentUser();
         // Location loc = user.get_employeeLocation();
-        Location loc = LocationFacade.getInstance().getLocation(user.getEmployeeLocation());
+        // Location loc = LocationFacade.getInstance().getLocation(user.getEmployeeLocation());
         LocationFacade locFacade = LocationFacade.getInstance();
-        locFacade.setCurrentLocation(loc);
+        Location loc = locFacade.getCurrentLocation();
         Inventory inv = loc.getInventory();
         ArrayList<Item> items = (ArrayList) inv.getInventory();
         Item temp = items.get(pos);
@@ -329,7 +355,7 @@ public class Home extends AppCompatActivity {
 
         short1.setText(temp.getShort());
         long1.setText(temp.getFull());
-        ItemType it = ItemType.valueOf(temp.getItemType());
+        ItemType it = ItemType.valueOf(temp.getItemType().toUpperCase());
         type.setText(it.getStringType());
         value.setText(Double.toString(temp.getValue()));
     }
@@ -342,6 +368,7 @@ public class Home extends AppCompatActivity {
         LocationFacade locFacade = LocationFacade.getInstance();
         ArrayList<Location> temp = (ArrayList) locFacade.getList();
         Location location = temp.get(pos);
+        locFacade.setCurrentLocation(location);
         locFacade.setCurrentLocation(location);
         TextView tv0 = findViewById(R.id.name);
         TextView tv1 = findViewById(R.id.latitude);
@@ -356,7 +383,7 @@ public class Home extends AppCompatActivity {
         tv4.setText(location.getType().getStringType());
 
         ListView simpleList = (ListView) findViewById(R.id.listView1);
-        ItemAdapter customAdapter = new ItemAdapter(getApplicationContext());
+        ItemAdapter customAdapter = new ItemAdapter(getApplicationContext(), null);
         simpleList.setAdapter(customAdapter);
         simpleList.setOnItemClickListener(new OnItemClickListener(){
             @Override

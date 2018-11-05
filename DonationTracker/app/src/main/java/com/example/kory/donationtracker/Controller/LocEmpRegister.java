@@ -30,11 +30,10 @@ public class LocEmpRegister extends AppCompatActivity implements OnItemSelectedL
         ArrayList<String> arr1 = new ArrayList<>();
         for (Location p : arr) {
             arr1.add(p.getAddress());
-            System.out.println(p);
         }
-        for (String te : arr1) {
-            System.out.println(te);
-        }
+//        for (String te : arr1) {
+//            System.out.println(te);
+//        }
         ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, arr1);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -45,7 +44,6 @@ public class LocEmpRegister extends AppCompatActivity implements OnItemSelectedL
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String p = (String) parent.getItemAtPosition(position);
-        System.out.println(p);
         UserFacade u = UserFacade.getInstance();
         User user = u.getCurrentUser();
         LocationFacade locFacade = LocationFacade.getInstance();
@@ -53,7 +51,6 @@ public class LocEmpRegister extends AppCompatActivity implements OnItemSelectedL
         for (Location l : arr) {
             String a = l.getAddress().toString();
             if (a.equals(p)) {
-                System.out.println("SLKDJFLKSDJFLKSDJFLSDKFLSF");
                 user.setEmployeeLocation(a);
 //                u.uploadToDB();
             }
