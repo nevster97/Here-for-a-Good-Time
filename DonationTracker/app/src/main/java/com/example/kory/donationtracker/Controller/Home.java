@@ -22,7 +22,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.kory.donationtracker.Models.LocationClasses.Address;
 import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Inventory;
 import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Item;
 import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.ItemType;
@@ -34,11 +33,6 @@ import com.example.kory.donationtracker.Models.UserClasses.UserFacade;
 import com.example.kory.donationtracker.Models.UserClasses.UserType;
 import com.example.kory.donationtracker.R;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 // importing LocationClasses package
@@ -57,7 +51,10 @@ public class Home extends AppCompatActivity {
     private ItemType tempStringForItem;
     private Spinner typeSpinner;
 
-
+    /**
+     * Creates the initial layout for the Home screen
+     * @param savedInstanceState the current state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +89,9 @@ public class Home extends AppCompatActivity {
 
     }
 
+    /**
+     * Loads the menus into the slide-out menu
+     */
     public void loadMenus(){
         if (ut.equals(UserType.EMPLOYEE)) {
             mDrawerLayout = findViewById(R.id.drawer_layout);
@@ -253,16 +253,28 @@ public class Home extends AppCompatActivity {
         }
     }
 
+    /**
+     * Opens the maps page through the MapsActivity class
+     * @param view Current view
+     */
     public void loadMapPage(View view) {
         Intent randomIntent = new Intent(this, MapsActivity.class);
         startActivity(randomIntent);
     }
 
+    /**
+     * Opens the search page through the Search class
+     * @param view Current view
+     */
     public void loadSearchPage(View view) {
         Intent randomIntent = new Intent(this, Search.class);
         startActivity(randomIntent);
     }
 
+    /**
+     * Loads the location employee's location's inventory
+     * @param view Current view
+     */
     public void loadInventory(View view) {
 //        LocationFacade locFacade = LocationFacade.getInstance();
 //        UserFacade userFacade = UserFacade.getInstance();
@@ -293,6 +305,10 @@ public class Home extends AppCompatActivity {
         });
     }
 
+    /**
+     * Loads the item's information
+     * @param view Current view
+     */
     public void addItemClick(View view) {
         setContentView(R.layout.add_item);
         loadMenus();
@@ -302,6 +318,10 @@ public class Home extends AppCompatActivity {
         typeSpinner.setAdapter(adapter);
     }
 
+    /**
+     * Adds the item to the location's inventory
+     * @param view Current view
+     */
     public void addItemClickInside(View view) {
         EditText val = findViewById(R.id.valuetext);
         String value = val.getText().toString();
@@ -335,7 +355,11 @@ public class Home extends AppCompatActivity {
     }
 
 
-
+    /**
+     * Loads the wanted item
+     * @param view Current view
+     * @param pos Item's position to load
+     */
     public void loadItem(View view, int pos) {
         setContentView(R.layout.activity_select_item);
         loadMenus();
@@ -360,7 +384,11 @@ public class Home extends AppCompatActivity {
         value.setText(Double.toString(temp.getValue()));
     }
 
-
+    /**
+     * Loads the desired location's information
+     * @param view Current view
+     * @param pos position of the location to load
+     */
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public void loadLocation(View view, int pos) {
         setContentView(R.layout.activity_select_location);
@@ -394,6 +422,11 @@ public class Home extends AppCompatActivity {
 
         });
     }
+
+    /**
+     * Logs the user out and opens the initial opening screen
+     * @param view Current view
+     */
     public void backToHome(View view) {
         // logs the current user out of the system
         UserFacade facade = UserFacade.getInstance();
@@ -405,6 +438,10 @@ public class Home extends AppCompatActivity {
         startActivity(randomIntent);
     }
 
+    /**
+     * Loads the home page
+     * @param view Current view
+     */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void reloadHome(View view) {
         // logs the current user out of the system
@@ -426,12 +463,9 @@ public class Home extends AppCompatActivity {
         });
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//
-//    }
-
-
+    /**
+     * Logs the user out if they press the back button on the phone
+     */
     @Override
     public void onBackPressed() {
         // Do Here what ever you want do on back press;
@@ -443,6 +477,9 @@ public class Home extends AppCompatActivity {
         startActivity(randomIntent);
     }
 
+    /**
+     * Loads the locations into the spinner if the user registers as a Location Employee
+     */
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public void populateSpinner() {
         ArrayList<String> temp = new ArrayList<>();
@@ -461,6 +498,9 @@ public class Home extends AppCompatActivity {
 
     }
 
+    /**
+     * Super calls the onDestroy method if the page is destroyed
+     */
     @Override
     protected void onDestroy() {
         // LocationFacade.getInstance().send();

@@ -5,22 +5,26 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-// app backend
-import com.example.kory.donationtracker.Models.LocationClasses.Address;
 import com.example.kory.donationtracker.Models.LocationClasses.Location;
 import com.example.kory.donationtracker.Models.LocationClasses.LocationFacade;
 import com.example.kory.donationtracker.Models.UserClasses.UserFacade;
 import com.example.kory.donationtracker.R;
 
-// file reader stuff
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
+// app backend
+// file reader stuff
+
 public class StartUp extends AppCompatActivity {
 
+    /**
+     * Load the start up page
+     * @param savedInstanceState the current state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +33,10 @@ public class StartUp extends AppCompatActivity {
 
     }
 
+    /**
+     * On login selected, load the login page
+     * @param view the current view
+     */
     public void toLogin(View view) {
         // Create an Intent to start the second activity
         Intent randomIntent = new Intent(this, Login.class);
@@ -37,11 +45,18 @@ public class StartUp extends AppCompatActivity {
         startActivity(randomIntent);
     }
 
+    /**
+     * Load the registration page
+     * @param view the current view
+     */
     public void toRegistration(View view) {
         Intent randomIntent = new Intent(this, Registration.class);
         startActivity(randomIntent);
     }
 
+    /**
+     * If the back button is pressed, reload the page
+     */
     @Override
     public void onBackPressed() {
         // Do Here what ever you want do on back press;
@@ -49,6 +64,9 @@ public class StartUp extends AppCompatActivity {
         startActivity(randomIntent);
     }
 
+    /**
+     * Loads information in from firebase
+     */
     public void getContent() {
         // firstRead();
         UserFacade.getInstance().setup();
@@ -56,6 +74,9 @@ public class StartUp extends AppCompatActivity {
         return;
     }
 
+    /**
+     * Loads the database with the locations
+     */
     public void firstRead() {
         try {
             //Open a stream on the raw file

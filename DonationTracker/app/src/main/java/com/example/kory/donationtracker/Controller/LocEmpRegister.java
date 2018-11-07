@@ -19,6 +19,10 @@ import java.util.ArrayList;
 
 public class LocEmpRegister extends AppCompatActivity implements OnItemSelectedListener{
 
+    /**
+     * Creates the location employee location choice page
+     * @param savedInstanceState the current state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +45,13 @@ public class LocEmpRegister extends AppCompatActivity implements OnItemSelectedL
 
     }
 
+    /**
+     * Whenever a location is chosen, that location is set as the user's location
+     * @param parent the parent Adapter View
+     * @param view  the current view
+     * @param position location's position in the spinner
+     * @param id the id
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String p = (String) parent.getItemAtPosition(position);
@@ -58,16 +69,28 @@ public class LocEmpRegister extends AppCompatActivity implements OnItemSelectedL
         // u.uploadToDB();
     }
 
+    /**
+     * If nothing is selected, do nothing
+     * @param parent the parent Adapter View
+     */
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
 
+    /**
+     * Loads the start up screen
+     * @param view Current view
+     */
     public void toStartUp(View view) {
         Intent randomIntent = new Intent(this, StartUp.class);
         startActivity(randomIntent);
     }
 
+    /**
+     * If login is selected, it opens the home page
+     * @param view Current view
+     */
     public void onLoginClick(View view) {
         Intent randomIntent = new Intent(this, Home.class);
         startActivity(randomIntent);

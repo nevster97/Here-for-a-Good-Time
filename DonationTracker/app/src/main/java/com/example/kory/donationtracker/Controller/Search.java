@@ -12,24 +12,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
+import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Inventory;
+import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Item;
 import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.ItemType;
 import com.example.kory.donationtracker.Models.LocationClasses.Location;
 import com.example.kory.donationtracker.Models.LocationClasses.LocationFacade;
-import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Inventory;
-import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Item;
 import com.example.kory.donationtracker.Models.UserClasses.User;
 import com.example.kory.donationtracker.Models.UserClasses.UserFacade;
 import com.example.kory.donationtracker.Models.UserClasses.UserType;
 import com.example.kory.donationtracker.R;
+
+import java.util.ArrayList;
 
 
 public class Search extends AppCompatActivity implements OnItemSelectedListener {
@@ -40,6 +40,10 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
     public ArrayList<Item> view;
     public Location locationToBeSearched;
 
+    /**
+     * Loads the search items page
+     * @param savedInstanceState the current state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_search);
@@ -52,6 +56,11 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
 
     }
 
+    /**
+     * Loads the location's list
+     * @param view Current view
+     * @param pos the location's index
+     */
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public void loadLocation(View view, int pos) {
         setContentView(R.layout.activity_select_location);
@@ -85,6 +94,11 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
         });
     }
 
+    /**
+     * Loads the item
+     * @param view current view
+     * @param pos index of the item
+     */
     public void loadItem(View view, int pos) {
         setContentView(R.layout.activity_select_item);
         loadMenus();
@@ -109,12 +123,18 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
         value.setText(Double.toString(temp.getValue()));
     }
 
+    /**
+     * populates every locations inventory into the master inventory
+     */
     protected void populateGlobalInventoryList() {
         for (Location l : LocationFacade.getInstance().getList()) {
             masterInventory.add(l.getInventory());
         }
     }
 
+    /**
+     * Loads the spinner with the list of locations
+     */
     protected void populateSpinner() {
         ArrayList<Location> locs = (ArrayList<Location>) LocationFacade.getInstance().getList();
         Spinner spinner = findViewById(R.id.spinner3);
@@ -129,13 +149,18 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
         spinner.setOnItemSelectedListener(this);
     }
 
+    /**
+     * Loads either specific location's inventory or the global inventory
+     * @param parent the parent AdapaterView
+     * @param view the current view
+     * @param position index
+     * @param id id of the item
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String p = (String) parent.getItemAtPosition(position);
         for (Location l : LocationFacade.getInstance().getList()) {
             if (p.equals(l.getName())) {
-                System.out.println(l.getName());
-                System.out.println(p);
                 locationToBeSearched = l;
                 break;
             } else {
@@ -144,11 +169,19 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
         }
     }
 
+    /**
+     * If nothing is selected, do nothing
+     * @param parent the parent AdapterView
+     */
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
 
+    /**
+     * Loads the desired items
+     * @param viewOfTheScreen current View
+     */
     public void onSearchClicked(View viewOfTheScreen) {
         view.clear();
         final EditText q = (EditText) findViewById(R.id.editText8);
@@ -192,6 +225,9 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
     // search through whatever inventory's desired
     // populate the view with each button pressed (partial searches)
 
+    /**
+     * Loads the menu for the slide out menu bar
+     */
     public void loadMenus(){
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
@@ -227,12 +263,20 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
                 });
     }
 
+    /**
+     * Loads the home page
+     * @param view current view
+     */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void reloadHome(View view) {
         Intent randomIntent = new Intent(this, Home.class);
         startActivity(randomIntent);
     }
 
+    /**
+     * Loads the item category search page
+     * @param view current view
+     */
     public void goToSearchByCat(View view) {
         Intent randomIntent = new Intent(this, SearchByCat.class);
         startActivity(randomIntent);

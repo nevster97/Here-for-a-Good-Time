@@ -10,14 +10,12 @@ import android.widget.TextView;
 
 import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Inventory;
 import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Item;
-import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.ItemType;
 import com.example.kory.donationtracker.Models.LocationClasses.Location;
 import com.example.kory.donationtracker.Models.LocationClasses.LocationFacade;
 import com.example.kory.donationtracker.Models.UserClasses.User;
 import com.example.kory.donationtracker.Models.UserClasses.UserFacade;
 import com.example.kory.donationtracker.R;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,12 +27,21 @@ public class ItemAdapter extends BaseAdapter {
     LayoutInflater inflter;
     ArrayList<Item> itemList;
 
+    /**
+     * Constructor for the item adapter
+     * @param applicationContext the context of the applicatoin
+     * @param itemList1 if this is null, then the item list is gonna be global
+     */
     public ItemAdapter(Context applicationContext, ArrayList<Item> itemList1) {
         this.context = context;
         inflter = (LayoutInflater.from(applicationContext));
         itemList = itemList1;
     }
 
+    /**
+     * Returns the number of items to generate
+     * @return the number of items
+     */
     @Override
     public int getCount() {
 //        LocationFacade locFacade = LocationFacade.getInstance();
@@ -50,16 +57,33 @@ public class ItemAdapter extends BaseAdapter {
         }
     }
 
+    /**
+     * Gets the item at i
+     * @param i gets the item at that index
+     * @return null object
+     */
     @Override
     public Object getItem(int i) {
         return null;
     }
 
+    /**
+     * Gets the id of the item at i
+     * @param i the index to get the item id
+     * @return 0
+     */
     @Override
     public long getItemId(int i) {
         return 0;
     }
 
+    /**
+     * Loads the item list, either global or specific location, depending on if itemList is null
+     * @param i the desired item
+     * @param view the current view
+     * @param viewGroup the current viewGroup
+     * @return
+     */
     @SuppressLint("ViewHolder")
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {

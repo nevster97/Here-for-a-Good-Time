@@ -3,17 +3,16 @@ package com.example.kory.donationtracker.Controller;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -39,6 +38,10 @@ public class SearchByCat extends AppCompatActivity implements AdapterView.OnItem
     public Location locationToBeSearched;
     public ItemType itemToBeSearched;
 
+    /**
+     * Loads the item category search page
+     * @param savedInstanceState the current state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,11 @@ public class SearchByCat extends AppCompatActivity implements AdapterView.OnItem
         loadMenus();
     }
 
+    /**
+     * Loads the item's information
+     * @param view the current view
+     * @param pos index of the desired item
+     */
     public void loadItem(View view, int pos) {
         setContentView(R.layout.activity_select_item);
         loadMenus();
@@ -75,12 +83,18 @@ public class SearchByCat extends AppCompatActivity implements AdapterView.OnItem
         value.setText(Double.toString(temp.getValue()));
     }
 
+    /**
+     * populates the global inventory
+     */
     protected void populateGlobalInventoryList() {
         for (Location l : LocationFacade.getInstance().getList()) {
             masterInventory.add(l.getInventory());
         }
     }
 
+    /**
+     * Populates the spinner with location names
+     */
     protected void populateSpinner() {
         ArrayList<Location> locs = (ArrayList<Location>) LocationFacade.getInstance().getList();
         Spinner spinner = findViewById(R.id.spinner3);
@@ -95,6 +109,9 @@ public class SearchByCat extends AppCompatActivity implements AdapterView.OnItem
         spinner.setOnItemSelectedListener(this);
     }
 
+    /**
+     * Populates this spinner with itemTypes
+     */
     protected void populateSpinner1() {
         ArrayList<Location> locs = (ArrayList<Location>) LocationFacade.getInstance().getList();
         Spinner spinner = findViewById(R.id.spinner4);
@@ -104,6 +121,13 @@ public class SearchByCat extends AppCompatActivity implements AdapterView.OnItem
         spinner.setOnItemSelectedListener(this);
     }
 
+    /**
+     * Sets search to either global or specific location
+     * @param parent the parent AdapterView
+     * @param view current view
+     * @param position the index
+     * @param id the id
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Spinner spinner = (Spinner) parent;
@@ -127,11 +151,19 @@ public class SearchByCat extends AppCompatActivity implements AdapterView.OnItem
         }
     }
 
+    /**
+     * If nothing is selected, do nothing
+     * @param parent the parent's AdapterView
+     */
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
 
+    /**
+     * Load the desired items
+     * @param viewOfTheScreen current view
+     */
     public void onSearchClicked(View viewOfTheScreen) {
         view.clear();
         if (locationToBeSearched == null) {
@@ -174,6 +206,9 @@ public class SearchByCat extends AppCompatActivity implements AdapterView.OnItem
     // search through whatever inventory's desired
     // populate the view with each button pressed (partial searches)
 
+    /**
+     * Load the menus for the slide out menu
+     */
     public void loadMenus(){
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
@@ -209,12 +244,20 @@ public class SearchByCat extends AppCompatActivity implements AdapterView.OnItem
                 });
     }
 
+    /**
+     * Load the home page
+     * @param view current view
+     */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void reloadHome(View view) {
         Intent randomIntent = new Intent(this, Home.class);
         startActivity(randomIntent);
     }
 
+    /**
+     * Load the original search page
+     * @param view the current view
+     */
     public void goToSearch(View view) {
         Intent randomIntent = new Intent(this, Search.class);
         startActivity(randomIntent);
