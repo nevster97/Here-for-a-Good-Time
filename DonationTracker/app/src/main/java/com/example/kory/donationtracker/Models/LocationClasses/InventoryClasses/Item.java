@@ -13,19 +13,13 @@ public class Item {
     private Double value;
     private String category;
 
-    // optional fields
-    // private String comments;
-    // private Picture picture;
-
-//    public Item(Location location, String shortDesc, String fullDesc, String value, String category) {
-//        // _timestamp = new Date();
-//        // _location = location;
-//        _shortDesc = shortDesc;
-//        _fullDesc = fullDesc;
-//        _value = Double.parseDouble(value);
-//        _category = category;
-//    }
-
+    /**
+     * constructor for an item
+     * @param shortDesc short description
+     * @param fullDesc full description
+     * @param value value
+     * @param category item type
+     */
     public Item(String shortDesc, String fullDesc, String value, String category) {
         this.shortDesc = shortDesc;
         this.fullDesc = fullDesc;
@@ -33,6 +27,15 @@ public class Item {
         this.category = category;
     }
 
+    /**
+     * updates an item
+     * @param timestamp timestamp
+     * @param location location
+     * @param shortDesc short description
+     * @param fullDesc full description
+     * @param value value
+     * @param category item type
+     */
     public void updateItem(Date timestamp, Location location, String shortDesc, String fullDesc, String value, String category) {
         // _timestamp = timestamp;
         // _location = location;
@@ -42,20 +45,34 @@ public class Item {
         this.category = category;
     }
 
-    // public Date getTimestamp() { return _timestamp; }
-    // public Location getLocation() { return _location; }
+    /**
+     * gets the short description
+     * @return short description
+     */
     public String getShort() {
         return shortDesc;
     }
 
+    /**
+     * gets the full description
+     * @return full description
+     */
     public String getFull() {
         return fullDesc;
     }
 
+    /**
+     * gets the value
+     * @return value
+     */
     public double getValue() {
         return value;
     }
 
+    /**
+     * gets the item type
+     * @return item type
+     */
     public String getItemType() {
         return category;
     }

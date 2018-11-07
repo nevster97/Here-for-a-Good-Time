@@ -26,14 +26,31 @@ public class UserFacade {
         manager = new UserManager();
     }
 
+    /**
+     * gets the current user
+     * @return current user
+     */
     public User getCurrentUser() {
         return currentUser;
     }
 
+    /**
+     * checks if a current user exists
+     * @return if a current user exists, true. otherwise false
+     */
     public boolean hasLoggedInUser() {
         return currentUser != null;
     }
 
+    /**
+     * registers a new user
+     * @param username username
+     * @param pass password
+     * @param name name
+     * @param contact email
+     * @param type user type
+     * @return true if registration is successful, false otherwise
+     */
     public boolean register(String username, String pass, String name, String contact, String type) {
         // manager.downloadFromDB();
         if (hasLoggedInUser()) {
@@ -47,6 +64,12 @@ public class UserFacade {
         }
     }
 
+    /**
+     * logs in an existing user
+     * @param username username
+     * @param password password
+     * @return true if login successful, otherwise false
+     */
     public boolean login(String username, String password) {
         // manager.downloadFromDB();
         if (hasLoggedInUser()) {
@@ -62,10 +85,16 @@ public class UserFacade {
         }
     }
 
+    /**
+     * a secret function that helps our database ;)
+     */
     public void setup() {
         manager.setup();
     }
 
+    /**
+     * logs a current user out of the facade
+     */
     public void logout() {
         currentUser = null;
     }
