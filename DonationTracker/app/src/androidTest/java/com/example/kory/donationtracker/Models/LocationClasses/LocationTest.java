@@ -1,34 +1,36 @@
 package com.example.kory.donationtracker.Models.LocationClasses;
 
+import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Inventory;
+
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
 public class LocationTest {
 
-    private ArrayList<String> invList;
     Location typeOne;
     Location typeTwo;
     Location typeThree;
 
+    Inventory temp1;
+    Inventory temp2;
+    Inventory temp3;
+
     @Before
     public void setup() {
-        ArrayList<String> inventoryList = new ArrayList<>();
-        inventoryList.add("cup");
-        inventoryList.add("shoe");
-        inventoryList.add("stove");
-
-        invList = inventoryList;
-
         typeOne = new Location("New Location", "101", "111", "420 High Road",
                 "Drop Off", "478-550-0168", "google.com");
         typeTwo = new Location("New Location", "101", "111", "420 High Road",
                 "Store", "478-550-0168", "google.com");
         typeThree = new Location("New Location", "101", "111", "420 High Road",
                 "Warehouse", "478-550-0168", "google.com");
+
+        temp1 = new Inventory(typeOne);
+        temp2 = new Inventory(typeTwo);
+        temp3 = new Inventory(typeThree);
+
+
     }
 
     @Test
@@ -40,6 +42,7 @@ public class LocationTest {
         assertEquals("Drop Off", typeOne.getType().getStringType());
         assertEquals("478-550-0168", typeOne.getPhone());
         assertEquals("google.com", typeOne.getWebsite());
+        assertEquals(0, temp1.getTotalItems());
     }
 
     @Test
@@ -51,6 +54,7 @@ public class LocationTest {
         assertEquals("Store", typeTwo.getType().getStringType());
         assertEquals("478-550-0168", typeTwo.getPhone());
         assertEquals("google.com", typeTwo.getWebsite());
+        assertEquals(0, temp2.getTotalItems());
     }
 
     @Test
@@ -62,5 +66,6 @@ public class LocationTest {
         assertEquals("Warehouse", typeThree.getType().getStringType());
         assertEquals("478-550-0168", typeThree.getPhone());
         assertEquals("google.com", typeThree.getWebsite());
+        assertEquals(0, temp3.getTotalItems());
     }
 }
