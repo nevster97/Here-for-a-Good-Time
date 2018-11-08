@@ -1,88 +1,187 @@
 package com.example.kory.donationtracker.Models.LocationClasses;
 
 import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Inventory;
-import com.example.kory.donationtracker.Models.UserClasses.User;
-import com.example.kory.donationtracker.Models.UserClasses.UserType;
-
-import java.util.ArrayList;
+import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Item;
 
 public class Location {
-    private String _name;
-    private String _latitude;
-    private String _longitude;
-    private Address _address;
-    private LocationType _type;
-    private String _phone;
-    private String _website;
-    private Inventory _inventory;
-    private ArrayList<User> _locationEmployees;
+    private String name;
+    private String latitude;
+    private String longitude;
+    // private Address _address;
+    private String address;
+    private LocationType type;
+    private String phone;
+    private String website;
+    private Inventory inventory;
+    // private ArrayList<User> locationEmployees;
 
 
-    public Location(String name, String latitude, String longitude, Address address,
+    /**
+     * location constructor
+     * @param name name
+     * @param latitude latitude
+     * @param longitude longitude
+     * @param address address
+     * @param type type
+     * @param phone phone number
+     * @param website website address
+     */
+    public Location(String name, String latitude, String longitude, String address,
                     String type, String phone, String website) {
-        _name = name;
+        this.name = name;
         // _latitude = Double.parseDouble(latitude);
         // _longitude = Double.parseDouble(longitude);
-        _latitude = latitude;
-        _longitude = longitude;
-        _address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.address = address;
         // _type = LocationType.valueOf(type);
         if (type.equals("Drop Off")) {
-            _type = LocationType.DROPOFF;
+            this.type = LocationType.DROPOFF;
         } else if (type.equals("Store")) {
-            _type = LocationType.STORE;
+            this.type = LocationType.STORE;
         } else {
-            _type = LocationType.WAREHOUSE;
+            this.type = LocationType.WAREHOUSE;
         }
-        _phone = phone;
-        _website = website;
-        _inventory = new Inventory(this);
+        this.phone = phone;
+        this.website = website;
+        this.inventory = new Inventory(this);
     }
 
     // use this constructor when taking in an inventory object
-    public Location(String name, String latitude, String longitude, Address address,
+
+    /**
+     * constructor for location with existing inventory
+     * @param name name
+     * @param latitude latitude
+     * @param longitude longitude
+     * @param address address
+     * @param type type
+     * @param phone phone number
+     * @param website website address
+     * @param inventory inventory
+     */
+    public Location(String name, String latitude, String longitude, String address,
                     String type, String phone, String website, Inventory inventory) {
-        _name = name;
-        _latitude = latitude;
-        _longitude = longitude;
-        _address = address;
-        if (type.equals("Drop Off")) { _type = LocationType.DROPOFF; }
-        else if (type.equals("Store")) { _type = LocationType.STORE; }
-        else { _type = LocationType.WAREHOUSE; }
-        _phone = phone;
-        _website = website;
-        _inventory = inventory;
-    }
-
-    public String getName() { return _name; }
-    public String getLat() { return _latitude; }
-    public String getLon() { return _longitude; }
-    public Address getAddress() { return _address; }
-    public LocationType getType() { return _type; }
-    public String getPhone() { return _phone; }
-    public String getWebsite() { return _website; }
-    public Inventory getInventory() { return _inventory; }
-    public ArrayList<User> getLocationEmployees() {return _locationEmployees; }
-
-    public boolean addLocationEmployee(User u) {
-        UserType ut = u.get_type();
-        if (ut.equals(UserType.EMPLOYEE)) {
-//            String username = u.get_name();
-//            String password = u.get_password();
-//            String name = u.get_name();
-//            String contact = u.get_contact();
-//            UserType type = u.get_type();
-//            User us = new User(username, password, name, contact, type, this);
-            _locationEmployees.add(u);
-            return true;
+        this.name = name;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.address = address;
+        if (type.equals("Drop Off")) {
+            this.type = LocationType.DROPOFF;
+        } else if (type.equals("Store")) {
+            this.type = LocationType.STORE;
         } else {
-            return false;
+            this.type = LocationType.WAREHOUSE;
         }
+        this.phone = phone;
+        this.website = website;
+        this.inventory = inventory;
     }
 
+    /**
+     * gets the name
+     * @return location name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * gets the latitude
+     * @return latitude
+     */
+    public String getLat() {
+        return latitude;
+    }
+
+    /**
+     * gets the longitude
+     * @return longitude
+     */
+    public String getLon() {
+        return longitude;
+    }
+
+    /**
+     * gets the address
+     * @return address
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * gets the location type
+     * @return location's type
+     */
+    public LocationType getType() {
+        return type;
+    }
+
+    /**
+     * gets the location's phone number
+     * @return location's phone number
+     */
+    public String getPhone() {
+        return phone;
+    }
+
+    /**
+     * gets the location's website
+     * @return website
+     */
+    public String getWebsite() {
+        return website;
+    }
+
+    /**
+     * gets a location's inventory
+     * @return a location's inventory
+     */
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    /**
+     * adds an item to a location's inventory
+     * @param item item to be added
+     */
+    public void addItem(Item item) {
+        inventory.addItem(item);
+    }
+    // public ArrayList<User> getLocationEmployees() {return ; }
+
+//    public boolean addLocationEmployee(User u) {
+//        UserType ut = u.getUserType();
+//        if (ut.equals(UserType.EMPLOYEE)) {
+////            String username = u.get_name();
+////            String password = u.get_password();
+////            String name = u.get_name();
+////            String contact = u.get_contact();
+////            UserType type = u.get_type();
+////            User us = new User(username, password, name, contact, type, this);
+//            _locationEmployees.add(u);
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
+
+    /**
+     * sets a location's inventory
+     * @param inventory the new inventory
+     */
+    public void setInventory (Inventory inventory) {
+        this.inventory = inventory;
+    }
+
+    /**
+     * overridden toString()
+     * @return the new Location.toString()
+     */
     @Override
     public String toString() {
-        return _name + "\n" + _address + "\n" + _phone + "\n" + _website;
+        return name + "\n" + address + "\n" + phone + "\n" + website;
     }
 
 }

@@ -6,6 +6,16 @@
         android:title="@string/location" />
 
     <item
+        android:id="@+id/search_menu"
+        android:icon="@drawable/search_icon"
+        android:title="@string/search_menu_thing" />
+
+    <item
+        android:id="@+id/map_menu"
+        android:icon="@drawable/map_thing"
+        android:title="@string/title_activity_maps" />
+
+    <item
         android:id="@+id/nav_camera"
         android:icon="@drawable/adduser"
         android:title="@string/adduser" />
