@@ -2,10 +2,6 @@ package com.example.kory.donationtracker.Models.LocationClasses;
 
 import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Inventory;
 import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Item;
-import com.example.kory.donationtracker.Models.UserClasses.User;
-import com.example.kory.donationtracker.Models.UserClasses.UserType;
-
-import java.util.ArrayList;
 
 public class Location {
     private String name;
