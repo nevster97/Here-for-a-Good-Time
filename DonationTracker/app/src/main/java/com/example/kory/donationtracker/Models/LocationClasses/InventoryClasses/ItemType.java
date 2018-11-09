@@ -10,10 +10,18 @@ public enum ItemType {
 
     private String _type;
 
+    /**
+     * constructs the Item enum
+     * @param type item type
+     */
     private ItemType(String type) {
         _type = type;
     }
 
+    /**
+     * gets the string type of an enum
+     * @return the string type
+     */
     public String getStringType() {
         return _type;
     }

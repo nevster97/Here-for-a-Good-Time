@@ -18,6 +18,14 @@ public enum UserType {
 
     private static List<UserType> list = Arrays.asList(USER, EMPLOYEE, MANAGER, ADMIN);
 
+    /**
+     * creates a UserType enum
+     * @param type type
+     * @param add can add users
+     * @param lock can lock users
+     * @param update can update users
+     * @param manage can manage users
+     */
     UserType(String type, boolean add, boolean lock, boolean update, boolean manage) {
         _type = type;
         _canAddUser = add;
@@ -26,12 +34,56 @@ public enum UserType {
         _canManageLoc = manage;
     }
 
+    /**
+     * gets the string type of the enum
+     * @return string type of the enum
+     */
     public String getStringType() { return _type; }
 
+    /**
+     * this was created because Enum.valueOf(String s) did not work at one point
+     * @param s string type
+     * @return corresponding user type
+     */
+    public static UserType typeFix(String s) {
+        if (s.equals("Employee")) {
+            return EMPLOYEE;
+        } else if (s.equals("Manager")) {
+            return MANAGER;
+        } else if (s.equals("Administrator")) {
+            return ADMIN;
+        } else {
+            return USER;
+        }
+    }
+
+    /**
+     * getter for canAddUser
+     * @return canAddUser
+     */
     public boolean canAddUser() { return _canAddUser; }
+
+    /**
+     * getter for canLockUser
+     * @return canLockUser
+     */
     public boolean canLockUser() { return _canLockUser; }
+
+    /**
+     * getter for canUpdateLocation
+     * @return canUpdateLoc
+     */
     public boolean canUpdateLocation() { return _canUpdateLoc; }
+
+    /**
+     * getter for canManageLocation
+     * @return canManageLoc
+     */
     public boolean canManageLocations() { return _canManageLoc; }
 
+    /**
+     * returns a list of the possible enums (for spinners)
+     * @return a list of possible enums
+     */
     public static List<UserType> getList() { return list; }
 }

@@ -12,6 +12,10 @@ import com.example.kory.donationtracker.R;
 
 public class Login extends AppCompatActivity {
 
+    /**
+     * Creates the login page
+     * @param savedInstanceState the current state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +23,10 @@ public class Login extends AppCompatActivity {
 
     }
 
+    /**
+     * Loads the opening screen
+     * @param view Current View
+     */
     public void toStartUp(View view) {
         // Create an Intent to start the second activity
         Intent randomIntent = new Intent(this, StartUp.class);
@@ -28,6 +36,10 @@ public class Login extends AppCompatActivity {
 
     }
 
+    /**
+     * Logs the user in and loads the home page
+     * @param view Current view
+     */
     public void onLoginClick(View view) {
 
         final EditText ET_username =  (EditText) findViewById(R.id.editText);
@@ -45,17 +57,12 @@ public class Login extends AppCompatActivity {
             myToast.show();
         }
 
-//        if (username.equals("user") && password.equals("pass")) {
-//            Intent randomIntent = new Intent(this, Home.class);
-//            startActivity(randomIntent);
-//        } else {
-//            Toast myToast = Toast.makeText(this, "Incorrect Username/Password!",
-//                    Toast.LENGTH_SHORT);
-//            myToast.show();
-//
-//        }
     }
 
+    /**
+     * Loads the opening screen
+     * @param view Current view
+     */
     public void onButtonPress4(View view) {
         Intent randomIntent = new Intent(this, StartUp.class);
         startActivity(randomIntent);

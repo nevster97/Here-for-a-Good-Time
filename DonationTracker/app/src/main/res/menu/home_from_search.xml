@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:android="http://schemas.android.com/apk/res/android" >
+<group android:checkableBehavior="single"></group>
+
+<item
+    android:id="@+id/nav_camera"
+    android:icon="@drawable/home_icon"
+    android:title="@string/home_from_search" />
+
+<item
+    android:id="@+id/nav_camera1"
+    android:icon="@drawable/search_icon"
+    android:title="@string/search_by_cat" />
+
+
+</menu>
