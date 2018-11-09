@@ -68,9 +68,9 @@ public class StartUp extends AppCompatActivity {
      * Loads information in from firebase
      */
     public void getContent() {
-        // firstRead();
+        firstRead();
         UserFacade.getInstance().setup();
-        LocationFacade.getInstance().setup();
+        // LocationFacade.getInstance().setup();
         return;
     }
 

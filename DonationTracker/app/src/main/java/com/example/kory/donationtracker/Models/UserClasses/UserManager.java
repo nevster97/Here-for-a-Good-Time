@@ -28,7 +28,7 @@ public class UserManager {
      * @param password password
      * @param name name
      * @param email email
-     * @param type user tyoe
+     * @param type user type
      * @param location employee location
      * @return true if add succeeds, otherwise false
      */
