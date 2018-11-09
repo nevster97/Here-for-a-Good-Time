@@ -4,6 +4,10 @@ package com.example.kory.donationtracker.Models.UserClasses;
 //import com.google.firebase.database.FirebaseDatabase;
 
 // << interface >>
+
+/**
+ * User facade class
+ */
 public class UserFacade {
 
     /**
@@ -17,12 +21,18 @@ public class UserFacade {
 //    private DatabaseReference ref = database.getReference();
 
 
-    public static UserFacade getInstance() { return INSTANCE; }
+    /**
+     * gets the instance of the user facade
+     * @return the instance
+     */
+    public static UserFacade getInstance() {
+        return INSTANCE;
+    }
 
     /**
      * Constructs the UserFacade
      */
-    public UserFacade() {
+    private UserFacade() {
         manager = new UserManager();
     }
 
@@ -38,7 +48,7 @@ public class UserFacade {
      * checks if a current user exists
      * @return if a current user exists, true. otherwise false
      */
-    public boolean hasLoggedInUser() {
+    private boolean hasLoggedInUser() {
         return currentUser != null;
     }
 

@@ -10,6 +10,9 @@ import com.example.kory.donationtracker.Models.UserClasses.UserFacade;
 
 import com.example.kory.donationtracker.R;
 
+/**
+ * login activity
+ */
 public class Login extends AppCompatActivity {
 
     /**
@@ -42,10 +45,10 @@ public class Login extends AppCompatActivity {
      */
     public void onLoginClick(View view) {
 
-        final EditText ET_username =  (EditText) findViewById(R.id.editText);
-        final EditText ET_password =  (EditText) findViewById(R.id.editText3);
-        String username = (String) ET_username.getText().toString();
-        String password = (String) ET_password.getText().toString();
+        final EditText ET_username = findViewById(R.id.editText);
+        final EditText ET_password = findViewById(R.id.editText3);
+        String username = ET_username.getText().toString();
+        String password = ET_password.getText().toString();
 
         UserFacade facade = UserFacade.getInstance();
         if (facade.login(username, password)) {

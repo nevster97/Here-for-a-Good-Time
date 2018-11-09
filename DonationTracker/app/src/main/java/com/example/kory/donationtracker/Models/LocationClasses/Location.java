@@ -3,6 +3,9 @@ package com.example.kory.donationtracker.Models.LocationClasses;
 import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Inventory;
 import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Item;
 
+/**
+ * Location class
+ */
 public class Location {
     private String name;
     private String latitude;
@@ -35,12 +38,16 @@ public class Location {
         this.longitude = longitude;
         this.address = address;
         // _type = LocationType.valueOf(type);
-        if (type.equals("Drop Off")) {
-            this.type = LocationType.DROPOFF;
-        } else if (type.equals("Store")) {
-            this.type = LocationType.STORE;
-        } else {
-            this.type = LocationType.WAREHOUSE;
+        switch (type) {
+            case "Drop Off":
+                this.type = LocationType.DROPOFF;
+                break;
+            case "Store":
+                this.type = LocationType.STORE;
+                break;
+            default:
+                this.type = LocationType.WAREHOUSE;
+                break;
         }
         this.phone = phone;
         this.website = website;
@@ -66,12 +73,16 @@ public class Location {
         this.latitude = latitude;
         this.longitude = longitude;
         this.address = address;
-        if (type.equals("Drop Off")) {
-            this.type = LocationType.DROPOFF;
-        } else if (type.equals("Store")) {
-            this.type = LocationType.STORE;
-        } else {
-            this.type = LocationType.WAREHOUSE;
+        switch (type) {
+            case "Drop Off":
+                this.type = LocationType.DROPOFF;
+                break;
+            case "Store":
+                this.type = LocationType.STORE;
+                break;
+            default:
+                this.type = LocationType.WAREHOUSE;
+                break;
         }
         this.phone = phone;
         this.website = website;

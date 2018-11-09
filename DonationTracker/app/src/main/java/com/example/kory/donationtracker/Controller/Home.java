@@ -37,6 +37,9 @@ import java.util.ArrayList;
 
 // importing LocationClasses package
 
+/**
+ * Home class
+ */
 public class Home extends AppCompatActivity {
 
     private ArrayList<String> dummy;
@@ -74,7 +77,7 @@ public class Home extends AppCompatActivity {
 //            populateLocations();
 //        }
 
-        ListView simpleList = (ListView) findViewById(R.id.listView);
+        ListView simpleList = findViewById(R.id.listView);
         CustomAdapter customAdapter = new CustomAdapter(getApplicationContext());
         simpleList.setAdapter(customAdapter);
         simpleList.setOnItemClickListener(new OnItemClickListener(){
@@ -92,7 +95,7 @@ public class Home extends AppCompatActivity {
     /**
      * Loads the menus into the slide-out menu
      */
-    public void loadMenus(){
+    private void loadMenus(){
         if (ut.equals(UserType.EMPLOYEE)) {
             mDrawerLayout = findViewById(R.id.drawer_layout);
 
@@ -285,7 +288,7 @@ public class Home extends AppCompatActivity {
         // LocationFacade.getInstance().send();
         setContentView(R.layout.activity_home_employee);
         loadMenus();
-        ListView simpleList = (ListView) findViewById(R.id.listView);
+        ListView simpleList = findViewById(R.id.listView);
         ItemAdapter customAdapter = new ItemAdapter(getApplicationContext(), null);
         simpleList.setAdapter(customAdapter);
         simpleList.setOnItemClickListener(new OnItemClickListener(){
@@ -407,10 +410,10 @@ public class Home extends AppCompatActivity {
         tv0.setText(location.getName());
         tv1.setText(location.getLat());
         tv2.setText(location.getLon());
-        tv3.setText(location.getAddress().toString());
+        tv3.setText(location.getAddress());
         tv4.setText(location.getType().getStringType());
 
-        ListView simpleList = (ListView) findViewById(R.id.listView1);
+        ListView simpleList = findViewById(R.id.listView1);
         ItemAdapter customAdapter = new ItemAdapter(getApplicationContext(), null);
         simpleList.setAdapter(customAdapter);
         simpleList.setOnItemClickListener(new OnItemClickListener(){
@@ -450,7 +453,7 @@ public class Home extends AppCompatActivity {
 
         setContentView(R.layout.activity_home);
         loadMenus();
-        ListView simpleList = (ListView) findViewById(R.id.listView);
+        ListView simpleList = findViewById(R.id.listView);
         CustomAdapter customAdapter = new CustomAdapter(getApplicationContext());
         simpleList.setAdapter(customAdapter);
         simpleList.setOnItemClickListener(new OnItemClickListener(){
@@ -497,16 +500,6 @@ public class Home extends AppCompatActivity {
         }
 
     }
-
-    /**
-     * Super calls the onDestroy method if the page is destroyed
-     */
-    @Override
-    protected void onDestroy() {
-        // LocationFacade.getInstance().send();
-        super.onDestroy();
-    }
-
 }
 
 

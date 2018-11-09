@@ -3,6 +3,9 @@ package com.example.kory.donationtracker.Models.UserClasses;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * UserType enum
+ */
 public enum UserType {
 
     USER("User", false, false, false, false),
@@ -46,14 +49,15 @@ public enum UserType {
      * @return corresponding user type
      */
     public static UserType typeFix(String s) {
-        if (s.equals("Employee")) {
-            return EMPLOYEE;
-        } else if (s.equals("Manager")) {
-            return MANAGER;
-        } else if (s.equals("Administrator")) {
-            return ADMIN;
-        } else {
-            return USER;
+        switch (s) {
+            case "Employee":
+                return EMPLOYEE;
+            case "Manager":
+                return MANAGER;
+            case "Administrator":
+                return ADMIN;
+            default:
+                return USER;
         }
     }
 

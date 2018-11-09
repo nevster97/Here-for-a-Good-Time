@@ -2,6 +2,9 @@ package com.example.kory.donationtracker.Models.LocationClasses;
 
 import java.util.List;
 
+/**
+ * LocationFacade class
+ */
 public class LocationFacade {
     private static LocationFacade INSTANCE = new LocationFacade();
     private LocationManager manager;
@@ -16,7 +19,7 @@ public class LocationFacade {
     /**
      * constructs the location facade
      */
-    public LocationFacade() {
+    private LocationFacade() {
         manager = new LocationManager();
     }
 
@@ -48,7 +51,7 @@ public class LocationFacade {
     /**
      * gets a desired location from the location manager
      * @param address the address of the desired location
-     * @return
+     * @return desired location
      */
     public Location getLocation(String address) {
         return manager.getLocation(address);

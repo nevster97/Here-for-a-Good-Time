@@ -17,6 +17,9 @@ import com.example.kory.donationtracker.R;
 
 import java.util.ArrayList;
 
+/**
+ * location employee register view
+ */
 public class LocEmpRegister extends AppCompatActivity implements OnItemSelectedListener{
 
     /**
@@ -60,7 +63,7 @@ public class LocEmpRegister extends AppCompatActivity implements OnItemSelectedL
         LocationFacade locFacade = LocationFacade.getInstance();
         ArrayList<Location> arr = (ArrayList) locFacade.getList();
         for (Location l : arr) {
-            String a = l.getAddress().toString();
+            String a = l.getAddress();
             if (a.equals(p)) {
                 user.setEmployeeLocation(a);
 //                u.uploadToDB();

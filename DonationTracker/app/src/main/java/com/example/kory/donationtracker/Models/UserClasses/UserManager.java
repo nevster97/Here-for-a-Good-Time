@@ -1,5 +1,7 @@
 package com.example.kory.donationtracker.Models.UserClasses;
 
+import android.util.Log;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,7 +11,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class UserManager {
+class UserManager {
 
     private Map<String, User> userMap;
     private static DatabaseReference db = FirebaseDatabase.getInstance().getReference("users");
@@ -32,7 +34,7 @@ public class UserManager {
      * @param location employee location
      * @return true if add succeeds, otherwise false
      */
-    public boolean addUser(String username, String password, String name, String email, String type, String location) {
+    private boolean addUser(String username, String password, String name, String email, String type, String location) {
         user = new User(username, password, name, email, type, location);
         if (userMap.containsKey(username)) {
             return false;
@@ -111,8 +113,6 @@ public class UserManager {
                     if (employeeLocation != null) {
                         catchThisBool = addUser(username, password, name, contact, type, employeeLocation);
                     } else {
-                        System.out.println(type);
-                        System.out.println(type.length());
                         catchThisBool = addUser(username, password, name, contact, type);
                     }
 
@@ -127,7 +127,8 @@ public class UserManager {
              */
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                System.out.println("Error -> it's Firebase's fault");
+                // System.out.println("Error -> it's Firebase's fault");
+                Log.d("UserManager.java", "Error -> it's Firebase's fault");
             }
         });
     }

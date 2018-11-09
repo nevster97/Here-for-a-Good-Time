@@ -1,5 +1,7 @@
 package com.example.kory.donationtracker.Models.LocationClasses;
 
+import android.util.Log;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
@@ -12,7 +14,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Item;
 
-public class LocationManager {
+class LocationManager {
 
     private static Map<String, Location> locations;
     private DatabaseReference db = FirebaseDatabase.getInstance().getReference("locations");
@@ -139,7 +141,8 @@ public class LocationManager {
              */
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                System.out.println("Error -> it's Firebase's fault");
+                // System.out.println("Error -> it's Firebase's fault");
+                Log.d("LocationManager.java", "Error -> it's Firebase's fault");
             }
         });
     }

@@ -4,6 +4,9 @@ import com.example.kory.donationtracker.Models.LocationClasses.Location;
 
 import java.util.Date;
 
+/**
+ * Item class
+ */
 public class Item {
 
     // private Date _timestamp;

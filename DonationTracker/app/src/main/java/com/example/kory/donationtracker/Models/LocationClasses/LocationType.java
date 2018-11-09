@@ -1,9 +1,12 @@
 package com.example.kory.donationtracker.Models.LocationClasses;
 
+/**
+ * Location type enum
+ */
 public enum LocationType {
-    DROPOFF("Drop Off", true, false, true),
-    STORE("Store", true, true, true),
-    WAREHOUSE("Warehouse", false, false, true);
+    DROPOFF("Drop Off", true, false),
+    STORE("Store", true, true),
+    WAREHOUSE("Warehouse", false, false);
 
     private String _type;
     private boolean _dropOff;
@@ -15,13 +18,12 @@ public enum LocationType {
      * @param type type
      * @param dropOff is dropoff
      * @param sales is store
-     * @param inventoryStorage is warehouse
      */
-    LocationType(String type, boolean dropOff, boolean sales, boolean inventoryStorage) {
+    LocationType(String type, boolean dropOff, boolean sales) {
         _type = type;
         _dropOff = dropOff;
         _sales = sales;
-        _inventoryStorage = inventoryStorage;
+        _inventoryStorage = true;
     }
 
     /**

@@ -7,16 +7,22 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Location test
+ */
 public class LocationTest {
 
-    Location typeOne;
-    Location typeTwo;
-    Location typeThree;
+    private Location typeOne;
+    private Location typeTwo;
+    private Location typeThree;
 
-    Inventory temp1;
-    Inventory temp2;
-    Inventory temp3;
+    private Inventory temp1;
+    private Inventory temp2;
+    private Inventory temp3;
 
+    /**
+     * sets up the test
+     */
     @Before
     public void setup() {
         typeOne = new Location("New Location", "101", "111", "420 High Road",
@@ -33,6 +39,9 @@ public class LocationTest {
 
     }
 
+    /**
+     * test 1
+     */
     @Test
     public void testConstructorTypeOne() {
         assertEquals("New Location", typeOne.getName());
@@ -45,6 +54,9 @@ public class LocationTest {
         assertEquals(0, temp1.getTotalItems());
     }
 
+    /**
+     * test 2
+     */
     @Test
     public void testConstructorTypeTwo() {
         assertEquals("New Location", typeTwo.getName());
@@ -57,6 +69,9 @@ public class LocationTest {
         assertEquals(0, temp2.getTotalItems());
     }
 
+    /**
+     * test 3
+     */
     @Test
     public void testConstructorTypeThree() {
         assertEquals("New Location", typeThree.getName());

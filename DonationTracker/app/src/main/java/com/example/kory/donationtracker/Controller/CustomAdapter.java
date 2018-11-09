@@ -15,7 +15,7 @@ import com.example.kory.donationtracker.R;
 
 import java.util.ArrayList;
 
-public class CustomAdapter extends BaseAdapter {
+class CustomAdapter extends BaseAdapter {
     Context context;
     ArrayList<String> data;
     ArrayList<String> address;
@@ -76,13 +76,13 @@ public class CustomAdapter extends BaseAdapter {
         ArrayList<Location> locList = (ArrayList) locFacade.getList();
         Location l = locList.get(i);
         view = inflter.inflate(R.layout.item, null);
-        TextView name = (TextView) view.findViewById(R.id.textView10);
+        TextView name = view.findViewById(R.id.textView10);
         name.setText(l.getName());
-        TextView address = (TextView) view.findViewById(R.id.textView11);
+        TextView address = view.findViewById(R.id.textView11);
         // Address a = l.getAddress();
         // address.setText(a.toString());
         address.setText(l.getAddress());
-        TextView type = (TextView) view.findViewById(R.id.textView12);
+        TextView type = view.findViewById(R.id.textView12);
         LocationType t = l.getType();
         type.setText(t.getStringType());
         return view;

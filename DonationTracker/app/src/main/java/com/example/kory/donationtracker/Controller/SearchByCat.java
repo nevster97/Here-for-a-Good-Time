@@ -29,14 +29,17 @@ import com.example.kory.donationtracker.R;
 
 import java.util.ArrayList;
 
+/**
+ * Search by Category Activity
+ */
 public class SearchByCat extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
     private UserType ut;
-    public ArrayList<Inventory> masterInventory;
-    public ArrayList<Item> view;
-    public Location locationToBeSearched;
-    public ItemType itemToBeSearched;
+    private ArrayList<Inventory> masterInventory;
+    private ArrayList<Item> view;
+    private Location locationToBeSearched;
+    private ItemType itemToBeSearched;
 
     /**
      * Loads the item category search page
@@ -59,7 +62,7 @@ public class SearchByCat extends AppCompatActivity implements AdapterView.OnItem
      * @param view the current view
      * @param pos index of the desired item
      */
-    public void loadItem(View view, int pos) {
+    private void loadItem(View view, int pos) {
         setContentView(R.layout.activity_select_item);
         loadMenus();
         UserFacade userFacade = UserFacade.getInstance();
@@ -86,7 +89,7 @@ public class SearchByCat extends AppCompatActivity implements AdapterView.OnItem
     /**
      * populates the global inventory
      */
-    protected void populateGlobalInventoryList() {
+    private void populateGlobalInventoryList() {
         for (Location l : LocationFacade.getInstance().getList()) {
             masterInventory.add(l.getInventory());
         }
@@ -95,7 +98,7 @@ public class SearchByCat extends AppCompatActivity implements AdapterView.OnItem
     /**
      * Populates the spinner with location names
      */
-    protected void populateSpinner() {
+    private void populateSpinner() {
         ArrayList<Location> locs = (ArrayList<Location>) LocationFacade.getInstance().getList();
         Spinner spinner = findViewById(R.id.spinner3);
         ArrayList<String> names = new ArrayList<>();
@@ -112,7 +115,7 @@ public class SearchByCat extends AppCompatActivity implements AdapterView.OnItem
     /**
      * Populates this spinner with itemTypes
      */
-    protected void populateSpinner1() {
+    private void populateSpinner1() {
         ArrayList<Location> locs = (ArrayList<Location>) LocationFacade.getInstance().getList();
         Spinner spinner = findViewById(R.id.spinner4);
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, ItemType.values());
@@ -184,8 +187,7 @@ public class SearchByCat extends AppCompatActivity implements AdapterView.OnItem
                 }
             }
         }
-        System.out.println(view);
-        ListView simpleList = (ListView) findViewById(R.id.listView911);
+        ListView simpleList = findViewById(R.id.listView911);
         ItemAdapter customAdapter = new ItemAdapter(getApplicationContext(), view);
         simpleList.setAdapter(customAdapter);
         simpleList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -209,7 +211,7 @@ public class SearchByCat extends AppCompatActivity implements AdapterView.OnItem
     /**
      * Load the menus for the slide out menu
      */
-    public void loadMenus(){
+    private void loadMenus(){
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -249,7 +251,7 @@ public class SearchByCat extends AppCompatActivity implements AdapterView.OnItem
      * @param view current view
      */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    public void reloadHome(View view) {
+    private void reloadHome(View view) {
         Intent randomIntent = new Intent(this, Home.class);
         startActivity(randomIntent);
     }
@@ -258,7 +260,7 @@ public class SearchByCat extends AppCompatActivity implements AdapterView.OnItem
      * Load the original search page
      * @param view the current view
      */
-    public void goToSearch(View view) {
+    private void goToSearch(View view) {
         Intent randomIntent = new Intent(this, Search.class);
         startActivity(randomIntent);
     }

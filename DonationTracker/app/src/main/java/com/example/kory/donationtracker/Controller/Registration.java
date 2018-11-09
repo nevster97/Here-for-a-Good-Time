@@ -15,6 +15,9 @@ import com.example.kory.donationtracker.Models.UserClasses.UserFacade;
 import com.example.kory.donationtracker.Models.UserClasses.UserType;
 import com.example.kory.donationtracker.R;
 
+/**
+ * Registration activity
+ */
 public class Registration extends AppCompatActivity {
 
     private EditText firstName;
@@ -33,12 +36,12 @@ public class Registration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        firstName = (EditText) findViewById(R.id.editText4);
-        lastName = (EditText) findViewById(R.id.editText7);
-        email =  (EditText) findViewById(R.id.editText6);
-        password = (EditText) findViewById(R.id.editText2);
-        confirmPassword = (EditText) findViewById(R.id.editText5);
-        typeSpinner = (Spinner) findViewById(R.id.spinner);
+        firstName = findViewById(R.id.editText4);
+        lastName = findViewById(R.id.editText7);
+        email = findViewById(R.id.editText6);
+        password = findViewById(R.id.editText2);
+        confirmPassword = findViewById(R.id.editText5);
+        typeSpinner = findViewById(R.id.spinner);
 
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, UserType.getList());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -67,14 +70,14 @@ public class Registration extends AppCompatActivity {
 //        final EditText confirmPassword = (EditText) findViewById(R.id.editText5);
 //        final EditText email =  (EditText) findViewById(R.id.editText6);
 
-        String firstString = (String) firstName.getText().toString().trim();
-        String lastString = (String) lastName.getText().toString().trim();
+        String firstString = firstName.getText().toString().trim();
+        String lastString = lastName.getText().toString().trim();
 
-        String pass1 = (String) password.getText().toString();
-        String pass2 = (String) confirmPassword.getText().toString();
+        String pass1 = password.getText().toString();
+        String pass2 = confirmPassword.getText().toString();
 
         String nameString = firstString + " " + lastString;
-        String emailString = (String) email.getText().toString();
+        String emailString = email.getText().toString();
 
         String type = ((UserType) typeSpinner.getSelectedItem()).getStringType();
 

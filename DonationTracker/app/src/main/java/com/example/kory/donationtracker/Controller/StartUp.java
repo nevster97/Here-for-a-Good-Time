@@ -3,6 +3,7 @@ package com.example.kory.donationtracker.Controller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.example.kory.donationtracker.Models.LocationClasses.Location;
@@ -19,6 +20,9 @@ import java.nio.charset.StandardCharsets;
 // app backend
 // file reader stuff
 
+/**
+ * StartUp activity
+ */
 public class StartUp extends AppCompatActivity {
 
     /**
@@ -67,11 +71,10 @@ public class StartUp extends AppCompatActivity {
     /**
      * Loads information in from firebase
      */
-    public void getContent() {
+    private void getContent() {
         // firstRead();
         UserFacade.getInstance().setup();
         LocationFacade.getInstance().setup();
-        return;
     }
 
     /**
@@ -114,7 +117,7 @@ public class StartUp extends AppCompatActivity {
 
 
         } catch (IOException e) {
-            System.out.println("Error");
+            Log.d("StartUp.java", "Error -> file could not be read");
         }
     }
 

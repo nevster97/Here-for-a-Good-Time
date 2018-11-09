@@ -31,14 +31,16 @@ import com.example.kory.donationtracker.R;
 
 import java.util.ArrayList;
 
-
+/**
+ * Search activity
+ */
 public class Search extends AppCompatActivity implements OnItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
     private UserType ut;
-    public ArrayList<Inventory> masterInventory;
-    public ArrayList<Item> view;
-    public Location locationToBeSearched;
+    private ArrayList<Inventory> masterInventory;
+    private ArrayList<Item> view;
+    private Location locationToBeSearched;
 
     /**
      * Loads the search items page
@@ -78,10 +80,10 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
         tv0.setText(location.getName());
         tv1.setText(location.getLat());
         tv2.setText(location.getLon());
-        tv3.setText(location.getAddress().toString());
+        tv3.setText(location.getAddress());
         tv4.setText(location.getType().getStringType());
 
-        ListView simpleList = (ListView) findViewById(R.id.listView1);
+        ListView simpleList = findViewById(R.id.listView1);
         ItemAdapter customAdapter = new ItemAdapter(getApplicationContext(), null);
         simpleList.setAdapter(customAdapter);
         simpleList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -99,7 +101,7 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
      * @param view current view
      * @param pos index of the item
      */
-    public void loadItem(View view, int pos) {
+    private void loadItem(View view, int pos) {
         setContentView(R.layout.activity_select_item);
         loadMenus();
         UserFacade userFacade = UserFacade.getInstance();
@@ -126,7 +128,7 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
     /**
      * populates every locations inventory into the master inventory
      */
-    protected void populateGlobalInventoryList() {
+    private void populateGlobalInventoryList() {
         for (Location l : LocationFacade.getInstance().getList()) {
             masterInventory.add(l.getInventory());
         }
@@ -135,7 +137,7 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
     /**
      * Loads the spinner with the list of locations
      */
-    protected void populateSpinner() {
+    private void populateSpinner() {
         ArrayList<Location> locs = (ArrayList<Location>) LocationFacade.getInstance().getList();
         Spinner spinner = findViewById(R.id.spinner3);
         ArrayList<String> names = new ArrayList<>();
@@ -184,7 +186,7 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
      */
     public void onSearchClicked(View viewOfTheScreen) {
         view.clear();
-        final EditText q = (EditText) findViewById(R.id.editText8);
+        final EditText q = findViewById(R.id.editText8);
         String query = q. getText().toString();
         if (locationToBeSearched == null) {
             // do global search
@@ -204,7 +206,7 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
                 }
             }
         }
-        ListView simpleList = (ListView) findViewById(R.id.listView911);
+        ListView simpleList = findViewById(R.id.listView911);
         ItemAdapter customAdapter = new ItemAdapter(getApplicationContext(), view);
         simpleList.setAdapter(customAdapter);
         simpleList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -228,7 +230,7 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
     /**
      * Loads the menu for the slide out menu bar
      */
-    public void loadMenus(){
+    private void loadMenus(){
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -268,7 +270,7 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
      * @param view current view
      */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    public void reloadHome(View view) {
+    private void reloadHome(View view) {
         Intent randomIntent = new Intent(this, Home.class);
         startActivity(randomIntent);
     }
@@ -277,7 +279,7 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
      * Loads the item category search page
      * @param view current view
      */
-    public void goToSearchByCat(View view) {
+    private void goToSearchByCat(View view) {
         Intent randomIntent = new Intent(this, SearchByCat.class);
         startActivity(randomIntent);
     }
