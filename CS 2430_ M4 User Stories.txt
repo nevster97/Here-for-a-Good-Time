@@ -1,0 +1,28 @@
+1. As an admin, I want to add/remove users so they can/cannot view locations of donation drop-offs/stores and inventories at these locations.
+
+
+2. As an admin, I want to lock user accounts so they temporarily cannot view locations of donation drop-offs/stores and inventories at these locations.
+
+
+3. As an admin, I want to unlock user accounts so they can view locations of donation drop-offs/stores and inventories at these locations after being locked out.
+
+
+4. As a user, I want to view the inventory available and information about each item at any location so I can determine which location best fits my needs.
+
+
+5. As a user, I want to view all the different locations available so I can determine which locations are closest and easily accessible.
+
+
+6. As a user, I want to be able to access Google Maps through the app so I can get directions to a donation location.
+
+
+7. As a user, I want to see the phone number for a location so I can call if I have any questions or concerns.
+
+
+8. As a location employee, I want to register donation drop-offs so I can update the current inventory at my location and users can view available products.
+
+
+9. As a manager, I want to view information about all locations so I can make sure that the information in the system is accurate and up-to-date.
+
+
+10. As a manager, I want to add and modify information for all locations so users can view up-to-date information about each location.

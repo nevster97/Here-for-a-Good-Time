@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Use DrawerLayout as root container for activity -->
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorLogo"
+    android:fitsSystemWindows="true">
+
+    <!-- Layout to contain contents of main body of screen (drawer will slide over this) -->
+    <RelativeLayout
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@color/backgroundColor1"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:title="@string/companyname" />
+
+        <Spinner
+            android:id="@+id/spinner3"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/toolbar" />
+
+        <ListView
+            android:id="@+id/listView911"
+            android:layout_width="match_parent"
+            android:layout_height="439dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="128dp"
+            android:background="@color/colorLogo"
+            android:divider="#f00"
+            android:dividerHeight="1dp" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="41dp"
+            android:onClick="onSearchClicked"
+            android:layout_height="36dp"
+            android:layout_toRightOf="@id/spinner4"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/spinner3"
+            android:layout_marginEnd="0dp" />
+
+        <Spinner
+            android:id="@+id/spinner4"
+            android:layout_width="341dp"
+            android:layout_height="36dp"
+            android:layout_alignBottom="@+id/spinner3"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/spinner3"
+            android:layout_marginBottom="-36dp" />
+
+
+    </RelativeLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:itemBackground="@android:color/white"
+        app:headerLayout="@layout/nav_header" />
+
+</android.support.v4.widget.DrawerLayout>

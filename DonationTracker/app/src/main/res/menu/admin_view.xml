@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_camer"
+        android:icon="@drawable/location"
+        android:title="@string/location" />
+
+    <item
+        android:id="@+id/search_menu"
+        android:icon="@drawable/search_icon"
+        android:title="@string/search_menu_thing" />
+
+    <item
+        android:id="@+id/map_menu"
+        android:icon="@drawable/map_thing"
+        android:title="@string/title_activity_maps" />
+
+    <item
+        android:id="@+id/nav_camera"
+        android:icon="@drawable/adduser"
+        android:title="@string/adduser" />
+
+    <item
+        android:id="@+id/nav_camera1"
+        android:icon="@drawable/lock"
+        android:title="@string/lockuser" />
+
+    <item
+        android:id="@+id/nav_camera2"
+        android:icon="@drawable/updatelocation"
+        android:title="@string/updatelocation" />
+
+    <item
+        android:id="@+id/nav_camera3"
+        android:icon="@drawable/managelocation"
+        android:title="@string/managelocation" />
+
+    <item
+        android:id="@+id/nav_camera4"
+        android:icon="@drawable/logout_icon"
+        android:title="@string/logout" />
+</menu>
