@@ -61,6 +61,10 @@ public class UserManager {
         return true;
     }
 
+    public void addUserTest(User user) {
+        userMap.put(user.getUsername(), user);
+    }
+
     /**
      * gets a user from the manager and returns it (if exists)
      * @param username username
