@@ -1,8 +1,5 @@
 package com.example.kory.donationtracker.Models.UserClasses;
 
-import java.util.Map;
-import java.util.HashMap;
-
 /**
  * User class
  */
@@ -40,7 +37,8 @@ public class User {
      * @param type type of user
      * @param employeeLocation locations
      */
-    public User(String username, String password, String name, String contact, String type, String employeeLocation) {
+    public User(String username, String password, String name,
+                String contact, String type, String employeeLocation) {
         this.username = username;
         this.password = password;
         this.name = name;
@@ -52,29 +50,20 @@ public class User {
     }
 
 
-//    public String get_name() { return _name; }
-////    public String get_contact() { return _contact; }
-////    public UserType get_type() { return _type; }
-////    public String get_password() {return _password; }
-////    // public Location get_employeeLocation() {return LocationFacade.getInstance().getLocation(_employeeLocation); }
-////    public String get_employeeLocation() { return _employeeLocation; }
-////    public void set_employeeLocation(String s) { _employeeLocation = s; }
-
-
-    /**
-     * converts a user to a map of the user's attributes
-     * @return a map with the user's attributes
-     */
-    public Map<String, Object> toMap() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("username", username);
-        map.put("password", password);
-        map.put("name", name);
-        map.put("contact", contact);
-        map.put("type", type.getStringType());
-        map.put("employeeLocation", employeeLocation);
-        return map;
-    }
+//    /**
+//     * converts a user to a map of the user's attributes
+//     * @return a map with the user's attributes
+//     */
+//    public Map<String, Object> toMap() {
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("username", username);
+//        map.put("password", password);
+//        map.put("name", name);
+//        map.put("contact", contact);
+//        map.put("type", type.getStringType());
+//        map.put("employeeLocation", employeeLocation);
+//        return map;
+//    }
 
     /**
      * checks if a passed in password equals a user's password

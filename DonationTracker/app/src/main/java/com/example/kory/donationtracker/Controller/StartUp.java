@@ -73,23 +73,26 @@ public class StartUp extends AppCompatActivity {
      */
     private void getContent() {
         // firstRead();
-        UserFacade.getInstance().setup();
-        LocationFacade.getInstance().setup();
+        UserFacade uf = UserFacade.getInstance();
+        LocationFacade lf = LocationFacade.getInstance();
+        uf.setup();
+        lf.setup();
     }
 
     /**
      * Loads the database with the locations
      */
-    public void firstRead() {
+    private void firstRead() {
         try {
             //Open a stream on the raw file
             InputStream is = getResources().openRawResource(R.raw.locationdata);
             //From here we probably should call a model method and pass the InputStream
             //Wrap it in a BufferedReader so that we get the readLine() method
-            BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+            BufferedReader br = new BufferedReader(new InputStreamReader(is,
+                    StandardCharsets.UTF_8));
             LocationFacade locFacade = LocationFacade.getInstance();
             String line;
-            String[] tokens = new String[10];
+            String[] tokens;
             br.readLine(); //get rid of header line
 
             while ((line = br.readLine()) != null) {

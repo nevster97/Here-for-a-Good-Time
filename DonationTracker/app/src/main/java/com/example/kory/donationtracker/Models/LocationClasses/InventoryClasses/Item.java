@@ -1,9 +1,5 @@
 package com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses;
 
-import com.example.kory.donationtracker.Models.LocationClasses.Location;
-
-import java.util.Date;
-
 /**
  * Item class
  */
@@ -32,14 +28,12 @@ public class Item {
 
     /**
      * updates an item
-     * @param timestamp timestamp
-     * @param location location
      * @param shortDesc short description
      * @param fullDesc full description
      * @param value value
      * @param category item type
      */
-    public void updateItem(Date timestamp, Location location, String shortDesc, String fullDesc, String value, String category) {
+    public void updateItem(String shortDesc, String fullDesc, String value, String category) {
         // _timestamp = timestamp;
         // _location = location;
         this.shortDesc = shortDesc;

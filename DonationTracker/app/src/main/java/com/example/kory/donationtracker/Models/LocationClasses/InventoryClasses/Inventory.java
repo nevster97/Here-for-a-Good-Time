@@ -5,23 +5,24 @@ import com.example.kory.donationtracker.Models.LocationClasses.Location;
 import com.example.kory.donationtracker.Models.LocationClasses.LocationFacade;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Inventory class
  */
 public class Inventory {
-    private Location location;
+    private final Location location;
     private int totalItems;
     private double totalValue;
-    private List<Item> inventory;
+    private final List<Item> inventory;
 
     /**
      * constructs an inventory with no inventory
      * @param location the owner of the inventory
      */
     public Inventory(Location location) {
-        this(location, new ArrayList());
+        this(location, new ArrayList<Item>());
     }
 
     /**
@@ -29,7 +30,7 @@ public class Inventory {
      * @param location the owner of the inventory
      * @param inventory the inventory
      */
-    private Inventory(Location location, ArrayList<Item> inventory) {
+    private Inventory(Location location, List<Item> inventory) {
         this.location = location;
         this.totalItems = 0;
         this.totalValue = 0.0;
@@ -44,7 +45,9 @@ public class Inventory {
         inventory.add(item);
         totalValue += item.getValue();
         totalItems++;
-        LocationFacade.getInstance().update(location);
+        LocationFacade locF = LocationFacade.getInstance();
+        locF.update();
+        // LocationFacade.getInstance().update(location);
 
     }
 
@@ -63,16 +66,16 @@ public class Inventory {
      * @return the inventory
      */
     public List<Item> getInventory() {
-        return inventory;
+        return Collections.unmodifiableList(inventory);
     }
 
-    /**
-     * sets the inventory
-     * @param inventory the new inventory
-     */
-    public void setInventory(List<Item> inventory) {
-        this.inventory = inventory;
-    }
+//    /**
+//     * sets the inventory
+//     * @param inventory the new inventory
+//     */
+//    public void setInventory(List<Item> inventory) {
+//        this.inventory = inventory;
+//    }
 
     /**
      * gets the total number of items
@@ -82,11 +85,13 @@ public class Inventory {
         return totalItems;
     }
 
-    /**
-     * gets the total value of an inventory
-     * @return the total value of items
-     */
-    public double getTotalValue() {
-        return totalValue;
-    }
+// --Commented out by Inspection START (11/12/18, 2:27 PM):
+//    /**
+//     * gets the total value of an inventory
+//     * @return the total value of items
+//     */
+//    public double getTotalValue() {
+//        return totalValue;
+//    }
+// --Commented out by Inspection STOP (11/12/18, 2:27 PM)
 }

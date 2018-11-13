@@ -1,11 +1,16 @@
 package com.example.kory.donationtracker.Models.UserClasses;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * test for the user type
+ */
 public class UserTypeTest {
+    /**
+     * test for the user type
+     */
     @Test
     public void testUserType() {
         assertEquals(UserType.EMPLOYEE, UserType.typeFix("Employee"));

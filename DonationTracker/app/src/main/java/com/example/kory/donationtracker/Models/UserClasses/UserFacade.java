@@ -8,13 +8,13 @@ package com.example.kory.donationtracker.Models.UserClasses;
 /**
  * User facade class
  */
-public class UserFacade {
+public final class UserFacade {
 
     /**
      * This is the only instance of UserFacade EVER!!!!
      */
-    private static UserFacade INSTANCE = new UserFacade();
-    private UserManager manager;
+    private static final UserFacade INSTANCE = new UserFacade();
+    private final UserManager manager;
     private User currentUser;
 
 //    private FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -61,17 +61,14 @@ public class UserFacade {
      * @param type user type
      * @return true if registration is successful, false otherwise
      */
-    public boolean register(String username, String pass, String name, String contact, String type) {
+    public boolean register(String username, String pass,
+                            String name, String contact, String type) {
         // manager.downloadFromDB();
         if (hasLoggedInUser()) {
             return false;
         }
-        User user = null;
-        if (manager.addUser(username, pass, name, contact, type)) {
-            return true;
-        } else {
-            return false;
-        }
+        // User user = null;
+        return manager.addUser(username, pass, name, contact, type);
     }
 
     /**

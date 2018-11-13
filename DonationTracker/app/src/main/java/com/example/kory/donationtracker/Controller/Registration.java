@@ -3,6 +3,7 @@ package com.example.kory.donationtracker.Controller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -43,7 +44,8 @@ public class Registration extends AppCompatActivity {
         confirmPassword = findViewById(R.id.editText5);
         typeSpinner = findViewById(R.id.spinner);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, UserType.getList());
+        ArrayAdapter<String> adapter = new ArrayAdapter(this,
+                android.R.layout.simple_spinner_item, UserType.getList());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeSpinner.setAdapter(adapter);
     }
@@ -70,19 +72,32 @@ public class Registration extends AppCompatActivity {
 //        final EditText confirmPassword = (EditText) findViewById(R.id.editText5);
 //        final EditText email =  (EditText) findViewById(R.id.editText6);
 
-        String firstString = firstName.getText().toString().trim();
-        String lastString = lastName.getText().toString().trim();
+        Editable first = firstName.getText();
+        Editable last = lastName.getText();
 
-        String pass1 = password.getText().toString();
-        String pass2 = confirmPassword.getText().toString();
+        String firstString = first.toString();
+        String lastString = last.toString();
+
+        firstString = firstString.trim();
+        lastString = lastString.trim();
+
+//        String firstString = firstName.getText().toString().trim();
+//        String lastString = lastName.getText().toString().trim();
+
+        Editable p1 = password.getText();
+        Editable p2 = confirmPassword.getText();
+        Editable e1 = email.getText();
+
+        String pass1 = p1.toString();
+        String pass2 = p2.toString();
 
         String nameString = firstString + " " + lastString;
-        String emailString = email.getText().toString();
+        String emailString = e1.toString();
 
         String type = ((UserType) typeSpinner.getSelectedItem()).getStringType();
 
-        if (firstString.equals("") || lastString.equals("")
-                || emailString.equals("") || pass1.equals("") || pass2.equals("")) {
+        if ("".equals(firstString) || "".equals(lastString)
+                || "".equals(emailString) || "".equals(pass1) || "".equals(pass2)) {
             // handle empty fields
             CharSequence text = ("Please ensure that all fields are completed");
             int duration = Toast.LENGTH_SHORT;
@@ -107,17 +122,21 @@ public class Registration extends AppCompatActivity {
                 UserType ut = u.getUserType();
                 if (ut.equals(UserType.EMPLOYEE)) {
                     try {
-                        Thread.sleep(500);
+                        Thread.sleep(100);
                     } catch (InterruptedException e) {
-                        Thread.currentThread().interrupt();
+                        Thread current = Thread.currentThread();
+                        current.interrupt();
+                        // Thread.currentThread().interrupt();
                     }
                     Intent randomIntent = new Intent(this, LocEmpRegister.class);
                     startActivity(randomIntent);
                 } else {
                     try {
-                        Thread.sleep(500);
+                        Thread.sleep(100);
                     } catch (InterruptedException e) {
-                        Thread.currentThread().interrupt();
+                        Thread current = Thread.currentThread();
+                        current.interrupt();
+                        // Thread.currentThread().interrupt();
                     }
                     Intent randomIntent = new Intent(this, Home.class);
                     startActivity(randomIntent);

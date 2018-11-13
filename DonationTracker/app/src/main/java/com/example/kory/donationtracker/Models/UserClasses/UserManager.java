@@ -13,8 +13,8 @@ import com.google.firebase.database.ValueEventListener;
 
 class UserManager {
 
-    private Map<String, User> userMap;
-    private static DatabaseReference db = FirebaseDatabase.getInstance().getReference("users");
+    private final Map<String, User> userMap;
+    private static final DatabaseReference db = FirebaseDatabase.getInstance().getReference("users");
     private static User user;
 
     /**
@@ -34,7 +34,8 @@ class UserManager {
      * @param location employee location
      * @return true if add succeeds, otherwise false
      */
-    private boolean addUser(String username, String password, String name, String email, String type, String location) {
+    private boolean addUser(String username, String password, String name,
+                            String email, String type, String location) {
         user = new User(username, password, name, email, type, location);
         if (userMap.containsKey(username)) {
             return false;
@@ -53,7 +54,8 @@ class UserManager {
      * @param type user type
      * @return true if add succeeds, otherwise false
      */
-    public boolean addUser(String username, String password, String name, String email, String type) {
+    public boolean addUser(String username, String password, String name,
+                           String email, String type) {
         User user = new User(username, password, name, email, type);
         if (userMap.containsKey(username)) {
             return false;
@@ -102,19 +104,30 @@ class UserManager {
 //                    System.out.println(s);
 //                }
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    String username = (String) ds.child("username").getValue();
-                    String password = (String) ds.child("password").getValue();
-                    String name = (String) ds.child("name").getValue();
-                    String contact = (String) ds.child("contact").getValue();
-                    String type = (String) ds.child("type").getValue();
-                    String employeeLocation = (String) ds.child("employeeLocation").getValue();
+
+                    DataSnapshot usernameDS = ds.child("username");
+                    DataSnapshot passwordDS = ds.child("password");
+                    DataSnapshot nameDS = ds.child("name");
+                    DataSnapshot contactDS = ds.child("contact");
+                    DataSnapshot typeDS = ds.child("type");
+                    DataSnapshot employeeLocationDS = ds.child("employeeLocation");
+
+                    String username = (String) usernameDS.getValue();
+                    String password = (String) passwordDS.getValue();
+                    String name = (String) nameDS.getValue();
+                    String contact = (String) contactDS.getValue();
+                    String type = (String) typeDS.getValue();
+                    String employeeLocation = (String) employeeLocationDS.getValue();
 
                     boolean catchThisBool;
                     if (employeeLocation != null) {
-                        catchThisBool = addUser(username, password, name, contact, type, employeeLocation);
+                        catchThisBool = addUser(username, password, name,
+                                contact, type, employeeLocation);
                     } else {
                         catchThisBool = addUser(username, password, name, contact, type);
                     }
+
+                    Log.d("UserManager.java", ((Boolean) catchThisBool).toString());
 
                 }
                 db.setValue(userMap);

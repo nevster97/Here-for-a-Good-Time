@@ -4,19 +4,22 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -33,7 +36,7 @@ import com.example.kory.donationtracker.Models.UserClasses.UserFacade;
 import com.example.kory.donationtracker.Models.UserClasses.UserType;
 import com.example.kory.donationtracker.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
 // importing LocationClasses package
 
@@ -42,16 +45,16 @@ import java.util.ArrayList;
  */
 public class Home extends AppCompatActivity {
 
-    private ArrayList<String> dummy;
-    private ArrayList<String> address = new ArrayList<>();
-    private ArrayList<String> type = new ArrayList<>();
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    // private ArrayList<String> dummy;
+    // private final ArrayList<String> address = new ArrayList<>();
+    // private final ArrayList<String> type = new ArrayList<>();
+    // private RecyclerView mRecyclerView;
+    // private RecyclerView.Adapter mAdapter;
+    // private RecyclerView.LayoutManager mLayoutManager;
     private DrawerLayout mDrawerLayout;
     private UserType ut;
-    private ArrayList<String> myDataSet;
-    private ItemType tempStringForItem;
+    // private ArrayList<String> myDataSet;
+    // private ItemType tempStringForItem;
     private Spinner typeSpinner;
 
     /**
@@ -66,25 +69,26 @@ public class Home extends AppCompatActivity {
 
         UserFacade facade = UserFacade.getInstance();
         User user = facade.getCurrentUser();
-        String name = user.getName();
+        // String name = user.getName();
         // TextView nameView = (TextView)findViewById(R.id.textView6);
         // nameView.setText(name);
         ut = user.getUserType();
         loadMenus();
 
-        LocationFacade locFacade = LocationFacade.getInstance();
+        // LocationFacade locFacade = LocationFacade.getInstance();
 //        if (locFacade.checkIfEmpty()) {
 //            populateLocations();
 //        }
 
         ListView simpleList = findViewById(R.id.listView);
-        CustomAdapter customAdapter = new CustomAdapter(getApplicationContext());
+        // CustomAdapter customAdapter = new CustomAdapter(getApplicationContext());
+        ListAdapter customAdapter = new CustomAdapter(getApplicationContext());
         simpleList.setAdapter(customAdapter);
         simpleList.setOnItemClickListener(new OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?>adapter,View v, int position, long id){
                 // Intent intent;
-                loadLocation(v, position);
+                loadLocation(position);
             }
 
         });
@@ -107,8 +111,10 @@ public class Home extends AppCompatActivity {
             UserFacade userF = UserFacade.getInstance();
             User user = userF.getCurrentUser();
             // Location loc = user.get_employeeLocation();
-            Location loc = LocationFacade.getInstance().getLocation(user.getEmployeeLocation());
+            // Location loc = LocationFacade.getInstance().getLocation(user.getEmployeeLocation());
             LocationFacade locF = LocationFacade.getInstance();
+            String address = user.getEmployeeLocation();
+            Location loc = locF.getLocation(address);
             locF.setCurrentLocation(loc);
 
             final NavigationView navigationView = findViewById(R.id.nav_view);
@@ -116,7 +122,7 @@ public class Home extends AppCompatActivity {
             navigationView.setNavigationItemSelectedListener(
                     new NavigationView.OnNavigationItemSelectedListener() {
                         @Override
-                        public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                             // set item as selected to persist highlight
                             // menuItem.setChecked(true);
                             // close drawer when item is tapped
@@ -155,7 +161,7 @@ public class Home extends AppCompatActivity {
             navigationView.setNavigationItemSelectedListener(
                     new NavigationView.OnNavigationItemSelectedListener() {
                         @Override
-                        public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                             // set item as selected to persist highlight
                             // menuItem.setChecked(true);
                             // close drawer when item is tapped
@@ -192,7 +198,7 @@ public class Home extends AppCompatActivity {
             navigationView.setNavigationItemSelectedListener(
                     new NavigationView.OnNavigationItemSelectedListener() {
                         @Override
-                        public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                             // set item as selected to persist highlight
                             // menuItem.setChecked(true);
                             // close drawer when item is tapped
@@ -229,7 +235,7 @@ public class Home extends AppCompatActivity {
             navigationView.setNavigationItemSelectedListener(
                     new NavigationView.OnNavigationItemSelectedListener() {
                         @Override
-                        public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                             // set item as selected to persist highlight
                             // menuItem.setChecked(true);
                             // close drawer when item is tapped
@@ -260,7 +266,7 @@ public class Home extends AppCompatActivity {
      * Opens the maps page through the MapsActivity class
      * @param view Current view
      */
-    public void loadMapPage(View view) {
+    private void loadMapPage(View view) {
         Intent randomIntent = new Intent(this, MapsActivity.class);
         startActivity(randomIntent);
     }
@@ -269,7 +275,7 @@ public class Home extends AppCompatActivity {
      * Opens the search page through the Search class
      * @param view Current view
      */
-    public void loadSearchPage(View view) {
+    private void loadSearchPage(View view) {
         Intent randomIntent = new Intent(this, Search.class);
         startActivity(randomIntent);
     }
@@ -278,7 +284,7 @@ public class Home extends AppCompatActivity {
      * Loads the location employee's location's inventory
      * @param view Current view
      */
-    public void loadInventory(View view) {
+    private void loadInventory(View view) {
 //        LocationFacade locFacade = LocationFacade.getInstance();
 //        UserFacade userFacade = UserFacade.getInstance();
 //        User user = userFacade.getCurrentUser();
@@ -286,10 +292,11 @@ public class Home extends AppCompatActivity {
 //        Inventory inv = loc.getInventory();
 //        ArrayList<Item> items = (ArrayList) inv.getInventory();
         // LocationFacade.getInstance().send();
+        Log.d("Home.java", view.toString());
         setContentView(R.layout.activity_home_employee);
         loadMenus();
         ListView simpleList = findViewById(R.id.listView);
-        ItemAdapter customAdapter = new ItemAdapter(getApplicationContext(), null);
+        ListAdapter customAdapter = new ItemAdapter(getApplicationContext(), null);
         simpleList.setAdapter(customAdapter);
         simpleList.setOnItemClickListener(new OnItemClickListener(){
             @Override
@@ -312,11 +319,13 @@ public class Home extends AppCompatActivity {
      * Loads the item's information
      * @param view Current view
      */
-    public void addItemClick(View view) {
+    private void addItemClick(View view) {
+        Log.d("Home.java", view.toString());
         setContentView(R.layout.add_item);
         loadMenus();
         typeSpinner = findViewById(R.id.typespinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, ItemType.values());
+        ArrayAdapter<String> adapter = new ArrayAdapter(this,
+                android.R.layout.simple_spinner_item, ItemType.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeSpinner.setAdapter(adapter);
     }
@@ -327,13 +336,16 @@ public class Home extends AppCompatActivity {
      */
     public void addItemClickInside(View view) {
         EditText val = findViewById(R.id.valuetext);
-        String value = val.getText().toString();
+        Editable ed = val.getText();
+        String value = ed.toString();
         try {
-            Double s = Double.parseDouble(value);
+            // Double s = Double.parseDouble(value);
             EditText sho = findViewById(R.id.shortext);
-            String shorttext = sho.getText().toString();
+            Editable sho_ed = sho.getText();
+            String shorttext = sho_ed.toString();
             EditText lon = findViewById(R.id.longtext);
-            String longtext = lon.getText().toString();
+            Editable lon_ed = lon.getText();
+            String longtext = lon_ed.toString();
 
             ItemType it = (ItemType) typeSpinner.getSelectedItem();
 
@@ -344,7 +356,11 @@ public class Home extends AppCompatActivity {
             // Location l = LocationFacade.getInstance().getLocation(user.getEmployeeLocation());
             // Inventory inv = l.getInventory();
             Item i = new Item(shorttext, longtext, value, it.getStringType());
-            LocationFacade.getInstance().getLocation(user.getEmployeeLocation()).addItem(i);
+            // LocationFacade.getInstance().getLocation(user.getEmployeeLocation()).addItem(i);
+            LocationFacade locF = LocationFacade.getInstance();
+            String address = user.getEmployeeLocation();
+            Location location = locF.getLocation(address);
+            location.addItem(i);
             // inv.addItem(i);
             // LocationFacade.getInstance().send();
             loadInventory(view);
@@ -363,17 +379,19 @@ public class Home extends AppCompatActivity {
      * @param view Current view
      * @param pos Item's position to load
      */
-    public void loadItem(View view, int pos) {
+    private void loadItem(View view, int pos) {
+        Log.d("Home.java", view.toString());
         setContentView(R.layout.activity_select_item);
         loadMenus();
-        UserFacade userFacade = UserFacade.getInstance();
-        User user = userFacade.getCurrentUser();
+        // UserFacade userFacade = UserFacade.getInstance();
+        // User user = userFacade.getCurrentUser();
         // Location loc = user.get_employeeLocation();
         // Location loc = LocationFacade.getInstance().getLocation(user.getEmployeeLocation());
         LocationFacade locFacade = LocationFacade.getInstance();
         Location loc = locFacade.getCurrentLocation();
         Inventory inv = loc.getInventory();
-        ArrayList<Item> items = (ArrayList) inv.getInventory();
+        // encapsulation issue, android requires a list for this view
+        List<Item> items = inv.getInventory();
         Item temp = items.get(pos);
         TextView short1 = findViewById(R.id.short1);
         TextView long1 = findViewById(R.id.long1);
@@ -382,22 +400,24 @@ public class Home extends AppCompatActivity {
 
         short1.setText(temp.getShort());
         long1.setText(temp.getFull());
-        ItemType it = ItemType.valueOf(temp.getItemType().toUpperCase());
+        // ItemType it = ItemType.valueOf(temp.getItemType().toUpperCase());
+        String type1 = temp.getItemType();
+        type1 = type1.toUpperCase();
+        ItemType it = ItemType.valueOf(type1);
         type.setText(it.getStringType());
         value.setText(Double.toString(temp.getValue()));
     }
 
     /**
      * Loads the desired location's information
-     * @param view Current view
      * @param pos position of the location to load
      */
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    public void loadLocation(View view, int pos) {
+    private void loadLocation(int pos) {
         setContentView(R.layout.activity_select_location);
         loadMenus();
         LocationFacade locFacade = LocationFacade.getInstance();
-        ArrayList<Location> temp = (ArrayList) locFacade.getList();
+        List<Location> temp = locFacade.getList();
         Location location = temp.get(pos);
         locFacade.setCurrentLocation(location);
         locFacade.setCurrentLocation(location);
@@ -411,10 +431,11 @@ public class Home extends AppCompatActivity {
         tv1.setText(location.getLat());
         tv2.setText(location.getLon());
         tv3.setText(location.getAddress());
-        tv4.setText(location.getType().getStringType());
+        LocationType locType = location.getType();
+        tv4.setText(locType.getStringType());
 
         ListView simpleList = findViewById(R.id.listView1);
-        ItemAdapter customAdapter = new ItemAdapter(getApplicationContext(), null);
+        ListAdapter customAdapter = new ItemAdapter(getApplicationContext(), null);
         simpleList.setAdapter(customAdapter);
         simpleList.setOnItemClickListener(new OnItemClickListener(){
             @Override
@@ -430,12 +451,13 @@ public class Home extends AppCompatActivity {
      * Logs the user out and opens the initial opening screen
      * @param view Current view
      */
-    public void backToHome(View view) {
+    private void backToHome(View view) {
         // logs the current user out of the system
+        Log.d("Home.java", view.toString());
         UserFacade facade = UserFacade.getInstance();
         facade.logout();
 
-        LocationFacade locFacade = LocationFacade.getInstance();
+        // LocationFacade locFacade = LocationFacade.getInstance();
 
         Intent randomIntent = new Intent(this, StartUp.class);
         startActivity(randomIntent);
@@ -446,7 +468,7 @@ public class Home extends AppCompatActivity {
      * @param view Current view
      */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    public void reloadHome(View view) {
+    private void reloadHome(View view) {
         // logs the current user out of the system
 //        Intent randomIntent = new Intent(this, Home.class);
 //        startActivity(randomIntent);
@@ -454,13 +476,13 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         loadMenus();
         ListView simpleList = findViewById(R.id.listView);
-        CustomAdapter customAdapter = new CustomAdapter(getApplicationContext());
+        ListAdapter customAdapter = new CustomAdapter(getApplicationContext());
         simpleList.setAdapter(customAdapter);
         simpleList.setOnItemClickListener(new OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?>adapter,View v, int position, long id){
                 // Intent intent;
-                loadLocation(v, position);
+                loadLocation(position);
             }
 
         });
@@ -480,26 +502,26 @@ public class Home extends AppCompatActivity {
         startActivity(randomIntent);
     }
 
-    /**
-     * Loads the locations into the spinner if the user registers as a Location Employee
-     */
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    public void populateSpinner() {
-        ArrayList<String> temp = new ArrayList<>();
-        LocationFacade locFacade = LocationFacade.getInstance();
-        ArrayList<Location> locations = (ArrayList) locFacade.getList();
-
-        for (int i = 0; i < locations.size(); i++) {
-            Location l = locations.get(i);
-            String name = l.getName();
-            // Address address1 = l.getAddress();
-            // String address = address1.toString();
-            String address = l.getAddress();
-            LocationType type1 = l.getType();
-            String type = type1.getStringType();
-        }
-
-    }
+//    /**
+//     * Loads the locations into the spinner if the user registers as a Location Employee
+//     */
+//    @TargetApi(Build.VERSION_CODES.KITKAT)
+//    public void populateSpinner() {
+//        // ArrayList<String> temp = new ArrayList<>();
+//        LocationFacade locFacade = LocationFacade.getInstance();
+//        List<Location> locations = locFacade.getList();
+//
+//        for (int i = 0; i < locations.size(); i++) {
+//            Location l = locations.get(i);
+//            // String name = l.getName();
+//            // Address address1 = l.getAddress();
+//            // String address = address1.toString();
+//            // String address = l.getAddress();
+//            // LocationType type1 = l.getType();
+//            // String type = type1.getStringType();
+//        }
+//
+//    }
 }
 
 

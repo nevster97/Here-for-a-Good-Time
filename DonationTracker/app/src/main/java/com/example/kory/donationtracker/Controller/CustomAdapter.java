@@ -13,21 +13,21 @@ import com.example.kory.donationtracker.Models.LocationClasses.LocationFacade;
 import com.example.kory.donationtracker.Models.LocationClasses.LocationType;
 import com.example.kory.donationtracker.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
 class CustomAdapter extends BaseAdapter {
-    Context context;
-    ArrayList<String> data;
-    ArrayList<String> address;
-    ArrayList<String> type;
-    LayoutInflater inflter;
+    // private Context context;
+    // ArrayList<String> data;
+    // ArrayList<String> address;
+    // ArrayList<String> type;
+    private final LayoutInflater inflter;
 
     /**
      * Constructor for the custom adapter
      * @param applicationContext context of the application
      */
     public CustomAdapter(Context applicationContext) {
-        this.context = context;
+        // this.context = context;
         inflter = (LayoutInflater.from(applicationContext));
     }
 
@@ -38,7 +38,7 @@ class CustomAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         LocationFacade locFacade = LocationFacade.getInstance();
-        ArrayList<Location> locList = (ArrayList) locFacade.getList();
+        List<Location> locList = locFacade.getList();
         return locList.size();
     }
 
@@ -73,14 +73,12 @@ class CustomAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         LocationFacade locFacade = LocationFacade.getInstance();
-        ArrayList<Location> locList = (ArrayList) locFacade.getList();
+        List<Location> locList = locFacade.getList();
         Location l = locList.get(i);
         view = inflter.inflate(R.layout.item, null);
         TextView name = view.findViewById(R.id.textView10);
         name.setText(l.getName());
         TextView address = view.findViewById(R.id.textView11);
-        // Address a = l.getAddress();
-        // address.setText(a.toString());
         address.setText(l.getAddress());
         TextView type = view.findViewById(R.id.textView12);
         LocationType t = l.getType();
