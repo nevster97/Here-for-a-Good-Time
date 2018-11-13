@@ -12,8 +12,8 @@ import static org.junit.Assert.assertFalse;
  * User Manager Test
  */
 public class UserManagerTest {
-    private User userOne;
-    private User userTwo;
+//    private User userOne;
+//    private User userTwo;
     private UserManager userManager;
 
     /**

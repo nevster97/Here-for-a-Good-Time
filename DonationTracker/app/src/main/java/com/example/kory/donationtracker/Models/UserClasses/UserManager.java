@@ -14,7 +14,8 @@ import com.google.firebase.database.ValueEventListener;
 class UserManager {
 
     private final Map<String, User> userMap;
-    private static final DatabaseReference db = FirebaseDatabase.getInstance().getReference("users");
+    private static final DatabaseReference db = FirebaseDatabase.getInstance().getReference(
+            "users");
     private static User user;
 
     /**
@@ -78,9 +79,7 @@ class UserManager {
      * @param username the username
      */
     public void removeUser(String username) {
-        if (userMap.containsKey(username)) {
-            userMap.remove(username);
-        }
+        userMap.remove(username);
         db.setValue(userMap);
     }
 
@@ -94,7 +93,7 @@ class UserManager {
         User user;
         if (userMap.containsKey(username)) {
             user = userMap.get(username);
-            if (user.checkPassword(password)) {
+            if (user != null && user.checkPassword(password)) {
                 return user;
             } else {
                 return null;

@@ -1,6 +1,7 @@
 package com.example.kory.donationtracker.Controller;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -85,7 +86,8 @@ public class StartUp extends AppCompatActivity {
     private void firstRead() {
         try {
             //Open a stream on the raw file
-            InputStream is = getResources().openRawResource(R.raw.locationdata);
+            Resources resource = getResources();
+            InputStream is = resource.openRawResource(R.raw.locationdata);
             //From here we probably should call a model method and pass the InputStream
             //Wrap it in a BufferedReader so that we get the readLine() method
             BufferedReader br = new BufferedReader(new InputStreamReader(is,
@@ -94,8 +96,9 @@ public class StartUp extends AppCompatActivity {
             String line;
             String[] tokens;
             br.readLine(); //get rid of header line
+            line = br.readLine();
 
-            while ((line = br.readLine()) != null) {
+            while (line != null) {
                 //line = br.readLine();
                 tokens = line.split(",");
                 String name = tokens[1];
@@ -114,6 +117,7 @@ public class StartUp extends AppCompatActivity {
 
                 Location location = new Location(name, lat, lon, address, type, phone, website);
                 locFacade.addLocation(location);
+                line = br.readLine();
             }
             br.close();
 
