@@ -106,5 +106,13 @@ public final class UserFacade {
         currentUser = null;
     }
 
+    /**
+     * gets the manager
+     * @return the manager
+     */
+    public UserManager getManager() {
+        return manager;
+    }
+
 
 }

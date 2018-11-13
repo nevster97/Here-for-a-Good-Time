@@ -34,7 +34,7 @@ class UserManager {
      * @param location employee location
      * @return true if add succeeds, otherwise false
      */
-    private boolean addUser(String username, String password, String name,
+    public boolean addUser(String username, String password, String name,
                             String email, String type, String location) {
         user = new User(username, password, name, email, type, location);
         if (userMap.containsKey(username)) {
@@ -65,8 +65,23 @@ class UserManager {
         return true;
     }
 
+    /**
+     * adds a user to a manager without updating the database
+     * @param user the user
+     */
     public void addUserTest(User user) {
         userMap.put(user.getUsername(), user);
+    }
+
+    /**
+     * removes a user from the database
+     * @param username the username
+     */
+    public void removeUser(String username) {
+        if (userMap.containsKey(username)) {
+            userMap.remove(username);
+        }
+        db.setValue(userMap);
     }
 
     /**
