@@ -17,6 +17,9 @@ import com.example.kory.donationtracker.R;
 
 import java.util.ArrayList;
 
+/**
+ * location employee register view
+ */
 public class LocEmpRegister extends AppCompatActivity implements OnItemSelectedListener{
 
     /**
@@ -28,8 +31,8 @@ public class LocEmpRegister extends AppCompatActivity implements OnItemSelectedL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loc_emp_register);
 
-        // LocationFacade locFacade = LocationFacade.getInstance();
-        ArrayList<Location> arr = (ArrayList) LocationFacade.getInstance().getList();
+        LocationFacade locFacade = LocationFacade.getInstance();
+        Iterable<Location> arr = locFacade.getList();
         Spinner spinner = findViewById(R.id.spinner);
         ArrayList<String> arr1 = new ArrayList<>();
         for (Location p : arr) {
@@ -38,7 +41,8 @@ public class LocEmpRegister extends AppCompatActivity implements OnItemSelectedL
 //        for (String te : arr1) {
 //            System.out.println(te);
 //        }
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, arr1);
+        ArrayAdapter<String> adapter = new ArrayAdapter(this,
+                android.R.layout.simple_spinner_item, arr1);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
@@ -58,9 +62,9 @@ public class LocEmpRegister extends AppCompatActivity implements OnItemSelectedL
         UserFacade u = UserFacade.getInstance();
         User user = u.getCurrentUser();
         LocationFacade locFacade = LocationFacade.getInstance();
-        ArrayList<Location> arr = (ArrayList) locFacade.getList();
+        Iterable<Location> arr = locFacade.getList();
         for (Location l : arr) {
-            String a = l.getAddress().toString();
+            String a = l.getAddress();
             if (a.equals(p)) {
                 user.setEmployeeLocation(a);
 //                u.uploadToDB();

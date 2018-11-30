@@ -2,9 +2,12 @@ package com.example.kory.donationtracker.Models.LocationClasses;
 
 import java.util.List;
 
-public class LocationFacade {
-    private static LocationFacade INSTANCE = new LocationFacade();
-    private LocationManager manager;
+/**
+ * LocationFacade class
+ */
+public final class LocationFacade {
+    private static final LocationFacade INSTANCE = new LocationFacade();
+    private final LocationManager manager;
     private Location current;
 
     /**
@@ -16,7 +19,7 @@ public class LocationFacade {
     /**
      * constructs the location facade
      */
-    public LocationFacade() {
+    private LocationFacade() {
         manager = new LocationManager();
     }
 
@@ -39,16 +42,15 @@ public class LocationFacade {
     /**
      * adds a new location to the location manager
      * @param location the new location
-     * @return true if the add was successful
      */
-    public boolean addLocation(Location location) {
-        return manager.addLocation(location);
+    public void addLocation(Location location) {
+        manager.addLocation(location);
     }
 
     /**
      * gets a desired location from the location manager
      * @param address the address of the desired location
-     * @return
+     * @return desired location
      */
     public Location getLocation(String address) {
         return manager.getLocation(address);
@@ -81,9 +83,8 @@ public class LocationFacade {
 
     /**
      * updates the location manager in firebase
-     * @param location edited location
      */
-    public void update(Location location) {
-        manager.update(location);
+    public void update() {
+        manager.update();
     }
 }

@@ -2,14 +2,21 @@ package com.example.kory.donationtracker.Models.LocationClasses;
 
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
+/**
+ * Location Manager Test
+ */
 public class LocationManagerTest {
 
     private Location locationOne;
     private Location locationTwo;
     private LocationManager locationManager;
 
+    /**
+     * sets up the test
+     */
     @Before
     public void setUp() {
 
@@ -22,12 +29,15 @@ public class LocationManagerTest {
         locationManager = new LocationManager();
     }
 
+    /**
+     * runs the test
+     */
     @Test
     public void testAddAndRemoveLocation() {
-        assertEquals(true, locationManager.addLocation(locationOne));
-        assertEquals(true, locationManager.addLocation(locationTwo));
-        assertEquals(false, locationManager.addLocation(locationTwo));
+        assertTrue(locationManager.addLocation(locationOne));
+        assertTrue(locationManager.addLocation(locationTwo));
+        assertFalse(locationManager.addLocation(locationTwo));
         locationManager.removeLocation(locationTwo);
-        assertEquals(true, locationManager.addLocation(locationTwo));
+        assertTrue(locationManager.addLocation(locationTwo));
     }
 }

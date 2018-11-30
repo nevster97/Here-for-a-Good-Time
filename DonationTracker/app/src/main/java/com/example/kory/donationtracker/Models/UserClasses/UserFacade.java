@@ -4,25 +4,35 @@ package com.example.kory.donationtracker.Models.UserClasses;
 //import com.google.firebase.database.FirebaseDatabase;
 
 // << interface >>
-public class UserFacade {
+
+/**
+ * User facade class
+ */
+public final class UserFacade {
 
     /**
      * This is the only instance of UserFacade EVER!!!!
      */
-    private static UserFacade INSTANCE = new UserFacade();
-    private UserManager manager;
+    private static final UserFacade INSTANCE = new UserFacade();
+    private final UserManager manager;
     private User currentUser;
 
 //    private FirebaseDatabase database = FirebaseDatabase.getInstance();
 //    private DatabaseReference ref = database.getReference();
 
 
-    public static UserFacade getInstance() { return INSTANCE; }
+    /**
+     * gets the instance of the user facade
+     * @return the instance
+     */
+    public static UserFacade getInstance() {
+        return INSTANCE;
+    }
 
     /**
      * Constructs the UserFacade
      */
-    public UserFacade() {
+    private UserFacade() {
         manager = new UserManager();
     }
 
@@ -38,7 +48,7 @@ public class UserFacade {
      * checks if a current user exists
      * @return if a current user exists, true. otherwise false
      */
-    public boolean hasLoggedInUser() {
+    private boolean hasLoggedInUser() {
         return currentUser != null;
     }
 
@@ -51,17 +61,14 @@ public class UserFacade {
      * @param type user type
      * @return true if registration is successful, false otherwise
      */
-    public boolean register(String username, String pass, String name, String contact, String type) {
+    public boolean register(String username, String pass,
+                            String name, String contact, String type) {
         // manager.downloadFromDB();
         if (hasLoggedInUser()) {
             return false;
         }
-        User user = null;
-        if (manager.addUser(username, pass, name, contact, type)) {
-            return true;
-        } else {
-            return false;
-        }
+        // User user = null;
+        return manager.addUser(username, pass, name, contact, type);
     }
 
     /**
@@ -97,6 +104,14 @@ public class UserFacade {
      */
     public void logout() {
         currentUser = null;
+    }
+
+    /**
+     * gets the manager
+     * @return the manager
+     */
+    public UserManager getManager() {
+        return manager;
     }
 
 

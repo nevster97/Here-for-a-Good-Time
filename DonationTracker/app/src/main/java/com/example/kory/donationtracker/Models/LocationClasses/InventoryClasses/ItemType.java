@@ -1,5 +1,8 @@
 package com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses;
 
+/**
+ * ItemType enum
+ */
 public enum ItemType {
     CLOTHING("Clothing"),
     HAT("Hat"),
@@ -8,13 +11,13 @@ public enum ItemType {
     HOUSEHOLD("Household"),
     OTHER("Other");
 
-    private String _type;
+    private final String _type;
 
     /**
      * constructs the Item enum
      * @param type item type
      */
-    private ItemType(String type) {
+    ItemType(String type) {
         _type = type;
     }
 

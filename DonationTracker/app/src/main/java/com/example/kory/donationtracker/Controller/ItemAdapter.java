@@ -12,28 +12,24 @@ import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.
 import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Item;
 import com.example.kory.donationtracker.Models.LocationClasses.Location;
 import com.example.kory.donationtracker.Models.LocationClasses.LocationFacade;
-import com.example.kory.donationtracker.Models.UserClasses.User;
-import com.example.kory.donationtracker.Models.UserClasses.UserFacade;
 import com.example.kory.donationtracker.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class ItemAdapter extends BaseAdapter {
-    Context context;
-    ArrayList<String> data;
-    ArrayList<String> address;
-    ArrayList<String> type;
-    LayoutInflater inflter;
-    ArrayList<Item> itemList;
+class ItemAdapter extends BaseAdapter {
+//    private Context context;
+//    ArrayList<String> data;
+//    ArrayList<String> address;
+//    ArrayList<String> type;
+    private final LayoutInflater inflter;
+    private final List<Item> itemList;
 
     /**
      * Constructor for the item adapter
      * @param applicationContext the context of the applicatoin
      * @param itemList1 if this is null, then the item list is gonna be global
      */
-    public ItemAdapter(Context applicationContext, ArrayList<Item> itemList1) {
-        this.context = context;
+    public ItemAdapter(Context applicationContext, List<Item> itemList1) {
         inflter = (LayoutInflater.from(applicationContext));
         itemList = itemList1;
     }
@@ -44,14 +40,12 @@ public class ItemAdapter extends BaseAdapter {
      */
     @Override
     public int getCount() {
-//        LocationFacade locFacade = LocationFacade.getInstance();
-////        Location loc = locFacade.getCurrentLocation();
-////        Inventory arr = loc.getInventory();
-////
-////        ArrayList<Item> arr1 = (ArrayList) arr.getInventory();
+
         if (itemList == null) {
-            ArrayList<Item> arr1 = (ArrayList) LocationFacade.getInstance().getCurrentLocation().getInventory().getInventory();
-            return arr1.size();
+            LocationFacade locF = LocationFacade.getInstance();
+            Location curr = locF.getCurrentLocation();
+            Inventory inv = curr.getInventory();
+            return inv.getTotalItems();
         } else {
             return itemList.size();
         }
@@ -82,39 +76,39 @@ public class ItemAdapter extends BaseAdapter {
      * @param i the desired item
      * @param view the current view
      * @param viewGroup the current viewGroup
-     * @return
+     * @return view
      */
     @SuppressLint("ViewHolder")
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if (itemList == null) {
-            UserFacade userFacade = UserFacade.getInstance();
-            User user = userFacade.getCurrentUser();
-            // Location loc = LocationFacade.getInstance().getLocation(user.get_employeeLocation());
-            Location loc = LocationFacade.getInstance().getCurrentLocation();
+            // UserFacade userFacade = UserFacade.getInstance();
+            // User user = userFacade.getCurrentUser();
+            LocationFacade locF = LocationFacade.getInstance();
+            Location loc = locF.getCurrentLocation();
             Inventory inv = loc.getInventory();
             List<Item> list = inv.getInventory();
             Item p = list.get(i);
             view = inflter.inflate(R.layout.item, null);
-            TextView name = (TextView) view.findViewById(R.id.textView10);
+            TextView name = view.findViewById(R.id.textView10);
             name.setText(p.getShort());
-            TextView address = (TextView) view.findViewById(R.id.textView11);
+            TextView address = view.findViewById(R.id.textView11);
             double temp = p.getValue();
             String temp1 = Double.toString(temp);
             address.setText(temp1);
-            TextView type = (TextView) view.findViewById(R.id.textView12);
+            TextView type = view.findViewById(R.id.textView12);
             String type2 = p.getItemType();
             type.setText(type2);
         } else {
             Item p = itemList.get(i);
             view = inflter.inflate(R.layout.item, null);
-            TextView name = (TextView) view.findViewById(R.id.textView10);
+            TextView name = view.findViewById(R.id.textView10);
             name.setText(p.getShort());
-            TextView address = (TextView) view.findViewById(R.id.textView11);
+            TextView address = view.findViewById(R.id.textView11);
             double temp = p.getValue();
             String temp1 = Double.toString(temp);
             address.setText(temp1);
-            TextView type = (TextView) view.findViewById(R.id.textView12);
+            TextView type = view.findViewById(R.id.textView12);
             String type2 = p.getItemType();
             type.setText(type2);
         }

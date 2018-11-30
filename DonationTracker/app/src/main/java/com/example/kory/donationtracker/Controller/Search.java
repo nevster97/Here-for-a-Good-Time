@@ -4,17 +4,20 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -24,21 +27,24 @@ import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.
 import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.ItemType;
 import com.example.kory.donationtracker.Models.LocationClasses.Location;
 import com.example.kory.donationtracker.Models.LocationClasses.LocationFacade;
+import com.example.kory.donationtracker.Models.LocationClasses.LocationType;
 import com.example.kory.donationtracker.Models.UserClasses.User;
 import com.example.kory.donationtracker.Models.UserClasses.UserFacade;
-import com.example.kory.donationtracker.Models.UserClasses.UserType;
 import com.example.kory.donationtracker.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
-
+/**
+ * Search activity
+ */
 public class Search extends AppCompatActivity implements OnItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
-    private UserType ut;
-    public ArrayList<Inventory> masterInventory;
-    public ArrayList<Item> view;
-    public Location locationToBeSearched;
+    // private UserType ut;
+    private List<Inventory> masterInventory;
+    private ArrayList<Item> view;
+    private Location locationToBeSearched;
 
     /**
      * Loads the search items page
@@ -66,23 +72,31 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
         setContentView(R.layout.activity_select_location);
         loadMenus();
         LocationFacade locFacade = LocationFacade.getInstance();
-        ArrayList<Location> temp = (ArrayList) locFacade.getList();
+        List<Location> temp = locFacade.getList();
         Location location = temp.get(pos);
         locFacade.setCurrentLocation(location);
+
+        String nam = location.getName();
+        String lat = location.getLat();
+        String lon = location.getLon();
+        String add = location.getAddress();
+        LocationType lt = location.getType();
+        String stringType = lt.getStringType();
+
         TextView tv0 = findViewById(R.id.name);
         TextView tv1 = findViewById(R.id.latitude);
         TextView tv2 = findViewById(R.id.longitude);
         TextView tv3 = findViewById(R.id.address);
         TextView tv4 = findViewById(R.id.type);
 
-        tv0.setText(location.getName());
-        tv1.setText(location.getLat());
-        tv2.setText(location.getLon());
-        tv3.setText(location.getAddress().toString());
-        tv4.setText(location.getType().getStringType());
+        tv0.setText(nam);
+        tv1.setText(lat);
+        tv2.setText(lon);
+        tv3.setText(add);
+        tv4.setText(stringType);
 
-        ListView simpleList = (ListView) findViewById(R.id.listView1);
-        ItemAdapter customAdapter = new ItemAdapter(getApplicationContext(), null);
+        ListView simpleList = findViewById(R.id.listView1);
+        ListAdapter customAdapter = new ItemAdapter(getApplicationContext(), null);
         simpleList.setAdapter(customAdapter);
         simpleList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
@@ -99,17 +113,19 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
      * @param view current view
      * @param pos index of the item
      */
-    public void loadItem(View view, int pos) {
+    private void loadItem(View view, int pos) {
         setContentView(R.layout.activity_select_item);
         loadMenus();
         UserFacade userFacade = UserFacade.getInstance();
         User user = userFacade.getCurrentUser();
         // Location loc = user.get_employeeLocation();
-        Location loc = LocationFacade.getInstance().getLocation(user.getEmployeeLocation());
+        LocationFacade locF = LocationFacade.getInstance();
+        String address = user.getEmployeeLocation();
+        Location loc = locF.getLocation(address);
         LocationFacade locFacade = LocationFacade.getInstance();
         locFacade.setCurrentLocation(loc);
         Inventory inv = loc.getInventory();
-        ArrayList<Item> items = (ArrayList) inv.getInventory();
+        List<Item> items = inv.getInventory();
         Item temp = items.get(pos);
         TextView short1 = findViewById(R.id.short1);
         TextView long1 = findViewById(R.id.long1);
@@ -126,8 +142,10 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
     /**
      * populates every locations inventory into the master inventory
      */
-    protected void populateGlobalInventoryList() {
-        for (Location l : LocationFacade.getInstance().getList()) {
+    private void populateGlobalInventoryList() {
+        LocationFacade locF = LocationFacade.getInstance();
+        List<Location> list = locF.getList();
+        for (Location l : list) {
             masterInventory.add(l.getInventory());
         }
     }
@@ -135,15 +153,17 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
     /**
      * Loads the spinner with the list of locations
      */
-    protected void populateSpinner() {
-        ArrayList<Location> locs = (ArrayList<Location>) LocationFacade.getInstance().getList();
+    private void populateSpinner() {
+        LocationFacade locF = LocationFacade.getInstance();
+        Iterable<Location> locs = locF.getList();
         Spinner spinner = findViewById(R.id.spinner3);
         ArrayList<String> names = new ArrayList<>();
         names.add("Global Search");
         for (Location l : locs) {
             names.add(l.getName());
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, names);
+        ArrayAdapter<String> adapter = new ArrayAdapter(this,
+                android.R.layout.simple_spinner_item, names);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
@@ -159,7 +179,9 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String p = (String) parent.getItemAtPosition(position);
-        for (Location l : LocationFacade.getInstance().getList()) {
+        LocationFacade locF = LocationFacade.getInstance();
+        List<Location> list = locF.getList();
+        for (Location l : list) {
             if (p.equals(l.getName())) {
                 locationToBeSearched = l;
                 break;
@@ -184,28 +206,37 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
      */
     public void onSearchClicked(View viewOfTheScreen) {
         view.clear();
-        final EditText q = (EditText) findViewById(R.id.editText8);
-        String query = q. getText().toString();
+        final EditText q = findViewById(R.id.editText8);
+        Editable qt = q.getText();
+        String query = qt.toString();
         if (locationToBeSearched == null) {
             // do global search
-            for (Location l : LocationFacade.getInstance().getList()) {
-                LocationFacade.getInstance().setCurrentLocation(l);
-                for (Item i : l.getInventory().getInventory()) {
-                    if (i.getShort().contains(query)) {
+            LocationFacade locF = LocationFacade.getInstance();
+            List<Location> list = locF.getList();
+            for (Location l : list) {
+                locF.setCurrentLocation(l);
+                Inventory inv = l.getInventory();
+                List<Item> items = inv.getInventory();
+                for (Item i : items) {
+                    String shorty = i.getShort();
+                    if (shorty.contains(query)) {
                         view.add(i);
                     }
                 }
             }
         } else {
             // do local search
-            for (Item i : locationToBeSearched.getInventory().getInventory()) {
-                if (i.getShort().contains(query)) {
+            Inventory inv = locationToBeSearched.getInventory();
+            List<Item> items = inv.getInventory();
+            for (Item i : items) {
+                String shorty = i.getShort();
+                if (shorty.contains(query)) {
                     view.add(i);
                 }
             }
         }
-        ListView simpleList = (ListView) findViewById(R.id.listView911);
-        ItemAdapter customAdapter = new ItemAdapter(getApplicationContext(), view);
+        ListView simpleList = findViewById(R.id.listView911);
+        ListAdapter customAdapter = new ItemAdapter(getApplicationContext(), view);
         simpleList.setAdapter(customAdapter);
         simpleList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
@@ -219,16 +250,10 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
 
     }
 
-
-    // TODO
-    // have a spinner that has all the locations and a "global search" option
-    // search through whatever inventory's desired
-    // populate the view with each button pressed (partial searches)
-
     /**
      * Loads the menu for the slide out menu bar
      */
-    public void loadMenus(){
+    private void loadMenus(){
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -242,7 +267,7 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                         // set item as selected to persist highlight
                         menuItem.setChecked(true);
                         // close drawer when item is tapped
@@ -250,9 +275,9 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
 
                         int id = menuItem.getItemId();
                         if (id == R.id.nav_camera) {
-                            reloadHome(navigationView);
+                            reloadHome();
                         } else if (id == R.id.nav_camera1) {
-                            goToSearchByCat(navigationView);
+                            goToSearchByCat();
                         }
 
                         // Add code here to update the UI based on the item selected
@@ -265,19 +290,17 @@ public class Search extends AppCompatActivity implements OnItemSelectedListener 
 
     /**
      * Loads the home page
-     * @param view current view
      */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    public void reloadHome(View view) {
+    private void reloadHome() {
         Intent randomIntent = new Intent(this, Home.class);
         startActivity(randomIntent);
     }
 
     /**
      * Loads the item category search page
-     * @param view current view
      */
-    public void goToSearchByCat(View view) {
+    private void goToSearchByCat() {
         Intent randomIntent = new Intent(this, SearchByCat.class);
         startActivity(randomIntent);
     }

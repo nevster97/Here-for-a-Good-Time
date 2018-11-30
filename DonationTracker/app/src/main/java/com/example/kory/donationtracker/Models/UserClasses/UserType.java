@@ -1,37 +1,37 @@
 package com.example.kory.donationtracker.Models.UserClasses;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+/**
+ * UserType enum
+ */
 public enum UserType {
 
-    USER("User", false, false, false, false),
-    EMPLOYEE("Employee", false, false, true, false),
-    MANAGER("Manager", true, false, true, true),
-    ADMIN("Administrator", true, true, true, true);
+    USER("User"),
+    EMPLOYEE("Employee"),
+    MANAGER("Manager"),
+    ADMIN("Administrator");
 
-    private String _type;
-    private boolean _canAddUser;
-    private boolean _canLockUser;
-    private boolean _canUpdateLoc;
-    private boolean _canManageLoc;
+    private final String _type;
+//    private final boolean _canAddUser;
+//    private final boolean _canLockUser;
+//    private final boolean _canUpdateLoc;
+//    private final boolean _canManageLoc;
 
-    private static List<UserType> list = Arrays.asList(USER, EMPLOYEE, MANAGER, ADMIN);
+    private static final List<UserType> list = Arrays.asList(USER, EMPLOYEE, MANAGER, ADMIN);
 
     /**
      * creates a UserType enum
      * @param type type
-     * @param add can add users
-     * @param lock can lock users
-     * @param update can update users
-     * @param manage can manage users
      */
-    UserType(String type, boolean add, boolean lock, boolean update, boolean manage) {
+    UserType(String type) {
         _type = type;
-        _canAddUser = add;
-        _canLockUser = lock;
-        _canUpdateLoc = update;
-        _canManageLoc = manage;
+//        _canAddUser = add;
+//        _canLockUser = lock;
+//        _canUpdateLoc = update;
+//        _canManageLoc = manage;
     }
 
     /**
@@ -46,44 +46,47 @@ public enum UserType {
      * @return corresponding user type
      */
     public static UserType typeFix(String s) {
-        if (s.equals("Employee")) {
-            return EMPLOYEE;
-        } else if (s.equals("Manager")) {
-            return MANAGER;
-        } else if (s.equals("Administrator")) {
-            return ADMIN;
-        } else {
-            return USER;
+        switch (s) {
+            case "Employee":
+                return EMPLOYEE;
+            case "Manager":
+                return MANAGER;
+            case "Administrator":
+                return ADMIN;
+            default:
+                return USER;
         }
     }
 
-    /**
-     * getter for canAddUser
-     * @return canAddUser
-     */
-    public boolean canAddUser() { return _canAddUser; }
+// --Commented out by Inspection START (11/12/18, 3:06 PM):
+//    /**
+//     * getter for canAddUser
+//     * @return canAddUser
+//     */
+//    public boolean canAddUser() { return _canAddUser; }
+// --Commented out by Inspection STOP (11/12/18, 3:06 PM)
 
-    /**
-     * getter for canLockUser
-     * @return canLockUser
-     */
-    public boolean canLockUser() { return _canLockUser; }
-
-    /**
-     * getter for canUpdateLocation
-     * @return canUpdateLoc
-     */
-    public boolean canUpdateLocation() { return _canUpdateLoc; }
-
-    /**
-     * getter for canManageLocation
-     * @return canManageLoc
-     */
-    public boolean canManageLocations() { return _canManageLoc; }
+//    /**
+//     * getter for canLockUser
+//     * @return canLockUser
+//     */
+//    public boolean canLockUser() { return _canLockUser; }
+//
+//    /**
+//     * getter for canUpdateLocation
+//     * @return canUpdateLoc
+//     */
+//    public boolean canUpdateLocation() { return _canUpdateLoc; }
+//
+//    /**
+//     * getter for canManageLocation
+//     * @return canManageLoc
+//     */
+//    public boolean canManageLocations() { return _canManageLoc; }
 
     /**
      * returns a list of the possible enums (for spinners)
      * @return a list of possible enums
      */
-    public static List<UserType> getList() { return list; }
+    public static List<UserType> getList() { return Collections.unmodifiableList(list); }
 }

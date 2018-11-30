@@ -1,6 +1,9 @@
 package com.example.kory.donationtracker.Models.LocationClasses;
 
+import android.util.Log;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
 
@@ -12,10 +15,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Item;
 
-public class LocationManager {
+class LocationManager {
 
     private static Map<String, Location> locations;
-    private DatabaseReference db = FirebaseDatabase.getInstance().getReference("locations");
+    private final DatabaseReference db = FirebaseDatabase.getInstance().getReference("locations");
 
     /**
      * constructs the location manager
@@ -68,15 +71,14 @@ public class LocationManager {
      * returns the locations in the manager in list form
      * @return the list of locations
      */
-    public ArrayList<Location> getList() {
-        return new ArrayList(locations.values());
+    public List<Location> getList() {
+        return new ArrayList<>(locations.values());
     }
 
     /**
      * sends location manager to firebase
-     * @param location a location
      */
-    public void update(Location location) {
+    public void update() {
         //db.child(location.getAddress()).setValue(location);
         db.setValue(locations);
     }
@@ -94,21 +96,42 @@ public class LocationManager {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 db.setValue(locations);
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    String name = (String) ds.child("name").getValue();
-                    String lat = (String) ds.child("lat").getValue();
-                    String lon = (String) ds.child("lon").getValue();
-                    String addr = (String) ds.child("address").getValue();
-                    String type = (String) ds.child("type").getValue();
-                    String phone = (String) ds.child("phone").getValue();
-                    String website = (String) ds.child("website").getValue();
 
+                    DataSnapshot nameDS = ds.child("name");
+                    DataSnapshot latDS = ds.child("lat");
+                    DataSnapshot lonDS = ds.child("lon");
+                    DataSnapshot addrDS = ds.child("address");
+                    DataSnapshot typeDS = ds.child("type");
+                    DataSnapshot phoneDS = ds.child("phone");
+                    DataSnapshot websiteDS = ds.child("website");
+
+                    String name = (String) nameDS.getValue();
+                    String lat = (String) latDS.getValue();
+                    String lon = (String) lonDS.getValue();
+                    String addr = (String) addrDS.getValue();
+                    String type = (String) typeDS.getValue();
+                    String phone = (String) phoneDS.getValue();
+                    String website = (String) websiteDS.getValue();
+
+                    // String name = (String) ds.child("name").getValue();
+                    // String lat = (String) ds.child("lat").getValue();
+                    // String lon = (String) ds.child("lon").getValue();
+                    // String addr = (String) ds.child("address").getValue();
+                    // String type = (String) ds.child("type").getValue();
+                    // String phone = (String) ds.child("phone").getValue();
+                    // String website = (String) ds.child("website").getValue();
+
+                    assert type != null;
                     Location loc = new Location(name, lat, lon, addr, type, phone, website);
                     boolean catchThisBoolJuulFool = addLocation(loc);
-                    Map<String, Object> map = (Map) ds.child("inventory").getValue();
+                    Log.d("LocationManager.java", ((Boolean) catchThisBoolJuulFool).toString());
+                    DataSnapshot mapDS = ds.child("inventory");
+                    Map<String, Object> map = (Map) mapDS.getValue();
+                    // Map<String, Object> map = (Map) ds.child("inventory").getValue();
 
                     Object obj = map.get("inventory");
                     if (obj != null) {
-                        for (Map<String, Object> item : (ArrayList<Map>) obj) {
+                        for (Map<String, Object> item : (ArrayList<Map<String, Object>>) obj) {
                             String s = (String) item.get("short");
                             String f = (String) item.get("full");
                             String t = (String) item.get("itemType");
@@ -139,7 +162,8 @@ public class LocationManager {
              */
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                System.out.println("Error -> it's Firebase's fault");
+                // System.out.println("Error -> it's Firebase's fault");
+                Log.d("LocationManager.java", "Error -> it's Firebase's fault");
             }
         });
     }

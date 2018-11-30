@@ -1,18 +1,23 @@
 package com.example.kory.donationtracker.Models.LocationClasses;
 
+import android.support.annotation.NonNull;
+
 import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Inventory;
 import com.example.kory.donationtracker.Models.LocationClasses.InventoryClasses.Item;
 
+/**
+ * Location class
+ */
 public class Location {
-    private String name;
-    private String latitude;
-    private String longitude;
+    private final String name;
+    private final String latitude;
+    private final String longitude;
     // private Address _address;
-    private String address;
-    private LocationType type;
-    private String phone;
-    private String website;
-    private Inventory inventory;
+    private final String address;
+    private final LocationType type;
+    private final String phone;
+    private final String website;
+    private final Inventory inventory;
     // private ArrayList<User> locationEmployees;
 
 
@@ -35,12 +40,16 @@ public class Location {
         this.longitude = longitude;
         this.address = address;
         // _type = LocationType.valueOf(type);
-        if (type.equals("Drop Off")) {
-            this.type = LocationType.DROPOFF;
-        } else if (type.equals("Store")) {
-            this.type = LocationType.STORE;
-        } else {
-            this.type = LocationType.WAREHOUSE;
+        switch (type) {
+            case "Drop Off":
+                this.type = LocationType.DROPOFF;
+                break;
+            case "Store":
+                this.type = LocationType.STORE;
+                break;
+            default:
+                this.type = LocationType.WAREHOUSE;
+                break;
         }
         this.phone = phone;
         this.website = website;
@@ -66,12 +75,16 @@ public class Location {
         this.latitude = latitude;
         this.longitude = longitude;
         this.address = address;
-        if (type.equals("Drop Off")) {
-            this.type = LocationType.DROPOFF;
-        } else if (type.equals("Store")) {
-            this.type = LocationType.STORE;
-        } else {
-            this.type = LocationType.WAREHOUSE;
+        switch (type) {
+            case "Drop Off":
+                this.type = LocationType.DROPOFF;
+                break;
+            case "Store":
+                this.type = LocationType.STORE;
+                break;
+            default:
+                this.type = LocationType.WAREHOUSE;
+                break;
         }
         this.phone = phone;
         this.website = website;
@@ -167,18 +180,19 @@ public class Location {
 //        }
 //    }
 
-    /**
-     * sets a location's inventory
-     * @param inventory the new inventory
-     */
-    public void setInventory (Inventory inventory) {
-        this.inventory = inventory;
-    }
+//    /**
+//     * sets a location's inventory
+//     * @param inventory the new inventory
+//     */
+//    public void setInventory(Inventory inventory) {
+//        this.inventory = inventory;
+//    }
 
     /**
      * overridden toString()
      * @return the new Location.toString()
      */
+    @NonNull
     @Override
     public String toString() {
         return name + "\n" + address + "\n" + phone + "\n" + website;

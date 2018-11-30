@@ -3,6 +3,7 @@ package com.example.kory.donationtracker.Controller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -10,6 +11,9 @@ import com.example.kory.donationtracker.Models.UserClasses.UserFacade;
 
 import com.example.kory.donationtracker.R;
 
+/**
+ * login activity
+ */
 public class Login extends AppCompatActivity {
 
     /**
@@ -42,10 +46,12 @@ public class Login extends AppCompatActivity {
      */
     public void onLoginClick(View view) {
 
-        final EditText ET_username =  (EditText) findViewById(R.id.editText);
-        final EditText ET_password =  (EditText) findViewById(R.id.editText3);
-        String username = (String) ET_username.getText().toString();
-        String password = (String) ET_password.getText().toString();
+        final EditText ET_username = findViewById(R.id.editText);
+        final EditText ET_password = findViewById(R.id.editText3);
+        Editable ed_user = ET_username.getText();
+        Editable ed_pass = ET_password.getText();
+        String username = ed_user.toString();
+        String password = ed_pass.toString();
 
         UserFacade facade = UserFacade.getInstance();
         if (facade.login(username, password)) {
@@ -59,14 +65,13 @@ public class Login extends AppCompatActivity {
 
     }
 
-    /**
-     * Loads the opening screen
-     * @param view Current view
-     */
-    public void onButtonPress4(View view) {
-        Intent randomIntent = new Intent(this, StartUp.class);
-        startActivity(randomIntent);
-    }
+//    /**
+//     * Loads the opening screen
+//     */
+//    public void onButtonPress4() {
+//        Intent randomIntent = new Intent(this, StartUp.class);
+//        startActivity(randomIntent);
+//    }
 
 
 
